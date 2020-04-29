@@ -3,7 +3,7 @@
 * **Mybatis**
 
 ###功能模块
-**mybatis generator**
+* **mybatis generator**
 ```
 根据数据库表生成代码：entity、dao、mapper
 ```
