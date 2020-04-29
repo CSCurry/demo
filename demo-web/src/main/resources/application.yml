@@ -1,0 +1,81 @@
+# 项目相关配置
+project:
+  # 名称
+  name: demo
+  # 版本
+  version: 1.0.0
+
+# 开发环境配置
+server:
+  # 服务端口
+  port: 8080
+  servlet:
+    # 项目contextPath
+    context-path: /
+  tomcat:
+    # tomcat的URI编码
+    uri-encoding: UTF-8
+    # tomcat最大线程数，默认为200
+    max-threads: 800
+    # Tomcat启动初始化的线程数，默认值25
+    min-spare-threads: 30
+
+# Spring配置
+spring:
+  profiles:
+    active: @environment@
+  # 切面启用
+  aop:
+    proxy-target-class: true
+    auto: true
+  # 文件上传
+  servlet:
+    multipart:
+      max-file-size:  30MB
+      max-request-size:  30MB
+  # 热部署
+  devtools:
+    restart:
+      # 重启开关
+      enabled: false
+  # 发送邮件
+  mail:
+    host: smtp.163.com #发送方邮件服务器
+    username: 15086680081@163.com #发送方邮箱地址
+    password: lcs205455 #客户端授权码，不是邮箱密码
+    properties.mail.smtp.port: 465 #端口号465或587
+    properties.mail.smtp.starttls.enable: true
+    properties.mail.smtp.starttls.required: true
+    properties.mail.smtp.ssl.enable: true
+    default-encoding: utf-8
+
+# MyBatis
+mybatis:
+  # 搜索指定包别名
+  typeAliasesPackage: com.demo
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapperLocations: classpath*:mapper/**/*Mapper.xml
+  # 加载全局的配置文件
+  configLocation: classpath:mybatis-config.xml
+
+# 日志配置
+logging:
+  level:
+    # 这里日志级别设为debug是为了打印SQL
+    com.demo: debug
+
+# PageHelper分页插件
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+# 防止XSS攻击
+xss:
+  # 过滤开关
+  enabled: true
+  # 排除链接（多个用逗号分隔）
+  excludes: /shop/notice/*
+  # 匹配链接
+  urlPatterns: /shop/*,/monitor/*,/tool/*
