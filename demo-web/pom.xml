@@ -14,7 +14,7 @@
         <!--依赖service-->
         <dependency>
             <groupId>com.helloworld</groupId>
-            <artifactId>demo-service</artifactId>
+            <artifactId>demo-business</artifactId>
         </dependency>
         <!--thymeleaf-->
         <dependency>

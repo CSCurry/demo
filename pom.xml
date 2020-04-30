@@ -6,7 +6,8 @@
         <module>demo-common</module>
         <module>demo-framework</module>
         <module>demo-web</module>
-        <module>demo-service</module>
+        <module>demo-business</module>
+        <module>demo-mgr</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -49,7 +50,7 @@
             </dependency>
             <dependency>
                 <groupId>com.helloworld</groupId>
-                <artifactId>demo-service</artifactId>
+                <artifactId>demo-business</artifactId>
                 <version>${demo.version}</version>
             </dependency>
         </dependencies>

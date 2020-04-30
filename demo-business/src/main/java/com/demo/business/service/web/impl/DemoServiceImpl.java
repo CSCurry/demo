@@ -1,8 +1,8 @@
-package com.demo.service.demo.service.impl;
+package com.demo.business.service.web.impl;
 
-import com.demo.common.entity.DemoUser;
-import com.demo.service.demo.mapper.DemoUserMapper;
-import com.demo.service.demo.service.DemoService;
+import com.demo.business.domain.DemoUser;
+import com.demo.business.mapper.DemoUserMapper;
+import com.demo.business.service.web.DemoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.demo.common.entity;
+package com.demo.business.domain;
 
 import com.demo.common.base.PageEntity;
 import io.swagger.annotations.ApiModel;

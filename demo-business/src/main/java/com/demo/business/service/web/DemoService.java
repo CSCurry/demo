@@ -1,6 +1,6 @@
-package com.demo.service.demo.service;
+package com.demo.business.service.web;
 
-import com.demo.common.entity.DemoUser;
+import com.demo.business.domain.DemoUser;
 
 import java.util.List;
 

@@ -3,7 +3,7 @@ package com.demo.web.controller.test;
 import com.demo.common.base.BaseController;
 import com.demo.common.base.BaseResult;
 import com.demo.common.base.BaseResultVO;
-import com.demo.common.entity.TestEntity;
+import com.demo.business.domain.TestEntity;
 import com.demo.framework.systemlog.SystemLog;
 import com.demo.framework.taxno.TaxNoService;
 import io.swagger.annotations.Api;

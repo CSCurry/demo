@@ -1,6 +1,6 @@
-package com.demo.service.demo.mapper;
+package com.demo.business.mapper;
 
-import com.demo.common.entity.DemoUser;
+import com.demo.business.domain.DemoUser;
 
 import java.util.List;
 
