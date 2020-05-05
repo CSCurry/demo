@@ -16,6 +16,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Objects;
 
 /**
  * 系统日志切点
@@ -58,7 +59,7 @@ public class SystemLogAspect {
     @AfterReturning(pointcut = "controllerAspect()", returning = "result")
     public void doAfterReturning(JoinPoint joinPoint, Object result) {
         try {
-            HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+            HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
             HashMap<String, Object> map = new LinkedHashMap<>();
             map.put("time", (System.currentTimeMillis() - timeThreadLocal.get()) + "ms");
             map.put("method", joinPoint.getTarget().getClass().getSimpleName() + "." + joinPoint.getSignature().getName());

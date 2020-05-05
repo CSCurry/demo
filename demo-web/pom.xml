@@ -75,7 +75,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <!--指定main入口-->
-                    <mainClass>com.demo.web.DemoApplication</mainClass>
+                    <mainClass>com.demo.web.WebApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

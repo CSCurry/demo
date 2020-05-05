@@ -9,10 +9,10 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 //扫描Mapper接口文件 **表示有n个包 *表示1个包
 @MapperScan(value = "com.demo.**.mapper")
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class}, scanBasePackages = {"com.demo.*"})
-public class DemoApplication {
+public class WebApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
-        System.out.println(" :: SpringBoot Start SUCCESS :: ");
+        SpringApplication.run(WebApplication.class, args);
+        System.out.println(" :: Web Start SUCCESS :: ");
     }
 }

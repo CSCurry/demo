@@ -24,6 +24,9 @@ public class SwaggerConfig {
     @Value("${swagger.title}")
     private String title;
 
+    /**
+     * 创建API
+     */
     @Bean
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -36,7 +39,9 @@ public class SwaggerConfig {
                 .build();
     }
 
-    //配置在线文档的基本信息
+    /**
+     * 添加摘要信息
+     */
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title(title)
