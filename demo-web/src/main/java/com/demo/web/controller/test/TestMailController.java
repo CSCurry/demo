@@ -1,6 +1,6 @@
 package com.demo.web.controller.test;
 
-import com.demo.common.base.BaseController;
+import com.demo.framework.base.BaseController;
 import com.demo.framework.mail.MailService;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;

@@ -1,7 +1,7 @@
 package com.demo.mgr.shiro.web.manager;
 
-import com.demo.common.constant.SpringUtils;
-import com.demo.common.utils.Threads;
+import com.demo.framework.constant.SpringUtils;
+import com.demo.framework.util.Threads;
 
 import java.util.TimerTask;
 import java.util.concurrent.ScheduledExecutorService;

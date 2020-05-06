@@ -3,7 +3,7 @@ package com.demo.business.service.mgr;
 import com.demo.business.domain.SysMenu;
 import com.demo.business.domain.SysRole;
 import com.demo.business.domain.SysUser;
-import com.demo.common.domain.Ztree;
+import com.demo.framework.domain.Ztree;
 
 import java.util.List;
 import java.util.Map;

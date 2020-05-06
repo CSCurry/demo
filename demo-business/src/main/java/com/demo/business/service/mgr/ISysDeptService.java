@@ -2,7 +2,7 @@ package com.demo.business.service.mgr;
 
 import com.demo.business.domain.SysDept;
 import com.demo.business.domain.SysRole;
-import com.demo.common.domain.Ztree;
+import com.demo.framework.domain.Ztree;
 
 import java.util.List;
 

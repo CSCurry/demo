@@ -5,11 +5,11 @@ import com.demo.mgr.shiro.web.manager.AsyncManager;
 import com.demo.mgr.shiro.web.manager.factory.AsyncFactory;
 import com.demo.business.service.mgr.ISysUserService;
 import com.demo.mgr.shiro.ShiroUtils;
-import com.demo.common.constant.Constants;
-import com.demo.common.constant.ServletUtils;
-import com.demo.common.constant.ShiroConstants;
-import com.demo.common.constant.UserConstants;
-import com.demo.common.utils.MessageUtils;
+import com.demo.framework.constant.Constants;
+import com.demo.framework.constant.ServletUtils;
+import com.demo.framework.constant.ShiroConstants;
+import com.demo.framework.constant.UserConstants;
+import com.demo.framework.util.MessageUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 

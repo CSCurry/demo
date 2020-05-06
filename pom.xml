@@ -3,10 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <modules>
-        <module>demo-common</module>
         <module>demo-framework</module>
-        <module>demo-web</module>
         <module>demo-business</module>
+        <module>demo-web</module>
         <module>demo-mgr</module>
     </modules>
     <parent>
@@ -29,7 +28,7 @@
         <mybatis.generator.version>1.3.5</mybatis.generator.version>
         <fastjson.version>1.2.62</fastjson.version>
         <swagger.version>2.7.0</swagger.version>
-        <pagehelper.version>1.2.12</pagehelper.version>
+        <pagehelper.version>1.2.5</pagehelper.version>
     </properties>
 
     <!-- 配置主 pom 打包方式为 pom -->
@@ -38,11 +37,6 @@
     <!--声明依赖，并不实现引入，主要管理版本-->
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>com.helloworld</groupId>
-                <artifactId>demo-common</artifactId>
-                <version>${demo.version}</version>
-            </dependency>
             <dependency>
                 <groupId>com.helloworld</groupId>
                 <artifactId>demo-framework</artifactId>

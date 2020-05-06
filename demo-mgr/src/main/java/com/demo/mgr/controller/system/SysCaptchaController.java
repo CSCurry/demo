@@ -1,6 +1,6 @@
 package com.demo.mgr.controller.system;
 
-import com.demo.common.base.BaseController;
+import com.demo.framework.base.BaseController;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import org.springframework.stereotype.Controller;

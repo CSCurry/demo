@@ -2,7 +2,7 @@ package com.demo.mgr.shiro.web.filter.sync;
 
 import com.demo.mgr.shiro.session.OnlineSession;
 import com.demo.mgr.shiro.session.OnlineSessionDAO;
-import com.demo.common.constant.ShiroConstants;
+import com.demo.framework.constant.ShiroConstants;
 import org.apache.shiro.web.filter.PathMatchingFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 

@@ -1,6 +1,6 @@
 package com.demo.business.domain;
 
-import com.demo.common.base.BaseEntity;
+import com.demo.framework.base.BaseEntity;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

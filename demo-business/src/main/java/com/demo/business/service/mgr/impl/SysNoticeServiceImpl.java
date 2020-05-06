@@ -3,7 +3,7 @@ package com.demo.business.service.mgr.impl;
 import com.demo.business.domain.SysNotice;
 import com.demo.business.mapper.SysNoticeMapper;
 import com.demo.business.service.mgr.ISysNoticeService;
-import com.demo.common.constant.Convert;
+import com.demo.framework.constant.Convert;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

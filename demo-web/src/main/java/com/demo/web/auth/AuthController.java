@@ -1,9 +1,9 @@
 package com.demo.web.auth;
 
 import com.alibaba.fastjson.JSON;
-import com.demo.common.base.BaseController;
-import com.demo.common.base.BaseResult;
-import com.demo.common.constant.Constant;
+import com.demo.framework.base.BaseController;
+import com.demo.framework.base.BaseResult;
+import com.demo.framework.constant.Constant;
 import com.demo.framework.auth.access.AccessUser;
 import com.demo.framework.auth.access.AccessUserVo;
 import com.demo.framework.auth.util.MD5Util;

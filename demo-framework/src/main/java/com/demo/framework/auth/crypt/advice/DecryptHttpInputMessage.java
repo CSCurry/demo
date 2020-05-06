@@ -1,7 +1,7 @@
 package com.demo.framework.auth.crypt.advice;
 
 import com.alibaba.fastjson.JSON;
-import com.demo.common.constant.Constant;
+import com.demo.framework.constant.Constant;
 import com.demo.framework.auth.access.AccessUser;
 import com.demo.framework.auth.crypt.annotation.Decrypt;
 import com.demo.framework.auth.util.AESUtil;

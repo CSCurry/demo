@@ -1,7 +1,7 @@
 package com.demo.business.domain;
 
-import com.demo.common.constant.CacheUtils;
-import com.demo.common.constant.Constants;
+import com.demo.framework.constant.CacheUtils;
+import com.demo.framework.constant.Constants;
 import com.demo.framework.util.StringUtil;
 
 import java.util.List;

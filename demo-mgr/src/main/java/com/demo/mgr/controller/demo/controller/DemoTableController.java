@@ -1,11 +1,11 @@
 package com.demo.mgr.controller.demo.controller;
 
-import com.demo.common.base.BaseController;
-import com.demo.common.constant.DateUtils;
-import com.demo.common.constant.StringUtils;
-import com.demo.common.page.PageDomain;
-import com.demo.common.page.TableDataInfo;
-import com.demo.common.page.TableSupport;
+import com.demo.framework.base.BaseController;
+import com.demo.framework.constant.DateUtils;
+import com.demo.framework.constant.StringUtils;
+import com.demo.framework.page.PageDomain;
+import com.demo.framework.page.TableDataInfo;
+import com.demo.framework.page.TableSupport;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

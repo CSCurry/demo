@@ -1,8 +1,8 @@
 package com.demo.business.domain;
 
-import com.demo.common.base.BaseEntity;
-import com.demo.common.base.Excel;
-import com.demo.common.constant.UserConstants;
+import com.demo.framework.base.BaseEntity;
+import com.demo.framework.base.Excel;
+import com.demo.framework.constant.UserConstants;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;

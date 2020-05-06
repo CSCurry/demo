@@ -1,8 +1,7 @@
 package com.demo.mgr.controller.tool;
 
-import com.demo.common.base.AjaxResult;
-import com.demo.common.base.BaseController;
-import com.demo.common.constant.StringUtils;
+import com.demo.framework.base.AjaxResult;
+import com.demo.framework.base.BaseController;
 import com.demo.framework.util.StringUtil;
 import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.*;

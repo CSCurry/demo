@@ -1,6 +1,6 @@
 package com.demo.mgr.controller.monitor;
 
-import com.demo.common.base.BaseController;
+import com.demo.framework.base.BaseController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

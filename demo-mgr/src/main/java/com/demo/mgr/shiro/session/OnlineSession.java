@@ -1,6 +1,6 @@
 package com.demo.mgr.shiro.session;
 
-import com.demo.common.enums.OnlineStatus;
+import com.demo.framework.enums.OnlineStatus;
 import org.apache.shiro.session.mgt.SimpleSession;
 
 /**

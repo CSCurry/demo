@@ -2,8 +2,8 @@ package com.demo.mgr.shiro;
 
 import com.demo.business.domain.SysUser;
 import com.demo.mgr.shiro.realm.UserRealm;
-import com.demo.common.constant.StringUtils;
-import com.demo.common.utils.BeanUtils;
+import com.demo.framework.constant.StringUtils;
+import com.demo.framework.util.BeanUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;

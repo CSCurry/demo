@@ -1,6 +1,6 @@
 package com.demo.business.domain;
 
-import com.demo.common.base.PageEntity;
+import com.demo.framework.base.PageEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;

@@ -1,8 +1,8 @@
 package com.demo.web.controller.test;
 
-import com.demo.common.base.BaseController;
-import com.demo.common.base.BaseResult;
-import com.demo.common.base.BaseResultVO;
+import com.demo.framework.base.BaseController;
+import com.demo.framework.base.BaseResult;
+import com.demo.framework.base.BaseResultVO;
 import com.demo.business.domain.DemoUser;
 import com.demo.framework.systemlog.SystemLog;
 import com.demo.business.service.web.DemoService;

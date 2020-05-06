@@ -1,7 +1,7 @@
 package com.demo.mgr.shiro.web.filter.captcha;
 
 import com.demo.mgr.shiro.ShiroUtils;
-import com.demo.common.constant.ShiroConstants;
+import com.demo.framework.constant.ShiroConstants;
 import com.demo.framework.util.StringUtil;
 import com.google.code.kaptcha.Constants;
 import org.apache.shiro.web.filter.AccessControlFilter;

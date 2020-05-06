@@ -2,9 +2,9 @@ package com.demo.mgr.shiro.web.filter.kickout;
 
 import com.demo.business.domain.SysUser;
 import com.demo.mgr.shiro.ShiroUtils;
-import com.demo.common.base.AjaxResult;
-import com.demo.common.constant.ServletUtils;
-import com.demo.common.constant.ShiroConstants;
+import com.demo.framework.base.AjaxResult;
+import com.demo.framework.constant.ServletUtils;
+import com.demo.framework.constant.ShiroConstants;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;

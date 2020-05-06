@@ -1,7 +1,7 @@
 package com.demo.mgr.shiro.session;
 
-import com.demo.common.constant.IpUtils;
-import com.demo.common.constant.ServletUtils;
+import com.demo.framework.constant.IpUtils;
+import com.demo.framework.constant.ServletUtils;
 import eu.bitwalker.useragentutils.UserAgent;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.SessionContext;

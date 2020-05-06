@@ -1,6 +1,6 @@
 package com.demo.mgr.shiro.web.session;
 
-import com.demo.common.utils.Threads;
+import com.demo.framework.util.Threads;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.session.mgt.DefaultSessionManager;
 import org.apache.shiro.session.mgt.SessionValidationScheduler;

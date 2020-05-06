@@ -1,10 +1,10 @@
 package com.demo.business.domain;
 
-import com.demo.common.base.BaseEntity;
-import com.demo.common.base.Excel;
-import com.demo.common.base.Excel.ColumnType;
-import com.demo.common.base.Excel.Type;
-import com.demo.common.base.Excels;
+import com.demo.framework.base.BaseEntity;
+import com.demo.framework.base.Excel;
+import com.demo.framework.base.Excel.ColumnType;
+import com.demo.framework.base.Excel.Type;
+import com.demo.framework.base.Excels;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

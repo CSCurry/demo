@@ -3,7 +3,7 @@ package com.demo.business.service.mgr.impl;
 import com.demo.business.domain.SysUserOnline;
 import com.demo.business.mapper.SysUserOnlineMapper;
 import com.demo.business.service.mgr.ISysUserOnlineService;
-import com.demo.common.constant.StringUtils;
+import com.demo.framework.constant.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

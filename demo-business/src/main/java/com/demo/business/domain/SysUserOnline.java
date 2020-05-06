@@ -1,7 +1,7 @@
 package com.demo.business.domain;
 
-import com.demo.common.base.BaseEntity;
-import com.demo.common.enums.OnlineStatus;
+import com.demo.framework.base.BaseEntity;
+import com.demo.framework.enums.OnlineStatus;
 
 import java.util.Date;
 

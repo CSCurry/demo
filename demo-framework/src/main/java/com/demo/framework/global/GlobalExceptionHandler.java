@@ -1,7 +1,7 @@
 package com.demo.framework.global;
 
-import com.demo.common.base.BaseResult;
-import com.demo.common.enums.ResultCode;
+import com.demo.framework.base.BaseResult;
+import com.demo.framework.enums.ResultCode;
 import com.demo.framework.exception.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.ObjectError;

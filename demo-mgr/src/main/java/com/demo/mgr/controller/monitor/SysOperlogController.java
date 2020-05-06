@@ -2,12 +2,12 @@ package com.demo.mgr.controller.monitor;
 
 import com.demo.business.domain.SysOperLog;
 import com.demo.business.service.mgr.ISysOperLogService;
-import com.demo.common.annotation.Log;
-import com.demo.common.base.AjaxResult;
-import com.demo.common.base.BaseController;
-import com.demo.common.constant.ExcelUtil;
-import com.demo.common.enums.BusinessType;
-import com.demo.common.page.TableDataInfo;
+import com.demo.framework.annotation.Log;
+import com.demo.framework.base.AjaxResult;
+import com.demo.framework.base.BaseController;
+import com.demo.framework.constant.ExcelUtil;
+import com.demo.framework.enums.BusinessType;
+import com.demo.framework.page.TableDataInfo;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

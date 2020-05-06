@@ -11,7 +11,7 @@ import com.demo.mgr.shiro.web.filter.online.OnlineSessionFilter;
 import com.demo.mgr.shiro.web.filter.sync.SyncOnlineSessionFilter;
 import com.demo.mgr.shiro.web.session.OnlineWebSessionManager;
 import com.demo.mgr.shiro.web.session.SpringSessionValidationScheduler;
-import com.demo.common.constant.SpringUtils;
+import com.demo.framework.constant.SpringUtils;
 import com.demo.framework.util.StringUtil;
 import org.apache.commons.io.IOUtils;
 import org.apache.shiro.cache.ehcache.EhCacheManager;

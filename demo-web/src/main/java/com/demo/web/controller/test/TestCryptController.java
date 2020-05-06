@@ -1,7 +1,7 @@
 package com.demo.web.controller.test;
 
-import com.demo.common.base.BaseController;
-import com.demo.common.base.BaseResult;
+import com.demo.framework.base.BaseController;
+import com.demo.framework.base.BaseResult;
 import com.demo.framework.auth.crypt.annotation.Decrypt;
 import com.demo.framework.auth.crypt.annotation.Encrypt;
 import com.demo.framework.systemlog.SystemLog;

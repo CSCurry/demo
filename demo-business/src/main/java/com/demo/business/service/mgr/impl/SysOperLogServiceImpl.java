@@ -3,7 +3,7 @@ package com.demo.business.service.mgr.impl;
 import com.demo.business.domain.SysOperLog;
 import com.demo.business.mapper.SysOperLogMapper;
 import com.demo.business.service.mgr.ISysOperLogService;
-import com.demo.common.constant.Convert;
+import com.demo.framework.constant.Convert;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

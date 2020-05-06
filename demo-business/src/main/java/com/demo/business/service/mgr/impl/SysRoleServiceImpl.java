@@ -9,12 +9,12 @@ import com.demo.business.mapper.SysRoleMapper;
 import com.demo.business.mapper.SysRoleMenuMapper;
 import com.demo.business.mapper.SysUserRoleMapper;
 import com.demo.business.service.mgr.ISysRoleService;
-import com.demo.common.annotation.DataScope;
-import com.demo.common.base.BusinessException;
-import com.demo.common.constant.Convert;
-import com.demo.common.constant.SpringUtils;
-import com.demo.common.constant.StringUtils;
-import com.demo.common.constant.UserConstants;
+import com.demo.framework.annotation.DataScope;
+import com.demo.framework.base.BusinessException;
+import com.demo.framework.constant.Convert;
+import com.demo.framework.constant.SpringUtils;
+import com.demo.framework.constant.StringUtils;
+import com.demo.framework.constant.UserConstants;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

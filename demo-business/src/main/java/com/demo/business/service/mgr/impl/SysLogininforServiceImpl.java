@@ -3,7 +3,7 @@ package com.demo.business.service.mgr.impl;
 import com.demo.business.domain.SysLogininfor;
 import com.demo.business.mapper.SysLogininforMapper;
 import com.demo.business.service.mgr.ISysLogininforService;
-import com.demo.common.constant.Convert;
+import com.demo.framework.constant.Convert;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

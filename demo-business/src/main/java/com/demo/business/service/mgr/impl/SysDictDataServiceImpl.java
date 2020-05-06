@@ -4,7 +4,7 @@ import com.demo.business.domain.DictUtils;
 import com.demo.business.domain.SysDictData;
 import com.demo.business.mapper.SysDictDataMapper;
 import com.demo.business.service.mgr.ISysDictDataService;
-import com.demo.common.constant.Convert;
+import com.demo.framework.constant.Convert;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

@@ -6,9 +6,9 @@ import com.demo.business.domain.SysUser;
 import com.demo.business.mapper.SysMenuMapper;
 import com.demo.business.mapper.SysRoleMenuMapper;
 import com.demo.business.service.mgr.ISysMenuService;
-import com.demo.common.domain.Ztree;
-import com.demo.common.constant.StringUtils;
-import com.demo.common.constant.UserConstants;
+import com.demo.framework.domain.Ztree;
+import com.demo.framework.constant.StringUtils;
+import com.demo.framework.constant.UserConstants;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

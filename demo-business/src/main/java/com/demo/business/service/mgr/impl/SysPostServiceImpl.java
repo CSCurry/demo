@@ -4,10 +4,10 @@ import com.demo.business.domain.SysPost;
 import com.demo.business.mapper.SysPostMapper;
 import com.demo.business.mapper.SysUserPostMapper;
 import com.demo.business.service.mgr.ISysPostService;
-import com.demo.common.base.BusinessException;
-import com.demo.common.constant.Convert;
-import com.demo.common.constant.StringUtils;
-import com.demo.common.constant.UserConstants;
+import com.demo.framework.base.BusinessException;
+import com.demo.framework.constant.Convert;
+import com.demo.framework.constant.StringUtils;
+import com.demo.framework.constant.UserConstants;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

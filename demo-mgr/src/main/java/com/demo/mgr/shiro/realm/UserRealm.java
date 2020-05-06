@@ -5,7 +5,7 @@ import com.demo.business.service.mgr.ISysMenuService;
 import com.demo.business.service.mgr.ISysRoleService;
 import com.demo.mgr.shiro.ShiroUtils;
 import com.demo.mgr.shiro.service.SysLoginService;
-import com.demo.common.exception.user.*;
+import com.demo.framework.exception.user.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;

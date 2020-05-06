@@ -1,9 +1,9 @@
 package com.demo.mgr.controller.system;
 
-import com.demo.common.base.AjaxResult;
-import com.demo.common.base.BaseController;
-import com.demo.common.constant.ServletUtils;
-import com.demo.common.constant.StringUtils;
+import com.demo.framework.base.AjaxResult;
+import com.demo.framework.base.BaseController;
+import com.demo.framework.constant.ServletUtils;
+import com.demo.framework.constant.StringUtils;
 import com.demo.framework.systemlog.SystemLog;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;

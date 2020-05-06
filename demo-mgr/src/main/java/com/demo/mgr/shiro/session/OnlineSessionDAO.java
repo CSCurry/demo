@@ -3,7 +3,7 @@ package com.demo.mgr.shiro.session;
 import com.demo.mgr.shiro.web.manager.AsyncManager;
 import com.demo.mgr.shiro.web.manager.factory.AsyncFactory;
 import com.demo.mgr.shiro.service.SysShiroService;
-import com.demo.common.enums.OnlineStatus;
+import com.demo.framework.enums.OnlineStatus;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.UnknownSessionException;
 import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;

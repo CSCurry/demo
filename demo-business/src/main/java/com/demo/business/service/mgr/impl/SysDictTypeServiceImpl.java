@@ -6,11 +6,11 @@ import com.demo.business.domain.SysDictType;
 import com.demo.business.mapper.SysDictDataMapper;
 import com.demo.business.mapper.SysDictTypeMapper;
 import com.demo.business.service.mgr.ISysDictTypeService;
-import com.demo.common.base.BusinessException;
-import com.demo.common.domain.Ztree;
-import com.demo.common.constant.Convert;
-import com.demo.common.constant.StringUtils;
-import com.demo.common.constant.UserConstants;
+import com.demo.framework.base.BusinessException;
+import com.demo.framework.domain.Ztree;
+import com.demo.framework.constant.Convert;
+import com.demo.framework.constant.StringUtils;
+import com.demo.framework.constant.UserConstants;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

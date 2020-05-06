@@ -1,7 +1,7 @@
 package com.demo.business.domain;
 
-import com.demo.common.base.BaseEntity;
-import com.demo.common.base.Excel;
+import com.demo.framework.base.BaseEntity;
+import com.demo.framework.base.Excel;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;

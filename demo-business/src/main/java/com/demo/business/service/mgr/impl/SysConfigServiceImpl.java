@@ -3,7 +3,7 @@ package com.demo.business.service.mgr.impl;
 import com.demo.business.domain.SysConfig;
 import com.demo.business.mapper.SysConfigMapper;
 import com.demo.business.service.mgr.ISysConfigService;
-import com.demo.common.constant.*;
+import com.demo.framework.constant.*;
 import com.demo.framework.util.StringUtil;
 import org.springframework.stereotype.Service;
 
