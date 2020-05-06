@@ -1,6 +1,6 @@
 package com.demo.framework.config;
 
-import com.demo.framework.constant.ServletUtils;
+import com.demo.framework.util.ServletUtils;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;

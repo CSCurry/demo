@@ -1,4 +1,6 @@
-package com.demo.framework.constant;
+package com.demo.framework.util;
+
+import com.demo.framework.constant.StrFormatter;
 
 import java.util.Collection;
 import java.util.Map;

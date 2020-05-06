@@ -2,7 +2,7 @@ package com.demo.mgr.shiro;
 
 import com.demo.business.domain.SysUser;
 import com.demo.mgr.shiro.realm.UserRealm;
-import com.demo.framework.constant.StringUtils;
+import com.demo.framework.util.StringUtils;
 import com.demo.framework.util.BeanUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;

@@ -1,6 +1,6 @@
 package com.demo.framework.util.html;
 
-import com.demo.framework.constant.StringUtils;
+import com.demo.framework.util.StringUtils;
 
 /**
  * 转义和反转义工具类

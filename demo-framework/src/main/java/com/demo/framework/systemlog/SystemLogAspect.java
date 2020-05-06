@@ -2,7 +2,7 @@ package com.demo.framework.systemlog;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.demo.framework.util.IPUtil;
+import com.demo.framework.util.IpUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -66,7 +66,7 @@ public class SystemLogAspect {
             map.put("params", joinPoint.getArgs() == null || joinPoint.getArgs().length == 0 ? null : joinPoint.getArgs()[0]);
             map.put("result", result);
             map.put("uri", request.getRequestURI());
-            map.put("ip", IPUtil.getIp(request));
+            map.put("ip", IpUtil.getIpAddr(request));
             log.info(JSON.toJSONString(map, SerializerFeature.WriteMapNullValue));
         } finally {
             timeThreadLocal.remove();

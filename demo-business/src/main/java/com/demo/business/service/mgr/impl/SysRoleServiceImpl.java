@@ -11,9 +11,9 @@ import com.demo.business.mapper.SysUserRoleMapper;
 import com.demo.business.service.mgr.ISysRoleService;
 import com.demo.framework.annotation.DataScope;
 import com.demo.framework.exception.BusinessException;
-import com.demo.framework.constant.Convert;
-import com.demo.framework.constant.SpringUtils;
-import com.demo.framework.constant.StringUtils;
+import com.demo.framework.util.ConvertUtil;
+import com.demo.framework.util.SpringUtils;
+import com.demo.framework.util.StringUtils;
 import com.demo.framework.constant.UserConstants;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -132,7 +132,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
      */
     @Override
     public int deleteRoleByIds(String ids) throws BusinessException {
-        Long[] roleIds = Convert.toLongArray(ids);
+        Long[] roleIds = ConvertUtil.toLongArray(ids);
         for (Long roleId : roleIds) {
             checkRoleAllowed(new SysRole(roleId));
             SysRole role = selectRoleById(roleId);
@@ -318,7 +318,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
      */
     @Override
     public int deleteAuthUsers(Long roleId, String userIds) {
-        return userRoleMapper.deleteUserRoleInfos(roleId, Convert.toLongArray(userIds));
+        return userRoleMapper.deleteUserRoleInfos(roleId, ConvertUtil.toLongArray(userIds));
     }
 
     /**
@@ -330,7 +330,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
      */
     @Override
     public int insertAuthUsers(Long roleId, String userIds) {
-        Long[] users = Convert.toLongArray(userIds);
+        Long[] users = ConvertUtil.toLongArray(userIds);
         // 新增用户与角色管理
         List<SysUserRole> list = new ArrayList<SysUserRole>();
         for (Long userId : users) {

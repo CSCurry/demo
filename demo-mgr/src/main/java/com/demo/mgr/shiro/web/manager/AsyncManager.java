@@ -1,6 +1,6 @@
 package com.demo.mgr.shiro.web.manager;
 
-import com.demo.framework.constant.SpringUtils;
+import com.demo.framework.util.SpringUtils;
 import com.demo.framework.util.Threads;
 
 import java.util.TimerTask;

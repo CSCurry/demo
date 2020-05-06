@@ -1,6 +1,5 @@
 package com.demo.framework.util;
 
-import com.demo.framework.constant.SpringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;

@@ -4,9 +4,9 @@ import com.demo.business.domain.SysUser;
 import com.demo.mgr.shiro.web.manager.AsyncManager;
 import com.demo.mgr.shiro.web.manager.factory.AsyncFactory;
 import com.demo.mgr.shiro.ShiroUtils;
-import com.demo.framework.constant.Constants;
+import com.demo.framework.constant.Constant;
 import com.demo.framework.constant.ShiroConstants;
-import com.demo.framework.constant.StringUtils;
+import com.demo.framework.util.StringUtils;
 import com.demo.framework.util.MessageUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.cache.Cache;
@@ -52,7 +52,7 @@ public class LogoutFilter extends org.apache.shiro.web.filter.authc.LogoutFilter
                 if (StringUtils.isNotNull(user)) {
                     String loginName = user.getLoginName();
                     // 记录用户退出日志
-                    AsyncManager.me().execute(AsyncFactory.recordLogininfor(loginName, Constants.LOGOUT, MessageUtils.message("user.logout.success")));
+                    AsyncManager.me().execute(AsyncFactory.recordLogininfor(loginName, Constant.LOGOUT, MessageUtils.message("user.logout.success")));
                     // 清理缓存
                     cache.remove(loginName);
                 }

@@ -3,8 +3,8 @@ package com.demo.mgr.controller.common;
 import com.demo.framework.base.AjaxResult;
 import com.demo.framework.config.GlobalConfig;
 import com.demo.framework.config.ServerConfig;
-import com.demo.framework.constant.Constants;
-import com.demo.framework.constant.StringUtils;
+import com.demo.framework.constant.Constant;
+import com.demo.framework.util.StringUtils;
 import com.demo.framework.util.file.FileUploadUtils;
 import com.demo.framework.util.file.FileUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -45,7 +45,7 @@ public class CommonController {
             String realFileName = System.currentTimeMillis() + fileName.substring(fileName.indexOf("_") + 1);
             String filePath = GlobalConfig.getDownloadPath() + fileName;
 
-            response.setCharacterEncoding("utf-8");
+            response.setCharacterEncoding(Constant.UTF8);
             response.setContentType("multipart/form-data");
             response.setHeader("Content-Disposition", "attachment;fileName=" + FileUtils.setFileDownloadHeader(request, realFileName));
             FileUtils.writeBytes(filePath, response.getOutputStream());
@@ -87,10 +87,10 @@ public class CommonController {
         // 本地资源路径
         String localPath = GlobalConfig.getProfile();
         // 数据库资源地址
-        String downloadPath = localPath + StringUtils.substringAfter(resource, Constants.RESOURCE_PREFIX);
+        String downloadPath = localPath + StringUtils.substringAfter(resource, Constant.RESOURCE_PREFIX);
         // 下载名称
         String downloadName = StringUtils.substringAfterLast(downloadPath, "/");
-        response.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding(Constant.UTF8);
         response.setContentType("multipart/form-data");
         response.setHeader("Content-Disposition", "attachment;fileName=" + FileUtils.setFileDownloadHeader(request, downloadName));
         FileUtils.writeBytes(downloadPath, response.getOutputStream());

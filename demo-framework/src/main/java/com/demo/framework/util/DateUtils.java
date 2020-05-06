@@ -1,4 +1,4 @@
-package com.demo.framework.constant;
+package com.demo.framework.util;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
 

@@ -4,7 +4,7 @@ import com.demo.business.domain.DictUtils;
 import com.demo.business.domain.SysDictData;
 import com.demo.business.mapper.SysDictDataMapper;
 import com.demo.business.service.mgr.ISysDictDataService;
-import com.demo.framework.constant.Convert;
+import com.demo.framework.util.ConvertUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -63,7 +63,7 @@ public class SysDictDataServiceImpl implements ISysDictDataService {
      */
     @Override
     public int deleteDictDataByIds(String ids) {
-        int row = dictDataMapper.deleteDictDataByIds(Convert.toStrArray(ids));
+        int row = dictDataMapper.deleteDictDataByIds(ConvertUtil.toStrArray(ids));
         if (row > 0) {
             DictUtils.clearDictCache();
         }

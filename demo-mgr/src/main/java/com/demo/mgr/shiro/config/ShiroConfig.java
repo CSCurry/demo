@@ -2,7 +2,7 @@ package com.demo.mgr.shiro.config;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import com.demo.framework.config.CacheConfig;
-import com.demo.framework.constant.SpringUtils;
+import com.demo.framework.util.SpringUtils;
 import com.demo.mgr.shiro.realm.UserRealm;
 import com.demo.mgr.shiro.session.OnlineSessionDAO;
 import com.demo.mgr.shiro.session.OnlineSessionFactory;

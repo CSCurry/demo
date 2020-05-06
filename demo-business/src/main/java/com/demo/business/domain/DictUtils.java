@@ -1,7 +1,7 @@
 package com.demo.business.domain;
 
 import com.demo.framework.util.CacheUtil;
-import com.demo.framework.constant.Constants;
+import com.demo.framework.constant.Constant;
 import com.demo.framework.util.StringUtil;
 
 import java.util.List;
@@ -51,7 +51,7 @@ public class DictUtils {
      * @return 缓存名
      */
     public static String getCacheName() {
-        return Constants.SYS_DICT_CACHE;
+        return Constant.SYS_DICT_CACHE;
     }
 
     /**
@@ -61,6 +61,6 @@ public class DictUtils {
      * @return 缓存键key
      */
     public static String getCacheKey(String configKey) {
-        return Constants.SYS_DICT_KEY + configKey;
+        return Constant.SYS_DICT_KEY + configKey;
     }
 }

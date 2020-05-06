@@ -6,7 +6,7 @@ import com.demo.mgr.shiro.service.SysPasswordService;
 import com.demo.framework.annotation.Log;
 import com.demo.framework.base.AjaxResult;
 import com.demo.framework.base.BaseController;
-import com.demo.framework.constant.ExcelUtil;
+import com.demo.framework.util.ExcelUtil;
 import com.demo.framework.enums.BusinessType;
 import com.demo.framework.page.TableDataInfo;
 import org.apache.shiro.authz.annotation.RequiresPermissions;

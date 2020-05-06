@@ -1,7 +1,7 @@
 package com.demo.framework.domain.server;
 
 import com.demo.framework.util.MathUtil;
-import com.demo.framework.constant.DateUtils;
+import com.demo.framework.util.DateUtils;
 
 import java.lang.management.ManagementFactory;
 

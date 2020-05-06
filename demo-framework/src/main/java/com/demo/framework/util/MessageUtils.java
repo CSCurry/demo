@@ -1,6 +1,5 @@
 package com.demo.framework.util;
 
-import com.demo.framework.constant.SpringUtils;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 

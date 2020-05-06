@@ -6,7 +6,7 @@ import com.demo.framework.annotation.Log;
 import com.demo.framework.base.AjaxResult;
 import com.demo.framework.base.BaseController;
 import com.demo.framework.config.GlobalConfig;
-import com.demo.framework.constant.StringUtils;
+import com.demo.framework.util.StringUtils;
 import com.demo.framework.enums.BusinessType;
 import com.demo.framework.util.file.FileUploadUtils;
 import com.demo.mgr.shiro.ShiroUtils;

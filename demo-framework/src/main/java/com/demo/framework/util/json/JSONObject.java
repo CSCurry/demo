@@ -1,6 +1,6 @@
 package com.demo.framework.util.json;
 
-import com.demo.framework.constant.StringUtils;
+import com.demo.framework.util.StringUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.*;

@@ -1,8 +1,8 @@
 package com.demo.mgr.controller.demo.controller;
 
 import com.demo.framework.base.BaseController;
-import com.demo.framework.constant.DateUtils;
-import com.demo.framework.constant.StringUtils;
+import com.demo.framework.util.DateUtils;
+import com.demo.framework.util.StringUtils;
 import com.demo.framework.page.PageDomain;
 import com.demo.framework.page.TableDataInfo;
 import com.demo.framework.page.TableSupport;

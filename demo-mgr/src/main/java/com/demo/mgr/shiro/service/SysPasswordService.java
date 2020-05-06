@@ -3,7 +3,7 @@ package com.demo.mgr.shiro.service;
 import com.demo.business.domain.SysUser;
 import com.demo.mgr.shiro.web.manager.AsyncManager;
 import com.demo.mgr.shiro.web.manager.factory.AsyncFactory;
-import com.demo.framework.constant.Constants;
+import com.demo.framework.constant.Constant;
 import com.demo.framework.constant.ShiroConstants;
 import com.demo.framework.exception.user.UserPasswordNotMatchException;
 import com.demo.framework.exception.user.UserPasswordRetryLimitExceedException;
@@ -48,12 +48,12 @@ public class SysPasswordService {
             loginRecordCache.put(loginName, retryCount);
         }
         if (retryCount.incrementAndGet() > Integer.parseInt(maxRetryCount)) {
-            AsyncManager.me().execute(AsyncFactory.recordLogininfor(loginName, Constants.LOGIN_FAIL, MessageUtils.message("user.password.retry.limit.exceed", maxRetryCount)));
+            AsyncManager.me().execute(AsyncFactory.recordLogininfor(loginName, Constant.LOGIN_FAIL, MessageUtils.message("user.password.retry.limit.exceed", maxRetryCount)));
             throw new UserPasswordRetryLimitExceedException(Integer.parseInt(maxRetryCount));
         }
 
         if (!matches(user, password)) {
-            AsyncManager.me().execute(AsyncFactory.recordLogininfor(loginName, Constants.LOGIN_FAIL, MessageUtils.message("user.password.retry.limit.count", retryCount)));
+            AsyncManager.me().execute(AsyncFactory.recordLogininfor(loginName, Constant.LOGIN_FAIL, MessageUtils.message("user.password.retry.limit.count", retryCount)));
             loginRecordCache.put(loginName, retryCount);
             throw new UserPasswordNotMatchException();
         } else {

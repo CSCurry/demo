@@ -1,12 +1,12 @@
 package com.demo.framework.base;
 
-import com.demo.framework.constant.StringUtils;
+import com.demo.framework.util.StringUtils;
 import com.demo.framework.page.PageDomain;
 import com.demo.framework.page.TableDataInfo;
 import com.demo.framework.page.TableSupport;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.demo.framework.constant.SqlUtil;
+import com.demo.framework.util.SqlUtil;
 import com.demo.framework.base.AjaxResult.Type;
 import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;

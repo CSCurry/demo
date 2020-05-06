@@ -8,7 +8,7 @@ import com.demo.framework.annotation.Log;
 import com.demo.framework.base.AjaxResult;
 import com.demo.framework.base.BaseController;
 import com.demo.framework.domain.Ztree;
-import com.demo.framework.constant.StringUtils;
+import com.demo.framework.util.StringUtils;
 import com.demo.framework.constant.UserConstants;
 import com.demo.framework.enums.BusinessType;
 import org.apache.shiro.authz.annotation.RequiresPermissions;

@@ -1,4 +1,4 @@
-package com.demo.framework.constant;
+package com.demo.framework.util;
 
 /**
  * sql操作工具类

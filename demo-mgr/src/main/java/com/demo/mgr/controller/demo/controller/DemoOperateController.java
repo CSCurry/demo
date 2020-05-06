@@ -4,9 +4,9 @@ import com.demo.framework.base.AjaxResult;
 import com.demo.framework.base.BaseController;
 import com.demo.framework.exception.BusinessException;
 import com.demo.framework.domain.UserOperateModel;
-import com.demo.framework.constant.Convert;
-import com.demo.framework.constant.ExcelUtil;
-import com.demo.framework.constant.StringUtils;
+import com.demo.framework.util.ConvertUtil;
+import com.demo.framework.util.ExcelUtil;
+import com.demo.framework.util.StringUtils;
 import com.demo.framework.page.PageDomain;
 import com.demo.framework.page.TableDataInfo;
 import com.demo.framework.page.TableSupport;
@@ -193,7 +193,7 @@ public class DemoOperateController extends BaseController {
     @PostMapping("/remove")
     @ResponseBody
     public AjaxResult remove(String ids) {
-        Integer[] userIds = Convert.toIntArray(ids);
+        Integer[] userIds = ConvertUtil.toIntArray(ids);
         for (Integer userId : userIds) {
             users.remove(userId);
         }

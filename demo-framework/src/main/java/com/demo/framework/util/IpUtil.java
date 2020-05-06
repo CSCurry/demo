@@ -1,15 +1,50 @@
-package com.demo.framework.constant;
+package com.demo.framework.util;
+
+import com.demo.framework.config.GlobalConfig;
+import com.demo.framework.util.json.JSON;
+import com.demo.framework.util.json.JSONObject;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
- * 获取IP方法
+ * IpUtil
  *
- * @author ruoyi
+ * @author 30
  */
-public class IpUtils {
+@Slf4j
+public class IpUtil {
+
+    public static final String IP_URL = "http://ip.taobao.com/service/getIpInfo.php";
+
+    public static String getRealAddressByIP(String ip) {
+        String address = "XX XX";
+
+        // 内网不查询
+        if (IpUtil.internalIp(ip)) {
+            return "内网IP";
+        }
+        if (GlobalConfig.isAddressEnabled()) {
+            String rspStr = HttpUtils.sendPost(IP_URL, "ip=" + ip);
+            if (StringUtils.isEmpty(rspStr)) {
+                log.error("获取地理位置异常 {}", ip);
+                return address;
+            }
+            try {
+                JSONObject obj = JSON.unmarshal(rspStr, JSONObject.class);
+                JSONObject data = obj.getObj("data");
+                String region = data.getStr("region");
+                String city = data.getStr("city");
+                address = region + " " + city;
+            } catch (Exception e) {
+                log.error("获取地理位置异常 {}", ip);
+            }
+        }
+        return address;
+    }
+
     public static String getIpAddr(HttpServletRequest request) {
         if (request == null) {
             return "unknown";
@@ -27,11 +62,9 @@ public class IpUtils {
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("X-Real-IP");
         }
-
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getRemoteAddr();
         }
-
         return "0:0:0:0:0:0:0:1".equals(ip) ? "127.0.0.1" : ip;
     }
 
@@ -63,9 +96,8 @@ public class IpUtils {
                     return true;
                 }
             case SECTION_5:
-                switch (b1) {
-                    case SECTION_6:
-                        return true;
+                if (b1 == SECTION_6) {
+                    return true;
                 }
             default:
                 return false;
@@ -144,6 +176,7 @@ public class IpUtils {
         try {
             return InetAddress.getLocalHost().getHostAddress();
         } catch (UnknownHostException e) {
+            e.printStackTrace();
         }
         return "127.0.0.1";
     }
@@ -152,6 +185,7 @@ public class IpUtils {
         try {
             return InetAddress.getLocalHost().getHostName();
         } catch (UnknownHostException e) {
+            e.printStackTrace();
         }
         return "未知";
     }

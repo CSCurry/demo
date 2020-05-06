@@ -7,8 +7,8 @@ import com.demo.business.mapper.SysDictDataMapper;
 import com.demo.business.mapper.SysDictTypeMapper;
 import com.demo.business.service.mgr.ISysDictTypeService;
 import com.demo.framework.exception.BusinessException;
-import com.demo.framework.constant.Convert;
-import com.demo.framework.constant.StringUtils;
+import com.demo.framework.util.ConvertUtil;
+import com.demo.framework.util.StringUtils;
 import com.demo.framework.constant.UserConstants;
 import com.demo.framework.domain.Ztree;
 import org.springframework.stereotype.Service;
@@ -113,7 +113,7 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
      */
     @Override
     public int deleteDictTypeByIds(String ids) {
-        Long[] dictIds = Convert.toLongArray(ids);
+        Long[] dictIds = ConvertUtil.toLongArray(ids);
         for (Long dictId : dictIds) {
             SysDictType dictType = selectDictTypeById(dictId);
             if (dictDataMapper.countDictDataByType(dictType.getDictType()) > 0) {

@@ -5,7 +5,9 @@ import com.demo.business.mapper.SysConfigMapper;
 import com.demo.business.service.mgr.ISysConfigService;
 import com.demo.framework.constant.*;
 import com.demo.framework.util.CacheUtil;
+import com.demo.framework.util.ConvertUtil;
 import com.demo.framework.util.StringUtil;
+import com.demo.framework.util.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -50,7 +52,7 @@ public class SysConfigServiceImpl implements ISysConfigService {
      */
     @Override
     public String selectConfigByKey(String configKey) {
-        String configValue = Convert.toStr(CacheUtil.get(getCacheName(), getCacheKey(configKey)));
+        String configValue = ConvertUtil.toStr(CacheUtil.get(getCacheName(), getCacheKey(configKey)));
         if (StringUtil.isNotEmpty(configValue)) {
             return configValue;
         }
@@ -113,7 +115,7 @@ public class SysConfigServiceImpl implements ISysConfigService {
      */
     @Override
     public int deleteConfigByIds(String ids) {
-        int count = configMapper.deleteConfigByIds(Convert.toStrArray(ids));
+        int count = configMapper.deleteConfigByIds(ConvertUtil.toStrArray(ids));
         if (count > 0) {
 
             CacheUtil.removeAll(getCacheName());
@@ -151,7 +153,7 @@ public class SysConfigServiceImpl implements ISysConfigService {
      * @return 缓存名
      */
     private String getCacheName() {
-        return Constants.SYS_CONFIG_CACHE;
+        return Constant.SYS_CONFIG_CACHE;
     }
 
     /**
@@ -161,6 +163,6 @@ public class SysConfigServiceImpl implements ISysConfigService {
      * @return 缓存键key
      */
     private String getCacheKey(String configKey) {
-        return Constants.SYS_CONFIG_KEY + configKey;
+        return Constant.SYS_CONFIG_KEY + configKey;
     }
 }

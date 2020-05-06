@@ -3,7 +3,7 @@ package com.demo.mgr.shiro.web.filter.kickout;
 import com.demo.business.domain.SysUser;
 import com.demo.mgr.shiro.ShiroUtils;
 import com.demo.framework.base.AjaxResult;
-import com.demo.framework.constant.ServletUtils;
+import com.demo.framework.util.ServletUtils;
 import com.demo.framework.constant.ShiroConstants;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.shiro.cache.Cache;

@@ -9,9 +9,10 @@ import java.util.regex.Pattern;
 /**
  * Bean 工具类
  *
- * @author ruoyi
+ * @author 30
  */
 public class BeanUtils extends org.springframework.beans.BeanUtils {
+
     /**
      * Bean方法名中属性名开始的下标
      */
@@ -49,13 +50,12 @@ public class BeanUtils extends org.springframework.beans.BeanUtils {
      */
     public static List<Method> getSetterMethods(Object obj) {
         // setter方法列表
-        List<Method> setterMethods = new ArrayList<Method>();
+        List<Method> setterMethods = new ArrayList<>();
 
         // 获取所有方法
         Method[] methods = obj.getClass().getMethods();
 
         // 查找setter方法
-
         for (Method method : methods) {
             Matcher m = SET_PATTERN.matcher(method.getName());
             if (m.matches() && (method.getParameterTypes().length == 1)) {
@@ -75,7 +75,7 @@ public class BeanUtils extends org.springframework.beans.BeanUtils {
 
     public static List<Method> getGetterMethods(Object obj) {
         // getter方法列表
-        List<Method> getterMethods = new ArrayList<Method>();
+        List<Method> getterMethods = new ArrayList<>();
         // 获取所有方法
         Method[] methods = obj.getClass().getMethods();
         // 查找getter方法

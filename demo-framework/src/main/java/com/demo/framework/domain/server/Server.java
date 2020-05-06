@@ -1,7 +1,7 @@
 package com.demo.framework.domain.server;
 
 import com.demo.framework.util.MathUtil;
-import com.demo.framework.constant.IpUtils;
+import com.demo.framework.util.IpUtil;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.CentralProcessor.TickType;
@@ -136,8 +136,8 @@ public class Server {
      */
     private void setSysInfo() {
         Properties props = System.getProperties();
-        sys.setComputerName(IpUtils.getHostName());
-        sys.setComputerIp(IpUtils.getHostIp());
+        sys.setComputerName(IpUtil.getHostName());
+        sys.setComputerIp(IpUtil.getHostIp());
         sys.setOsName(props.getProperty("os.name"));
         sys.setOsArch(props.getProperty("os.arch"));
         sys.setUserDir(props.getProperty("user.dir"));

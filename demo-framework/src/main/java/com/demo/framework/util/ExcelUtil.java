@@ -1,19 +1,19 @@
-package com.demo.framework.constant;
+package com.demo.framework.util;
 
 import com.demo.framework.annotation.Excel;
-import com.demo.framework.annotation.Excels;
-import com.demo.framework.base.*;
 import com.demo.framework.annotation.Excel.ColumnType;
 import com.demo.framework.annotation.Excel.Type;
+import com.demo.framework.annotation.Excels;
+import com.demo.framework.base.AjaxResult;
 import com.demo.framework.config.GlobalConfig;
 import com.demo.framework.exception.BusinessException;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.util.CellRangeAddressList;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFDataValidation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.lang.reflect.Field;
@@ -27,8 +27,8 @@ import java.util.*;
  *
  * @author ruoyi
  */
+@Slf4j
 public class ExcelUtil<T> {
-    private static final Logger log = LoggerFactory.getLogger(ExcelUtil.class);
 
     /**
      * Excel sheet最大行数，默认65536
@@ -81,7 +81,7 @@ public class ExcelUtil<T> {
 
     public void init(List<T> list, String sheetName, Type type) {
         if (list == null) {
-            list = new ArrayList<T>();
+            list = new ArrayList<>();
         }
         this.list = list;
         this.sheetName = sheetName;
@@ -110,8 +110,8 @@ public class ExcelUtil<T> {
     public List<T> importExcel(String sheetName, InputStream is) throws Exception {
         this.type = Type.IMPORT;
         this.wb = WorkbookFactory.create(is);
-        List<T> list = new ArrayList<T>();
-        Sheet sheet = null;
+        List<T> list = new ArrayList<>();
+        Sheet sheet;
         if (StringUtils.isNotEmpty(sheetName)) {
             // 如果指定sheet名,则取指定sheet中的内容.
             sheet = wb.getSheet(sheetName);
@@ -128,7 +128,7 @@ public class ExcelUtil<T> {
 
         if (rows > 0) {
             // 定义一个map用于存放excel列的序号和field.
-            Map<String, Integer> cellMap = new HashMap<String, Integer>();
+            Map<String, Integer> cellMap = new HashMap<>();
             // 获取表头
             Row heard = sheet.getRow(0);
             for (int i = 0; i < heard.getPhysicalNumberOfCells(); i++) {
@@ -143,9 +143,8 @@ public class ExcelUtil<T> {
             // 有数据时才处理 得到类的所有field.
             Field[] allFields = clazz.getDeclaredFields();
             // 定义一个map用于存放列的序号和field.
-            Map<Integer, Field> fieldsMap = new HashMap<Integer, Field>();
-            for (int col = 0; col < allFields.length; col++) {
-                Field field = allFields[col];
+            Map<Integer, Field> fieldsMap = new HashMap<>();
+            for (Field field : allFields) {
                 Excel attr = field.getAnnotation(Excel.class);
                 if (attr != null && (attr.type() == Type.ALL || attr.type() == type)) {
                     // 设置类的私有字段属性可访问.
@@ -168,7 +167,7 @@ public class ExcelUtil<T> {
                     // 取得类型,并根据对象类型设置值.
                     Class<?> fieldType = field.getType();
                     if (String.class == fieldType) {
-                        String s = Convert.toStr(val);
+                        String s = ConvertUtil.toStr(val);
                         if (StringUtils.endsWith(s, ".0")) {
                             val = StringUtils.substringBefore(s, ".0");
                         } else {
@@ -176,24 +175,24 @@ public class ExcelUtil<T> {
                             if (StringUtils.isNotEmpty(dateFormat)) {
                                 val = DateUtils.parseDateToStr(dateFormat, (Date) val);
                             } else {
-                                val = Convert.toStr(val);
+                                val = ConvertUtil.toStr(val);
                             }
                         }
                     } else if ((Integer.TYPE == fieldType) || (Integer.class == fieldType)) {
-                        val = Convert.toInt(val);
+                        val = ConvertUtil.toInt(val);
                     } else if ((Long.TYPE == fieldType) || (Long.class == fieldType)) {
-                        val = Convert.toLong(val);
+                        val = ConvertUtil.toLong(val);
                     } else if ((Double.TYPE == fieldType) || (Double.class == fieldType)) {
-                        val = Convert.toDouble(val);
+                        val = ConvertUtil.toDouble(val);
                     } else if ((Float.TYPE == fieldType) || (Float.class == fieldType)) {
-                        val = Convert.toFloat(val);
+                        val = ConvertUtil.toFloat(val);
                     } else if (BigDecimal.class == fieldType) {
-                        val = Convert.toBigDecimal(val);
+                        val = ConvertUtil.toBigDecimal(val);
                     } else if (Date.class == fieldType) {
                         if (val instanceof String) {
                             val = DateUtils.parseDate(val);
                         } else if (val instanceof Double) {
-                            val = DateUtil.getJavaDate((Double) val);
+                            val = org.apache.poi.ss.usermodel.DateUtil.getJavaDate((Double) val);
                         }
                     }
                     if (StringUtils.isNotNull(fieldType)) {
@@ -318,7 +317,7 @@ public class ExcelUtil<T> {
      */
     private Map<String, CellStyle> createStyles(Workbook wb) {
         // 写入各条记录,每条记录对应excel表中的一行
-        Map<String, CellStyle> styles = new HashMap<String, CellStyle>();
+        Map<String, CellStyle> styles = new HashMap<>();
         CellStyle style = wb.createCellStyle();
         style.setAlignment(HorizontalAlignment.CENTER);
         style.setVerticalAlignment(VerticalAlignment.CENTER);
@@ -387,7 +386,7 @@ public class ExcelUtil<T> {
      * 创建表格样式
      */
     public void setDataValidation(Excel attr, Row row, int column) {
-        if (attr.name().indexOf("注：") >= 0) {
+        if (attr.name().contains("注：")) {
             sheet.setColumnWidth(column, 6000);
         } else {
             // 设置列宽
@@ -434,7 +433,7 @@ public class ExcelUtil<T> {
                 }
             }
         } catch (Exception e) {
-            log.error("导出Excel失败{}", e);
+            log.error("导出Excel失败", e);
         }
         return cell;
     }
@@ -465,17 +464,17 @@ public class ExcelUtil<T> {
      * 设置某些列的值只能输入预制的数据,显示下拉框.
      *
      * @param sheet    要设置的sheet.
-     * @param textlist 下拉框显示的内容
+     * @param textList 下拉框显示的内容
      * @param firstRow 开始行
      * @param endRow   结束行
      * @param firstCol 开始列
      * @param endCol   结束列
      * @return 设置好的sheet.
      */
-    public void setXSSFValidation(Sheet sheet, String[] textlist, int firstRow, int endRow, int firstCol, int endCol) {
+    public void setXSSFValidation(Sheet sheet, String[] textList, int firstRow, int endRow, int firstCol, int endCol) {
         DataValidationHelper helper = sheet.getDataValidationHelper();
         // 加载下拉列表内容
-        DataValidationConstraint constraint = helper.createExplicitListConstraint(textlist);
+        DataValidationConstraint constraint = helper.createExplicitListConstraint(textList);
         // 设置数据有效性加载在哪个单元格上,四个参数分别是：起始行、终止行、起始列、终止列
         CellRangeAddressList regions = new CellRangeAddressList(firstRow, endRow, firstCol, endCol);
         // 数据有效性对象
@@ -572,7 +571,7 @@ public class ExcelUtil<T> {
         Object o = field.get(vo);
         if (StringUtils.isNotEmpty(excel.targetAttr())) {
             String target = excel.targetAttr();
-            if (target.indexOf(".") > -1) {
+            if (target.contains(".")) {
                 String[] targets = target.split("[.]");
                 for (String name : targets) {
                     o = getValue(o, name);
@@ -606,7 +605,7 @@ public class ExcelUtil<T> {
      * 得到所有定义字段
      */
     private void createExcelField() {
-        this.fields = new ArrayList<Object[]>();
+        this.fields = new ArrayList<>();
         List<Field> tempFields = new ArrayList<>();
         tempFields.addAll(Arrays.asList(clazz.getSuperclass().getDeclaredFields()));
         tempFields.addAll(Arrays.asList(clazz.getDeclaredFields()));

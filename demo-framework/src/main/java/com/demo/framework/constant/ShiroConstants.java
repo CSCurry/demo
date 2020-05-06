@@ -2,11 +2,10 @@ package com.demo.framework.constant;
 
 /**
  * Shiro通用常量
- * 
+ *
  * @author ruoyi
  */
-public interface ShiroConstants
-{
+public interface ShiroConstants {
     /**
      * 当前登录的用户
      */
@@ -26,11 +25,6 @@ public interface ShiroConstants
      * 错误key
      */
     public static final String ERROR = "errorMsg";
-
-    /**
-     * 编码格式
-     */
-    public static final String ENCODING = "UTF-8";
 
     /**
      * 当前在线会话

@@ -1,6 +1,6 @@
 package com.demo.framework.exception;
 
-import com.demo.framework.constant.StringUtils;
+import com.demo.framework.util.StringUtils;
 import com.demo.framework.util.MessageUtils;
 
 /**

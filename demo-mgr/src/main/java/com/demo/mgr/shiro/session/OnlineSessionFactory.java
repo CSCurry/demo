@@ -1,7 +1,7 @@
 package com.demo.mgr.shiro.session;
 
-import com.demo.framework.constant.IpUtils;
-import com.demo.framework.constant.ServletUtils;
+import com.demo.framework.util.IpUtil;
+import com.demo.framework.util.ServletUtils;
 import eu.bitwalker.useragentutils.UserAgent;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.SessionContext;
@@ -31,7 +31,7 @@ public class OnlineSessionFactory implements SessionFactory {
                 String os = userAgent.getOperatingSystem().getName();
                 // 获取客户端浏览器
                 String browser = userAgent.getBrowser().getName();
-                session.setHost(IpUtils.getIpAddr(request));
+                session.setHost(IpUtil.getIpAddr(request));
                 session.setBrowser(browser);
                 session.setOs(os);
             }

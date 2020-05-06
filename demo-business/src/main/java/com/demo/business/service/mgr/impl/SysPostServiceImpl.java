@@ -5,8 +5,8 @@ import com.demo.business.mapper.SysPostMapper;
 import com.demo.business.mapper.SysUserPostMapper;
 import com.demo.business.service.mgr.ISysPostService;
 import com.demo.framework.exception.BusinessException;
-import com.demo.framework.constant.Convert;
-import com.demo.framework.constant.StringUtils;
+import com.demo.framework.util.ConvertUtil;
+import com.demo.framework.util.StringUtils;
 import com.demo.framework.constant.UserConstants;
 import org.springframework.stereotype.Service;
 
@@ -88,7 +88,7 @@ public class SysPostServiceImpl implements ISysPostService {
      */
     @Override
     public int deletePostByIds(String ids) throws BusinessException {
-        Long[] postIds = Convert.toLongArray(ids);
+        Long[] postIds = ConvertUtil.toLongArray(ids);
         for (Long postId : postIds) {
             SysPost post = selectPostById(postId);
             if (countUserPostById(postId) > 0) {

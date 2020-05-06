@@ -6,11 +6,11 @@ import com.demo.business.domain.SysUserOnline;
 import com.demo.business.service.mgr.ISysOperLogService;
 import com.demo.business.service.mgr.ISysUserOnlineService;
 import com.demo.business.service.mgr.impl.SysLogininforServiceImpl;
-import com.demo.framework.constant.Constants;
-import com.demo.framework.constant.ServletUtils;
-import com.demo.framework.constant.SpringUtils;
-import com.demo.framework.constant.StringUtils;
-import com.demo.framework.util.AddressUtil;
+import com.demo.framework.constant.Constant;
+import com.demo.framework.util.ServletUtils;
+import com.demo.framework.util.SpringUtils;
+import com.demo.framework.util.StringUtils;
+import com.demo.framework.util.IpUtil;
 import com.demo.framework.util.LogUtils;
 import com.demo.mgr.shiro.ShiroUtils;
 import com.demo.mgr.shiro.session.OnlineSession;
@@ -45,7 +45,7 @@ public class AsyncFactory {
                 online.setLastAccessTime(session.getLastAccessTime());
                 online.setExpireTime(session.getTimeout());
                 online.setIpaddr(session.getHost());
-                online.setLoginLocation(AddressUtil.getRealAddressByIP(session.getHost()));
+                online.setLoginLocation(IpUtil.getRealAddressByIP(session.getHost()));
                 online.setBrowser(session.getBrowser());
                 online.setOs(session.getOs());
                 online.setStatus(session.getStatus());
@@ -65,7 +65,7 @@ public class AsyncFactory {
             @Override
             public void run() {
                 // 远程查询操作地点
-                operLog.setOperLocation(AddressUtil.getRealAddressByIP(operLog.getOperIp()));
+                operLog.setOperLocation(IpUtil.getRealAddressByIP(operLog.getOperIp()));
                 SpringUtils.getBean(ISysOperLogService.class).insertOperlog(operLog);
             }
         };
@@ -86,7 +86,7 @@ public class AsyncFactory {
         return new TimerTask() {
             @Override
             public void run() {
-                String address = AddressUtil.getRealAddressByIP(ip);
+                String address = IpUtil.getRealAddressByIP(ip);
                 StringBuilder s = new StringBuilder();
                 s.append(LogUtils.getBlock(ip));
                 s.append(address);
@@ -108,10 +108,10 @@ public class AsyncFactory {
                 loginInfo.setOs(os);
                 loginInfo.setMsg(message);
                 // 日志状态
-                if (StringUtils.equalsAny(status, Constants.LOGIN_SUCCESS, Constants.LOGOUT, Constants.REGISTER)) {
-                    loginInfo.setStatus(Constants.SUCCESS);
-                } else if (Constants.LOGIN_FAIL.equals(status)) {
-                    loginInfo.setStatus(Constants.FAIL);
+                if (StringUtils.equalsAny(status, Constant.LOGIN_SUCCESS, Constant.LOGOUT, Constant.REGISTER)) {
+                    loginInfo.setStatus("0");
+                } else if (Constant.LOGIN_FAIL.equals(status)) {
+                    loginInfo.setStatus("1");
                 }
                 // 插入数据
                 SpringUtils.getBean(SysLogininforServiceImpl.class).insertLogininfor(loginInfo);

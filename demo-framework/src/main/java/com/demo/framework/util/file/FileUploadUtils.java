@@ -1,10 +1,10 @@
 package com.demo.framework.util.file;
 
 import com.demo.framework.config.GlobalConfig;
-import com.demo.framework.constant.Constants;
-import com.demo.framework.constant.DateUtils;
-import com.demo.framework.constant.Md5Utils;
-import com.demo.framework.constant.StringUtils;
+import com.demo.framework.constant.Constant;
+import com.demo.framework.util.DateUtils;
+import com.demo.framework.util.Md5Utils;
+import com.demo.framework.util.StringUtils;
 import com.demo.framework.exception.file.FileNameLengthLimitExceededException;
 import com.demo.framework.exception.file.FileSizeLimitExceededException;
 import com.demo.framework.exception.file.InvalidExtensionException;
@@ -132,7 +132,7 @@ public class FileUploadUtils {
     private static final String getPathFileName(String uploadDir, String fileName) throws IOException {
         int dirLastIndex = GlobalConfig.getProfile().length() + 1;
         String currentDir = StringUtils.substring(uploadDir, dirLastIndex);
-        return Constants.RESOURCE_PREFIX + "/" + currentDir + "/" + fileName;
+        return Constant.RESOURCE_PREFIX + "/" + currentDir + "/" + fileName;
     }
 
     /**

@@ -6,9 +6,9 @@ import com.demo.business.service.mgr.ISysConfigService;
 import com.demo.business.service.mgr.ISysUserService;
 import com.demo.framework.annotation.DataScope;
 import com.demo.framework.exception.BusinessException;
-import com.demo.framework.constant.Convert;
-import com.demo.framework.constant.Md5Utils;
-import com.demo.framework.constant.StringUtils;
+import com.demo.framework.util.ConvertUtil;
+import com.demo.framework.util.Md5Utils;
+import com.demo.framework.util.StringUtils;
 import com.demo.framework.constant.UserConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -161,7 +161,7 @@ public class SysUserServiceImpl implements ISysUserService {
      */
     @Override
     public int deleteUserByIds(String ids) throws BusinessException {
-        Long[] userIds = Convert.toLongArray(ids);
+        Long[] userIds = ConvertUtil.toLongArray(ids);
         for (Long userId : userIds) {
             checkUserAllowed(new SysUser(userId));
         }
