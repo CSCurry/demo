@@ -4,31 +4,28 @@ import com.demo.business.domain.SysConfig;
 import com.demo.business.mapper.SysConfigMapper;
 import com.demo.business.service.mgr.ISysConfigService;
 import com.demo.framework.constant.*;
+import com.demo.framework.util.CacheUtil;
 import com.demo.framework.util.StringUtil;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.List;
 
 /**
  * 参数配置 服务层实现
  *
- * @author ruoyi
+ * @author 30
  */
 @Service
 public class SysConfigServiceImpl implements ISysConfigService {
+
     @Resource
     private SysConfigMapper configMapper;
 
-    /**
-     * 项目启动时，初始化参数到缓存
-     */
-    @PostConstruct
     public void init() {
         List<SysConfig> configsList = configMapper.selectConfigList(new SysConfig());
         for (SysConfig config : configsList) {
-            CacheUtils.put(getCacheName(), getCacheKey(config.getConfigKey()), config.getConfigValue());
+            CacheUtil.put(getCacheName(), getCacheKey(config.getConfigKey()), config.getConfigValue());
         }
     }
 
@@ -53,7 +50,7 @@ public class SysConfigServiceImpl implements ISysConfigService {
      */
     @Override
     public String selectConfigByKey(String configKey) {
-        String configValue = Convert.toStr(CacheUtils.get(getCacheName(), getCacheKey(configKey)));
+        String configValue = Convert.toStr(CacheUtil.get(getCacheName(), getCacheKey(configKey)));
         if (StringUtil.isNotEmpty(configValue)) {
             return configValue;
         }
@@ -61,7 +58,7 @@ public class SysConfigServiceImpl implements ISysConfigService {
         config.setConfigKey(configKey);
         SysConfig retConfig = configMapper.selectConfig(config);
         if (StringUtils.isNotNull(retConfig)) {
-            CacheUtils.put(getCacheName(), getCacheKey(configKey), retConfig.getConfigValue());
+            CacheUtil.put(getCacheName(), getCacheKey(configKey), retConfig.getConfigValue());
             return retConfig.getConfigValue();
         }
         return StringUtil.EMPTY;
@@ -88,7 +85,7 @@ public class SysConfigServiceImpl implements ISysConfigService {
     public int insertConfig(SysConfig config) {
         int row = configMapper.insertConfig(config);
         if (row > 0) {
-            CacheUtils.put(getCacheName(), getCacheKey(config.getConfigKey()), config.getConfigValue());
+            CacheUtil.put(getCacheName(), getCacheKey(config.getConfigKey()), config.getConfigValue());
         }
         return row;
     }
@@ -103,7 +100,7 @@ public class SysConfigServiceImpl implements ISysConfigService {
     public int updateConfig(SysConfig config) {
         int row = configMapper.updateConfig(config);
         if (row > 0) {
-            CacheUtils.put(getCacheName(), getCacheKey(config.getConfigKey()), config.getConfigValue());
+            CacheUtil.put(getCacheName(), getCacheKey(config.getConfigKey()), config.getConfigValue());
         }
         return row;
     }
@@ -119,7 +116,7 @@ public class SysConfigServiceImpl implements ISysConfigService {
         int count = configMapper.deleteConfigByIds(Convert.toStrArray(ids));
         if (count > 0) {
 
-            CacheUtils.removeAll(getCacheName());
+            CacheUtil.removeAll(getCacheName());
         }
         return count;
     }
@@ -129,7 +126,7 @@ public class SysConfigServiceImpl implements ISysConfigService {
      */
     @Override
     public void clearCache() {
-        CacheUtils.removeAll(getCacheName());
+        CacheUtil.removeAll(getCacheName());
     }
 
     /**

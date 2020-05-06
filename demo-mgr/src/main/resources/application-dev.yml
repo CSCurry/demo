@@ -56,6 +56,10 @@ spring:
           config:
             multi-statement-allow: true
 
+project:
+  # 文件路径 示例（ Windows配置D:/demo/uploadPath，Linux配置 /home/demo/uploadPath）
+  profile: D:/demo/uploadPath
+
 #Swagger2
 swagger:
   enable: true

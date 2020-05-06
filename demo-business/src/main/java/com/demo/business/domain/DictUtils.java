@@ -1,6 +1,6 @@
 package com.demo.business.domain;
 
-import com.demo.framework.constant.CacheUtils;
+import com.demo.framework.util.CacheUtil;
 import com.demo.framework.constant.Constants;
 import com.demo.framework.util.StringUtil;
 
@@ -20,7 +20,7 @@ public class DictUtils {
      * @param dictDatas 字典数据列表
      */
     public static void setDictCache(String key, List<SysDictData> dictDatas) {
-        CacheUtils.put(getCacheName(), getCacheKey(key), dictDatas);
+        CacheUtil.put(getCacheName(), getCacheKey(key), dictDatas);
     }
 
     /**
@@ -31,7 +31,7 @@ public class DictUtils {
      */
     @SuppressWarnings("unchecked")
     public static List<SysDictData> getDictCache(String key) {
-        Object cacheObj = CacheUtils.get(getCacheName(), getCacheKey(key));
+        Object cacheObj = CacheUtil.get(getCacheName(), getCacheKey(key));
         if (StringUtil.isNotNull(cacheObj)) {
             return (List<SysDictData>) cacheObj;
         }
@@ -42,7 +42,7 @@ public class DictUtils {
      * 清空字典缓存
      */
     public static void clearDictCache() {
-        CacheUtils.removeAll(getCacheName());
+        CacheUtil.removeAll(getCacheName());
     }
 
     /**

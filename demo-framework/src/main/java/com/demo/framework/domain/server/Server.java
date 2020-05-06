@@ -1,7 +1,6 @@
-package com.demo.framework.base;
+package com.demo.framework.domain.server;
 
-import com.demo.framework.base.server.*;
-import com.demo.framework.constant.Arith;
+import com.demo.framework.util.MathUtil;
 import com.demo.framework.constant.IpUtils;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
@@ -20,7 +19,7 @@ import java.util.Properties;
 /**
  * 服务器相关信息
  *
- * @author ruoyi
+ * @author 30
  */
 public class Server {
 
@@ -30,26 +29,22 @@ public class Server {
      * CPU相关信息
      */
     private Cpu cpu = new Cpu();
-
     /**
      * 內存相关信息
      */
     private Mem mem = new Mem();
-
     /**
      * JVM相关信息
      */
     private Jvm jvm = new Jvm();
-
     /**
      * 服务器相关信息
      */
     private Sys sys = new Sys();
-
     /**
      * 磁盘相关信息
      */
-    private List<SysFile> sysFiles = new LinkedList<SysFile>();
+    private List<SysFile> sysFiles = new LinkedList<>();
 
     public Cpu getCpu() {
         return cpu;
@@ -177,7 +172,7 @@ public class Server {
             sysFile.setTotal(convertFileSize(total));
             sysFile.setFree(convertFileSize(free));
             sysFile.setUsed(convertFileSize(used));
-            sysFile.setUsage(Arith.mul(Arith.div(used, total, 4), 100));
+            sysFile.setUsage(MathUtil.mul(MathUtil.div(used, total, 4), 100));
             sysFiles.add(sysFile);
         }
     }

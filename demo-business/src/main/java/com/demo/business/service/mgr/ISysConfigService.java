@@ -10,6 +10,9 @@ import java.util.List;
  * @author ruoyi
  */
 public interface ISysConfigService {
+
+    void init();
+
     /**
      * 查询参数配置信息
      *
@@ -70,4 +73,5 @@ public interface ISysConfigService {
      * @return 结果
      */
     public String checkConfigKeyUnique(SysConfig config);
+
 }

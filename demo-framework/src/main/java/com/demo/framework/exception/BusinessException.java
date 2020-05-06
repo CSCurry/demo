@@ -1,11 +1,12 @@
-package com.demo.framework.base;
+package com.demo.framework.exception;
 
 /**
  * 业务异常
  *
- * @author ruoyi
+ * @author 30
  */
 public class BusinessException extends RuntimeException {
+
     private static final long serialVersionUID = 1L;
 
     protected final String message;

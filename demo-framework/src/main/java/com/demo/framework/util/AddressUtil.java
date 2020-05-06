@@ -1,20 +1,19 @@
 package com.demo.framework.util;
 
-import com.demo.framework.base.Global;
+import com.demo.framework.config.GlobalConfig;
 import com.demo.framework.constant.IpUtils;
 import com.demo.framework.constant.StringUtils;
 import com.demo.framework.util.json.JSON;
 import com.demo.framework.util.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 获取地址类
  *
- * @author ruoyi
+ * @author 30
  */
-public class AddressUtils {
-    private static final Logger log = LoggerFactory.getLogger(AddressUtils.class);
+@Slf4j
+public class AddressUtil {
 
     public static final String IP_URL = "http://ip.taobao.com/service/getIpInfo.php";
 
@@ -25,7 +24,7 @@ public class AddressUtils {
         if (IpUtils.internalIp(ip)) {
             return "内网IP";
         }
-        if (Global.isAddressEnabled()) {
+        if (GlobalConfig.isAddressEnabled()) {
             String rspStr = HttpUtils.sendPost(IP_URL, "ip=" + ip);
             if (StringUtils.isEmpty(rspStr)) {
                 log.error("获取地理位置异常 {}", ip);

@@ -1,6 +1,6 @@
-package com.demo.framework.base.server;
+package com.demo.framework.domain.server;
 
-import com.demo.framework.constant.Arith;
+import com.demo.framework.util.MathUtil;
 import com.demo.framework.constant.DateUtils;
 
 import java.lang.management.ManagementFactory;
@@ -34,7 +34,7 @@ public class Jvm {
     private String home;
 
     public double getTotal() {
-        return Arith.div(total, (1024 * 1024), 2);
+        return MathUtil.div(total, (1024 * 1024), 2);
     }
 
     public void setTotal(double total) {
@@ -42,7 +42,7 @@ public class Jvm {
     }
 
     public double getMax() {
-        return Arith.div(max, (1024 * 1024), 2);
+        return MathUtil.div(max, (1024 * 1024), 2);
     }
 
     public void setMax(double max) {
@@ -50,7 +50,7 @@ public class Jvm {
     }
 
     public double getFree() {
-        return Arith.div(free, (1024 * 1024), 2);
+        return MathUtil.div(free, (1024 * 1024), 2);
     }
 
     public void setFree(double free) {
@@ -58,11 +58,11 @@ public class Jvm {
     }
 
     public double getUsed() {
-        return Arith.div(total - free, (1024 * 1024), 2);
+        return MathUtil.div(total - free, (1024 * 1024), 2);
     }
 
     public double getUsage() {
-        return Arith.mul(Arith.div(total - free, total, 4), 100);
+        return MathUtil.mul(MathUtil.div(total - free, total, 4), 100);
     }
 
     /**

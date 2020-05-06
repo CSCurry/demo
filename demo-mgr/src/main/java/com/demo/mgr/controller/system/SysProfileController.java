@@ -2,15 +2,15 @@ package com.demo.mgr.controller.system;
 
 import com.demo.business.domain.SysUser;
 import com.demo.business.service.mgr.ISysUserService;
-import com.demo.mgr.shiro.ShiroUtils;
-import com.demo.mgr.shiro.service.SysPasswordService;
 import com.demo.framework.annotation.Log;
 import com.demo.framework.base.AjaxResult;
 import com.demo.framework.base.BaseController;
-import com.demo.framework.base.Global;
+import com.demo.framework.config.GlobalConfig;
 import com.demo.framework.constant.StringUtils;
 import com.demo.framework.enums.BusinessType;
 import com.demo.framework.util.file.FileUploadUtils;
+import com.demo.mgr.shiro.ShiroUtils;
+import com.demo.mgr.shiro.service.SysPasswordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -133,7 +133,7 @@ public class SysProfileController extends BaseController {
         SysUser currentUser = ShiroUtils.getSysUser();
         try {
             if (!file.isEmpty()) {
-                String avatar = FileUploadUtils.upload(Global.getAvatarPath(), file);
+                String avatar = FileUploadUtils.upload(GlobalConfig.getAvatarPath(), file);
                 currentUser.setAvatar(avatar);
                 if (userService.updateUserInfo(currentUser) > 0) {
                     ShiroUtils.setSysUser(userService.selectUserById(currentUser.getUserId()));

@@ -6,15 +6,14 @@ import com.demo.business.domain.SysDictType;
 import com.demo.business.mapper.SysDictDataMapper;
 import com.demo.business.mapper.SysDictTypeMapper;
 import com.demo.business.service.mgr.ISysDictTypeService;
-import com.demo.framework.base.BusinessException;
-import com.demo.framework.domain.Ztree;
+import com.demo.framework.exception.BusinessException;
 import com.demo.framework.constant.Convert;
 import com.demo.framework.constant.StringUtils;
 import com.demo.framework.constant.UserConstants;
+import com.demo.framework.domain.Ztree;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,19 +28,17 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
 
     @Resource
     private SysDictTypeMapper dictTypeMapper;
-
     @Resource
     private SysDictDataMapper dictDataMapper;
 
     /**
      * 项目启动时，初始化字典到缓存
      */
-    @PostConstruct
     public void init() {
         List<SysDictType> dictTypeList = dictTypeMapper.selectDictTypeAll();
         for (SysDictType dictType : dictTypeList) {
-            List<SysDictData> dictDatas = dictDataMapper.selectDictDataByType(dictType.getDictType());
-            DictUtils.setDictCache(dictType.getDictType(), dictDatas);
+            List<SysDictData> dictDataList = dictDataMapper.selectDictDataByType(dictType.getDictType());
+            DictUtils.setDictCache(dictType.getDictType(), dictDataList);
         }
     }
 

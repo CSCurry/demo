@@ -12,10 +12,11 @@ import static com.google.code.kaptcha.Constants.*;
 /**
  * 验证码配置
  *
- * @author ruoyi
+ * @author 30
  */
 @Configuration
 public class CaptchaConfig {
+
     @Bean(name = "captchaProducer")
     public DefaultKaptcha getKaptchaBean() {
         DefaultKaptcha defaultKaptcha = new DefaultKaptcha();

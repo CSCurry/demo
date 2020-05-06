@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * 系统访问记录
  *
- * @author ruoyi
+ * @author 30
  */
 @Controller
 @RequestMapping("/monitor/logininfor")

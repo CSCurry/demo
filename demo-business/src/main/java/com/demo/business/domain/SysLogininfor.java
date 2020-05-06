@@ -1,7 +1,7 @@
 package com.demo.business.domain;
 
 import com.demo.framework.base.BaseEntity;
-import com.demo.framework.base.Excel;
+import com.demo.framework.annotation.Excel;
 
 import java.util.Date;
 

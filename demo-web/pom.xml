@@ -10,22 +10,10 @@
     <artifactId>demo-web</artifactId>
 
     <dependencies>
-        <!--依赖service-->
+        <!--依赖business-->
         <dependency>
             <groupId>com.helloworld</groupId>
             <artifactId>demo-business</artifactId>
-        </dependency>
-        <!--thymeleaf-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-        <!--devtools-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
         </dependency>
     </dependencies>
 

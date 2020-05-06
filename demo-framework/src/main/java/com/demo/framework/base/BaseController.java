@@ -25,6 +25,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Controller基类
+ *
+ * @author 30
+ */
 public class BaseController {
 
     /**

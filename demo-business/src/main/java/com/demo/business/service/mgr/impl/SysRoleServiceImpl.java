@@ -10,7 +10,7 @@ import com.demo.business.mapper.SysRoleMenuMapper;
 import com.demo.business.mapper.SysUserRoleMapper;
 import com.demo.business.service.mgr.ISysRoleService;
 import com.demo.framework.annotation.DataScope;
-import com.demo.framework.base.BusinessException;
+import com.demo.framework.exception.BusinessException;
 import com.demo.framework.constant.Convert;
 import com.demo.framework.constant.SpringUtils;
 import com.demo.framework.constant.StringUtils;

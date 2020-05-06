@@ -9,7 +9,7 @@ project:
   # 实例演示开关
   demoEnabled: true
   # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
-  profile: D:/ruoyi/uploadPath
+  #profile: D:/ruoyi/uploadPath
   # 获取ip地址开关
   addressEnabled: true
 
@@ -87,7 +87,7 @@ mybatis:
   # 配置mapper的扫描，找到所有的mapper.xml映射文件
   mapperLocations: classpath*:mapper/**/*Mapper.xml
   # 加载全局的配置文件
-  configLocation: classpath:mybatis-config.xml
+  configLocation: classpath:mybatis/mybatis-config.xml
 
 # PageHelper分页插件
 pagehelper:

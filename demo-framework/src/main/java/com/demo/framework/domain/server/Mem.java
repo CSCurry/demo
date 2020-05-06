@@ -1,30 +1,29 @@
-package com.demo.framework.base.server;
+package com.demo.framework.domain.server;
 
-import com.demo.framework.constant.Arith;
+import com.demo.framework.util.MathUtil;
 
 /**
  * 內存相关信息
  *
- * @author ruoyi
+ * @author 30
  */
 public class Mem {
+
     /**
      * 内存总量
      */
     private double total;
-
     /**
      * 已用内存
      */
     private double used;
-
     /**
      * 剩余内存
      */
     private double free;
 
     public double getTotal() {
-        return Arith.div(total, (1024 * 1024 * 1024), 2);
+        return MathUtil.div(total, (1024 * 1024 * 1024), 2);
     }
 
     public void setTotal(long total) {
@@ -32,7 +31,7 @@ public class Mem {
     }
 
     public double getUsed() {
-        return Arith.div(used, (1024 * 1024 * 1024), 2);
+        return MathUtil.div(used, (1024 * 1024 * 1024), 2);
     }
 
     public void setUsed(long used) {
@@ -40,7 +39,7 @@ public class Mem {
     }
 
     public double getFree() {
-        return Arith.div(free, (1024 * 1024 * 1024), 2);
+        return MathUtil.div(free, (1024 * 1024 * 1024), 2);
     }
 
     public void setFree(long free) {
@@ -48,6 +47,6 @@ public class Mem {
     }
 
     public double getUsage() {
-        return Arith.mul(Arith.div(used, total, 4), 100);
+        return MathUtil.mul(MathUtil.div(used, total, 4), 100);
     }
 }

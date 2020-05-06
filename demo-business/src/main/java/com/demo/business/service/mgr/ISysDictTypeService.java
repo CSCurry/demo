@@ -12,6 +12,9 @@ import java.util.List;
  * @author ruoyi
  */
 public interface ISysDictTypeService {
+
+    void init();
+
     /**
      * 根据条件分页查询字典类型
      *
@@ -96,4 +99,5 @@ public interface ISysDictTypeService {
      * @return 所有字典类型
      */
     public List<Ztree> selectDictTree(SysDictType dictType);
+
 }

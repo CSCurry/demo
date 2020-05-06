@@ -1,9 +1,9 @@
-package com.demo.framework.constant;
+package com.demo.framework.util;
 
+import com.demo.framework.constant.SpringUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Iterator;
 import java.util.Set;
@@ -13,9 +13,8 @@ import java.util.Set;
  *
  * @author 30
  */
-public class CacheUtils {
-
-    private static Logger logger = LoggerFactory.getLogger(CacheUtils.class);
+@Slf4j
+public class CacheUtil {
 
     private static CacheManager cacheManager = SpringUtils.getBean(CacheManager.class);
 
@@ -71,7 +70,7 @@ public class CacheUtils {
      * @return
      */
     public static Object get(String cacheName, String key) {
-        return getCache(cacheName).get(getKey(key));
+        return getCache(cacheName).get(key);
     }
 
     /**
@@ -83,7 +82,7 @@ public class CacheUtils {
      * @return
      */
     public static Object get(String cacheName, String key, Object defaultValue) {
-        Object value = get(cacheName, getKey(key));
+        Object value = get(cacheName, key);
         return value != null ? value : defaultValue;
     }
 
@@ -95,7 +94,7 @@ public class CacheUtils {
      * @param value
      */
     public static void put(String cacheName, String key, Object value) {
-        getCache(cacheName).put(getKey(key), value);
+        getCache(cacheName).put(key, value);
     }
 
     /**
@@ -105,7 +104,7 @@ public class CacheUtils {
      * @param key
      */
     public static void remove(String cacheName, String key) {
-        getCache(cacheName).remove(getKey(key));
+        getCache(cacheName).remove(key);
     }
 
     /**
@@ -119,7 +118,7 @@ public class CacheUtils {
         for (Iterator<String> it = keys.iterator(); it.hasNext(); ) {
             cache.remove(it.next());
         }
-        logger.info("清理缓存： {} => {}", cacheName, keys);
+        log.info("清理缓存： {} => {}", cacheName, keys);
     }
 
     /**
@@ -141,17 +140,7 @@ public class CacheUtils {
         for (Iterator<String> it = keys.iterator(); it.hasNext(); ) {
             remove(it.next());
         }
-        logger.info("清理缓存： {} => {}", cacheName, keys);
-    }
-
-    /**
-     * 获取缓存键名
-     *
-     * @param key
-     * @return
-     */
-    private static String getKey(String key) {
-        return key;
+        log.info("清理缓存： {} => {}", cacheName, keys);
     }
 
     /**

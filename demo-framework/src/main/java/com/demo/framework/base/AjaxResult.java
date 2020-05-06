@@ -5,9 +5,10 @@ import java.util.HashMap;
 /**
  * 操作消息提醒
  *
- * @author ruoyi
+ * @author 30
  */
 public class AjaxResult extends HashMap<String, Object> {
+
     private static final long serialVersionUID = 1L;
 
     /**

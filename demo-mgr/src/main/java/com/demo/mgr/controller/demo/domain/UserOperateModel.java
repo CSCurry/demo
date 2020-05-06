@@ -1,8 +1,8 @@
 package com.demo.mgr.controller.demo.domain;
 
 import com.demo.framework.base.BaseEntity;
-import com.demo.framework.base.Excel;
-import com.demo.framework.base.Excel.Type;
+import com.demo.framework.annotation.Excel;
+import com.demo.framework.annotation.Excel.Type;
 import com.demo.framework.constant.DateUtils;
 
 import java.util.Date;

@@ -6,6 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * BaseResultVO
+ *
+ * @author 30
+ */
 @SuppressWarnings({"unchecked"})
 @Data
 @NoArgsConstructor

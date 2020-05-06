@@ -6,6 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * BaseResult
+ *
+ * @author 30
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

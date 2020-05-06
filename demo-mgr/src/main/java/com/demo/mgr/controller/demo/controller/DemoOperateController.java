@@ -2,8 +2,8 @@ package com.demo.mgr.controller.demo.controller;
 
 import com.demo.framework.base.AjaxResult;
 import com.demo.framework.base.BaseController;
-import com.demo.framework.base.BusinessException;
-import com.demo.framework.base.UserOperateModel;
+import com.demo.framework.exception.BusinessException;
+import com.demo.framework.domain.UserOperateModel;
 import com.demo.framework.constant.Convert;
 import com.demo.framework.constant.ExcelUtil;
 import com.demo.framework.constant.StringUtils;

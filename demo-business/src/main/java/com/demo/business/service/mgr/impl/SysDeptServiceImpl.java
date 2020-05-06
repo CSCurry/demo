@@ -5,7 +5,7 @@ import com.demo.business.domain.SysRole;
 import com.demo.business.mapper.SysDeptMapper;
 import com.demo.business.service.mgr.ISysDeptService;
 import com.demo.framework.annotation.DataScope;
-import com.demo.framework.base.BusinessException;
+import com.demo.framework.exception.BusinessException;
 import com.demo.framework.domain.Ztree;
 import com.demo.framework.constant.UserConstants;
 import com.demo.framework.util.StringUtil;

@@ -1,8 +1,12 @@
 package com.demo.framework.constant;
 
+import com.demo.framework.annotation.Excel;
+import com.demo.framework.annotation.Excels;
 import com.demo.framework.base.*;
-import com.demo.framework.base.Excel.ColumnType;
-import com.demo.framework.base.Excel.Type;
+import com.demo.framework.annotation.Excel.ColumnType;
+import com.demo.framework.annotation.Excel.Type;
+import com.demo.framework.config.GlobalConfig;
+import com.demo.framework.exception.BusinessException;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddressList;
@@ -547,7 +551,7 @@ public class ExcelUtil<T> {
      * @param filename 文件名称
      */
     public String getAbsoluteFile(String filename) {
-        String downloadPath = Global.getDownloadPath() + filename;
+        String downloadPath = GlobalConfig.getDownloadPath() + filename;
         File desc = new File(downloadPath);
         if (!desc.getParentFile().exists()) {
             desc.getParentFile().mkdirs();

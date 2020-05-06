@@ -10,7 +10,7 @@ import com.demo.framework.constant.Constants;
 import com.demo.framework.constant.ServletUtils;
 import com.demo.framework.constant.SpringUtils;
 import com.demo.framework.constant.StringUtils;
-import com.demo.framework.util.AddressUtils;
+import com.demo.framework.util.AddressUtil;
 import com.demo.framework.util.LogUtils;
 import com.demo.mgr.shiro.ShiroUtils;
 import com.demo.mgr.shiro.session.OnlineSession;
@@ -45,7 +45,7 @@ public class AsyncFactory {
                 online.setLastAccessTime(session.getLastAccessTime());
                 online.setExpireTime(session.getTimeout());
                 online.setIpaddr(session.getHost());
-                online.setLoginLocation(AddressUtils.getRealAddressByIP(session.getHost()));
+                online.setLoginLocation(AddressUtil.getRealAddressByIP(session.getHost()));
                 online.setBrowser(session.getBrowser());
                 online.setOs(session.getOs());
                 online.setStatus(session.getStatus());
@@ -65,7 +65,7 @@ public class AsyncFactory {
             @Override
             public void run() {
                 // 远程查询操作地点
-                operLog.setOperLocation(AddressUtils.getRealAddressByIP(operLog.getOperIp()));
+                operLog.setOperLocation(AddressUtil.getRealAddressByIP(operLog.getOperIp()));
                 SpringUtils.getBean(ISysOperLogService.class).insertOperlog(operLog);
             }
         };
@@ -86,7 +86,7 @@ public class AsyncFactory {
         return new TimerTask() {
             @Override
             public void run() {
-                String address = AddressUtils.getRealAddressByIP(ip);
+                String address = AddressUtil.getRealAddressByIP(ip);
                 StringBuilder s = new StringBuilder();
                 s.append(LogUtils.getBlock(ip));
                 s.append(address);

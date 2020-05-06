@@ -1,4 +1,4 @@
-package com.demo.framework.base;
+package com.demo.framework.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -8,10 +8,11 @@ import java.lang.annotation.Target;
 /**
  * Excel注解集
  *
- * @author ruoyi
+ * @author 30
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Excels {
+
     Excel[] value();
 }

@@ -1,6 +1,6 @@
 package com.demo.framework.util.file;
 
-import com.demo.framework.base.Global;
+import com.demo.framework.config.GlobalConfig;
 import com.demo.framework.constant.Constants;
 import com.demo.framework.constant.DateUtils;
 import com.demo.framework.constant.Md5Utils;
@@ -35,7 +35,7 @@ public class FileUploadUtils {
     /**
      * 默认上传的地址
      */
-    private static String defaultBaseDir = Global.getProfile();
+    private static String defaultBaseDir = GlobalConfig.getProfile();
 
     private static int counter = 0;
 
@@ -130,7 +130,7 @@ public class FileUploadUtils {
     }
 
     private static final String getPathFileName(String uploadDir, String fileName) throws IOException {
-        int dirLastIndex = Global.getProfile().length() + 1;
+        int dirLastIndex = GlobalConfig.getProfile().length() + 1;
         String currentDir = StringUtils.substring(uploadDir, dirLastIndex);
         return Constants.RESOURCE_PREFIX + "/" + currentDir + "/" + fileName;
     }

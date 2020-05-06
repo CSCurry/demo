@@ -4,7 +4,7 @@ import com.demo.business.domain.SysPost;
 import com.demo.business.mapper.SysPostMapper;
 import com.demo.business.mapper.SysUserPostMapper;
 import com.demo.business.service.mgr.ISysPostService;
-import com.demo.framework.base.BusinessException;
+import com.demo.framework.exception.BusinessException;
 import com.demo.framework.constant.Convert;
 import com.demo.framework.constant.StringUtils;
 import com.demo.framework.constant.UserConstants;

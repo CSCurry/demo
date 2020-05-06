@@ -5,7 +5,7 @@ import com.demo.business.mapper.*;
 import com.demo.business.service.mgr.ISysConfigService;
 import com.demo.business.service.mgr.ISysUserService;
 import com.demo.framework.annotation.DataScope;
-import com.demo.framework.base.BusinessException;
+import com.demo.framework.exception.BusinessException;
 import com.demo.framework.constant.Convert;
 import com.demo.framework.constant.Md5Utils;
 import com.demo.framework.constant.StringUtils;

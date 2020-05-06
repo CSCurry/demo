@@ -6,7 +6,7 @@ import com.demo.business.service.mgr.ISysConfigService;
 import com.demo.business.service.mgr.ISysMenuService;
 import com.demo.mgr.shiro.ShiroUtils;
 import com.demo.framework.base.BaseController;
-import com.demo.framework.base.Global;
+import com.demo.framework.config.GlobalConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -38,8 +38,8 @@ public class SysIndexController extends BaseController {
         mmap.put("user", user);
         mmap.put("sideTheme", configService.selectConfigByKey("sys.index.sideTheme"));
         mmap.put("skinName", configService.selectConfigByKey("sys.index.skinName"));
-        mmap.put("copyrightYear", Global.getCopyrightYear());
-        mmap.put("demoEnabled", Global.isDemoEnabled());
+        mmap.put("copyrightYear", GlobalConfig.getCopyrightYear());
+        mmap.put("demoEnabled", GlobalConfig.isDemoEnabled());
         return "index";
     }
 
@@ -52,7 +52,7 @@ public class SysIndexController extends BaseController {
     // 系统介绍
     @GetMapping("/system/main")
     public String main(ModelMap mmap) {
-        mmap.put("version", Global.getVersion());
+        mmap.put("version", GlobalConfig.getVersion());
         return "main";
     }
 }
