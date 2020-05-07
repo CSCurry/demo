@@ -1,6 +1,6 @@
 package com.demo.framework.config;
 
-import com.demo.framework.util.Threads;
+import com.demo.framework.util.ThreadsUtil;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -48,7 +48,7 @@ public class ThreadPoolConfig {
             @Override
             protected void afterExecute(Runnable r, Throwable t) {
                 super.afterExecute(r, t);
-                Threads.printException(r, t);
+                ThreadsUtil.printException(r, t);
             }
         };
     }

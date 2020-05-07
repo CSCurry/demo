@@ -19,6 +19,9 @@ public class IpUtil {
 
     public static final String IP_URL = "http://ip.taobao.com/service/getIpInfo.php";
 
+    //这个服务已挂
+    //http://gwgp-hye6ycojwut.n.bdcloudapi.com/getIpInfo?ip=123.116.182.163
+
     public static String getRealAddressByIP(String ip) {
         String address = "XX XX";
 
@@ -27,8 +30,8 @@ public class IpUtil {
             return "内网IP";
         }
         if (GlobalConfig.isAddressEnabled()) {
-            String rspStr = HttpUtils.sendPost(IP_URL, "ip=" + ip);
-            if (StringUtils.isEmpty(rspStr)) {
+            String rspStr = HttpUtil.sendPost(IP_URL, "ip=" + ip);
+            if (StringUtil.isEmpty(rspStr)) {
                 log.error("获取地理位置异常 {}", ip);
                 return address;
             }
@@ -74,7 +77,7 @@ public class IpUtil {
     }
 
     private static boolean internalIp(byte[] addr) {
-        if (StringUtils.isNull(addr) || addr.length < 2) {
+        if (StringUtil.isNull(addr) || addr.length < 2) {
             return true;
         }
         final byte b0 = addr[0];

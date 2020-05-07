@@ -1,7 +1,7 @@
 package com.demo.framework.page;
 
 import com.demo.framework.constant.Constant;
-import com.demo.framework.util.ServletUtils;
+import com.demo.framework.util.ServletUtil;
 
 /**
  * 表格数据处理
@@ -15,10 +15,10 @@ public class TableSupport {
      */
     public static PageDomain getPageDomain() {
         PageDomain pageDomain = new PageDomain();
-        pageDomain.setPageNum(ServletUtils.getParameterToInt(Constant.PAGE_NUM));
-        pageDomain.setPageSize(ServletUtils.getParameterToInt(Constant.PAGE_SIZE));
-        pageDomain.setOrderByColumn(ServletUtils.getParameter(Constant.ORDER_BY_COLUMN));
-        pageDomain.setIsAsc(ServletUtils.getParameter(Constant.IS_ASC));
+        pageDomain.setPageNum(ServletUtil.getParameterToInt(Constant.PAGE_NUM));
+        pageDomain.setPageSize(ServletUtil.getParameterToInt(Constant.PAGE_SIZE));
+        pageDomain.setOrderByColumn(ServletUtil.getParameter(Constant.ORDER_BY_COLUMN));
+        pageDomain.setIsAsc(ServletUtil.getParameter(Constant.IS_ASC));
         return pageDomain;
     }
 

@@ -6,9 +6,9 @@ import com.demo.business.domain.SysUser;
 import com.demo.business.mapper.SysMenuMapper;
 import com.demo.business.mapper.SysRoleMenuMapper;
 import com.demo.business.service.mgr.ISysMenuService;
-import com.demo.framework.domain.Ztree;
-import com.demo.framework.util.StringUtils;
 import com.demo.framework.constant.UserConstants;
+import com.demo.framework.domain.Ztree;
+import com.demo.framework.util.StringUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -93,7 +93,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
         List<String> perms = menuMapper.selectPermsByUserId(userId);
         Set<String> permsSet = new HashSet<>();
         for (String perm : perms) {
-            if (StringUtils.isNotEmpty(perm)) {
+            if (StringUtil.isNotEmpty(perm)) {
                 permsSet.addAll(Arrays.asList(perm.trim().split(",")));
             }
         }
@@ -111,7 +111,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
         Long roleId = role.getRoleId();
         List<Ztree> ztrees;
         List<SysMenu> menuList = selectMenuAll(userId);
-        if (StringUtils.isNotNull(roleId)) {
+        if (StringUtil.isNotNull(roleId)) {
             List<String> roleMenuList = menuMapper.selectMenuTree(roleId);
             ztrees = initZTree(menuList, roleMenuList, true);
         } else {
@@ -140,7 +140,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
     public LinkedHashMap<String, String> selectPermsAll(Long userId) {
         LinkedHashMap<String, String> section = new LinkedHashMap<>();
         List<SysMenu> permissions = selectMenuAll(userId);
-        if (StringUtils.isNotEmpty(permissions)) {
+        if (StringUtil.isNotEmpty(permissions)) {
             for (SysMenu menu : permissions) {
                 section.put(menu.getUrl(), MessageFormat.format(PERMISSION_STRING, menu.getPerms()));
             }
@@ -168,7 +168,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
      */
     public List<Ztree> initZTree(List<SysMenu> menuList, List<String> roleMenuList, boolean permsFlag) {
         List<Ztree> zTrees = new ArrayList<>();
-        boolean isCheck = StringUtils.isNotNull(roleMenuList);
+        boolean isCheck = StringUtil.isNotNull(roleMenuList);
         for (SysMenu menu : menuList) {
             Ztree ztree = new Ztree();
             ztree.setId(menu.getMenuId());
@@ -266,9 +266,9 @@ public class SysMenuServiceImpl implements ISysMenuService {
      */
     @Override
     public String checkMenuNameUnique(SysMenu menu) {
-        long menuId = StringUtils.isNull(menu.getMenuId()) ? -1L : menu.getMenuId();
+        long menuId = StringUtil.isNull(menu.getMenuId()) ? -1L : menu.getMenuId();
         SysMenu info = menuMapper.checkMenuNameUnique(menu.getMenuName(), menu.getParentId());
-        if (StringUtils.isNotNull(info) && info.getMenuId() != menuId) {
+        if (StringUtil.isNotNull(info) && info.getMenuId() != menuId) {
             return UserConstants.MENU_NAME_NOT_UNIQUE;
         }
         return UserConstants.MENU_NAME_UNIQUE;

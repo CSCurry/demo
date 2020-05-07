@@ -1,6 +1,7 @@
 package com.demo.framework.util;
 
 import java.lang.management.ManagementFactory;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -33,19 +34,24 @@ public class DateUtil {
     private static final SimpleDateFormat FORMAT_HHMMSS = new SimpleDateFormat(HHMMSS);
     private static final SimpleDateFormat FORMAT_HH_MM_SS = new SimpleDateFormat(HH_MM_SS);
 
-    public static void main(String[] args) {
-        String s = formatDate(now(), YYYY_MM_DD_HH_MM_SS);
-        String s1 = getYesterdayTimeStr();
-        System.out.println(s);
-        System.out.println(s1);
-        System.out.println(diffTime(s, s1));
-        System.out.println(diffTime(now(), getYesterday()));
-        System.out.println(formatNow(YYYY$MM$DD_HH_MM_SS));
-        System.out.println(getTodayFirstSecond());
-        System.out.println(getTodayLastSecond());
-        System.out.println(FORMAT_YYYY_MM_DD_HH_MM_SS.format(getStartDayOfMonth()));
-        System.out.println(FORMAT_YYYY_MM_DD_HH_MM_SS.format(getLastDayOfMonth()));
-    }
+    private static String[] parsePatterns = {
+            "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm", "yyyy-MM",
+            "yyyy/MM/dd", "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm", "yyyy/MM",
+            "yyyy.MM.dd", "yyyy.MM.dd HH:mm:ss", "yyyy.MM.dd HH:mm", "yyyy.MM"};
+
+//    public static void main(String[] args) {
+//        String s = formatDate(now(), YYYY_MM_DD_HH_MM_SS);
+//        String s1 = getYesterdayTimeStr();
+//        System.out.println(s);
+//        System.out.println(s1);
+//        System.out.println(diffTime(s, s1));
+//        System.out.println(diffTime(now(), getYesterday()));
+//        System.out.println(formatNow(YYYY$MM$DD_HH_MM_SS));
+//        System.out.println(getTodayFirstSecond());
+//        System.out.println(getTodayLastSecond());
+//        System.out.println(FORMAT_YYYY_MM_DD_HH_MM_SS.format(getStartDayOfMonth()));
+//        System.out.println(FORMAT_YYYY_MM_DD_HH_MM_SS.format(getLastDayOfMonth()));
+//    }
 
     /**
      * 获取当前时间
@@ -81,7 +87,7 @@ public class DateUtil {
      * @param date Date对象
      * @return yyyy-MM-dd HH:mm:ss
      */
-    public static String formatNow(Date date) {
+    public static String formatDate(Date date) {
         return formatDate(now(), YYYY_MM_DD_HH_MM_SS);
     }
 
@@ -114,6 +120,21 @@ public class DateUtil {
                 return FORMAT_HH_MM_SS.format(date);
             default:
                 return "";
+        }
+    }
+
+    /**
+     * 日期型字符串转化为Date
+     */
+    public static Date parseDate(Object obj) {
+        if (obj == null) {
+            return null;
+        }
+        try {
+            return org.apache.commons.lang3.time.DateUtils.parseDate(obj.toString(), parsePatterns);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -171,17 +192,17 @@ public class DateUtil {
     }
 
     /**
-     * 计算时间差：date1 - date2
+     * 计算时间差：endDate - beginDate
      *
      * @return d天h小时m分钟s秒
      */
-    public static String diffTime(Date date1, Date date2) {
+    public static String diffTime(Date endDate, Date beginDate) {
         long nd = 1000 * 24 * 60 * 60;
         long nh = 1000 * 60 * 60;
         long nm = 1000 * 60;
         long ns = 1000;
         // 获得两个时间的毫秒时间差异
-        long diff = date1.getTime() - date2.getTime();
+        long diff = endDate.getTime() - beginDate.getTime();
         // 计算差多少天
         long day = diff / nd;
         // 计算差多少小时
@@ -194,6 +215,13 @@ public class DateUtil {
     }
 
     //↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 获取 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓//
+
+    /**
+     * 获取日期路径 即年/月/日 如2018/08/08
+     */
+    public static String getDatePath() {
+        return formatDate(now(), YYYY$MM$DD);
+    }
 
     /**
      * 获取服务器启动时间

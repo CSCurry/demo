@@ -1,6 +1,6 @@
 package com.demo.framework.util.html;
 
-import com.demo.framework.util.StringUtils;
+import com.demo.framework.util.StringUtil;
 
 /**
  * 转义和反转义工具类
@@ -63,7 +63,7 @@ public class EscapeUtil {
     private static String encode(String text) {
         int len;
         if ((text == null) || ((len = text.length()) == 0)) {
-            return StringUtils.EMPTY;
+            return StringUtil.EMPTY;
         }
         StringBuilder buffer = new StringBuilder(len + (len >> 2));
         char c;
@@ -85,7 +85,7 @@ public class EscapeUtil {
      * @return 解码后的字符串
      */
     public static String decode(String content) {
-        if (StringUtils.isEmpty(content)) {
+        if (StringUtil.isEmpty(content)) {
             return content;
         }
 

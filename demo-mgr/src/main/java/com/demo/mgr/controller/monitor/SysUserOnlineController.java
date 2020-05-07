@@ -2,42 +2,40 @@ package com.demo.mgr.controller.monitor;
 
 import com.demo.business.domain.SysUserOnline;
 import com.demo.business.service.mgr.ISysUserOnlineService;
-import com.demo.mgr.shiro.ShiroUtils;
-import com.demo.mgr.shiro.session.OnlineSession;
-import com.demo.mgr.shiro.session.OnlineSessionDAO;
 import com.demo.framework.annotation.Log;
 import com.demo.framework.base.AjaxResult;
 import com.demo.framework.base.BaseController;
 import com.demo.framework.enums.BusinessType;
 import com.demo.framework.enums.OnlineStatus;
 import com.demo.framework.page.TableDataInfo;
+import com.demo.mgr.shiro.ShiroUtils;
+import com.demo.mgr.shiro.session.OnlineSession;
+import com.demo.mgr.shiro.session.OnlineSessionDAO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
  * 在线用户监控
  *
- * @author ruoyi
+ * @author 30
  */
 @Controller
 @RequestMapping("/monitor/online")
 public class SysUserOnlineController extends BaseController {
-    private String prefix = "monitor/online";
 
-    @Autowired
+    @Resource
     private ISysUserOnlineService userOnlineService;
-
-    @Autowired
+    @Resource
     private OnlineSessionDAO onlineSessionDAO;
 
     @RequiresPermissions("monitor:online:view")
     @GetMapping()
     public String online() {
-        return prefix + "/online";
+        return "monitor/online/online";
     }
 
     @RequiresPermissions("monitor:online:list")

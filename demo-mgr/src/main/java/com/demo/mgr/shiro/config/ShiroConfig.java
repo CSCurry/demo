@@ -2,7 +2,7 @@ package com.demo.mgr.shiro.config;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import com.demo.framework.config.CacheConfig;
-import com.demo.framework.util.SpringUtils;
+import com.demo.framework.util.SpringUtil;
 import com.demo.mgr.shiro.realm.UserRealm;
 import com.demo.mgr.shiro.session.OnlineSessionDAO;
 import com.demo.mgr.shiro.session.OnlineSessionFactory;
@@ -161,7 +161,7 @@ public class ShiroConfig {
         // 去掉 JSESSIONID
         manager.setSessionIdUrlRewritingEnabled(false);
         // 定义要使用的无效的Session定时调度器
-        manager.setSessionValidationScheduler(SpringUtils.getBean(SpringSessionValidationScheduler.class));
+        manager.setSessionValidationScheduler(SpringUtil.getBean(SpringSessionValidationScheduler.class));
         // 是否定时检查session
         manager.setSessionValidationSchedulerEnabled(true);
         // 自定义SessionDao

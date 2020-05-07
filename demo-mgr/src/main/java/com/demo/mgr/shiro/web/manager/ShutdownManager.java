@@ -4,10 +4,10 @@ import com.demo.mgr.shiro.web.session.SpringSessionValidationScheduler;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.ehcache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
 
 /**
  * 确保应用退出时能关闭后台线程
@@ -18,9 +18,11 @@ import javax.annotation.PreDestroy;
 @Component
 public class ShutdownManager {
 
-    @Autowired(required = false)
+    //@Autowired(required = false)
+    @Resource
     private SpringSessionValidationScheduler springSessionValidationScheduler;
-    @Autowired(required = false)
+    //@Autowired(required = false)
+    @Resource
     private EhCacheManager ehCacheManager;
 
     @PreDestroy

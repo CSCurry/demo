@@ -1,6 +1,6 @@
 package com.demo.framework.config;
 
-import com.demo.framework.util.ServletUtils;
+import com.demo.framework.util.ServletUtil;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +19,7 @@ public class ServerConfig {
      * @return 服务地址
      */
     public String getUrl() {
-        HttpServletRequest request = ServletUtils.getRequest();
+        HttpServletRequest request = ServletUtil.getRequest();
         return getDomain(request);
     }
 

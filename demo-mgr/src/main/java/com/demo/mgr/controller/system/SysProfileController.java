@@ -6,35 +6,34 @@ import com.demo.framework.annotation.Log;
 import com.demo.framework.base.AjaxResult;
 import com.demo.framework.base.BaseController;
 import com.demo.framework.config.GlobalConfig;
-import com.demo.framework.util.StringUtils;
 import com.demo.framework.enums.BusinessType;
+import com.demo.framework.util.StringUtil;
 import com.demo.framework.util.file.FileUploadUtils;
 import com.demo.mgr.shiro.ShiroUtils;
 import com.demo.mgr.shiro.service.SysPasswordService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
+
 /**
  * 个人信息 业务处理
  *
- * @author ruoyi
+ * @author 30
  */
+@Slf4j
 @Controller
 @RequestMapping("/system/user/profile")
 public class SysProfileController extends BaseController {
-    private static final Logger log = LoggerFactory.getLogger(SysProfileController.class);
 
     private String prefix = "system/user/profile";
 
-    @Autowired
+    @Resource
     private ISysUserService userService;
-
-    @Autowired
+    @Resource
     private SysPasswordService passwordService;
 
     /**
@@ -53,10 +52,7 @@ public class SysProfileController extends BaseController {
     @ResponseBody
     public boolean checkPassword(String password) {
         SysUser user = ShiroUtils.getSysUser();
-        if (passwordService.matches(user, password)) {
-            return true;
-        }
-        return false;
+        return passwordService.matches(user, password);
     }
 
     @GetMapping("/resetPwd")
@@ -71,7 +67,7 @@ public class SysProfileController extends BaseController {
     @ResponseBody
     public AjaxResult resetPwd(String oldPassword, String newPassword) {
         SysUser user = ShiroUtils.getSysUser();
-        if (StringUtils.isNotEmpty(newPassword) && passwordService.matches(user, oldPassword)) {
+        if (StringUtil.isNotEmpty(newPassword) && passwordService.matches(user, oldPassword)) {
             user.setSalt(ShiroUtils.randomSalt());
             user.setPassword(passwordService.encryptPassword(user.getLoginName(), newPassword, user.getSalt()));
             if (userService.resetUserPwd(user) > 0) {

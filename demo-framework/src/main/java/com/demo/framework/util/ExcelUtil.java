@@ -10,7 +10,6 @@ import com.demo.framework.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.util.CellRangeAddressList;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFDataValidation;
@@ -97,7 +96,7 @@ public class ExcelUtil<T> {
      * @return 转换后集合
      */
     public List<T> importExcel(InputStream is) throws Exception {
-        return importExcel(StringUtils.EMPTY, is);
+        return importExcel(StringUtil.EMPTY, is);
     }
 
     /**
@@ -112,7 +111,7 @@ public class ExcelUtil<T> {
         this.wb = WorkbookFactory.create(is);
         List<T> list = new ArrayList<>();
         Sheet sheet;
-        if (StringUtils.isNotEmpty(sheetName)) {
+        if (StringUtil.isNotEmpty(sheetName)) {
             // 如果指定sheet名,则取指定sheet中的内容.
             sheet = wb.getSheet(sheetName);
         } else {
@@ -133,7 +132,7 @@ public class ExcelUtil<T> {
             Row heard = sheet.getRow(0);
             for (int i = 0; i < heard.getPhysicalNumberOfCells(); i++) {
                 Cell cell = heard.getCell(i);
-                if (StringUtils.isNotNull(cell)) {
+                if (StringUtil.isNotNull(cell)) {
                     String value = this.getCellValue(heard, i).toString();
                     cellMap.put(value, i);
                 } else {
@@ -168,12 +167,12 @@ public class ExcelUtil<T> {
                     Class<?> fieldType = field.getType();
                     if (String.class == fieldType) {
                         String s = ConvertUtil.toStr(val);
-                        if (StringUtils.endsWith(s, ".0")) {
-                            val = StringUtils.substringBefore(s, ".0");
+                        if (StringUtil.endsWith(s, ".0")) {
+                            val = StringUtil.substringBefore(s, ".0");
                         } else {
                             String dateFormat = field.getAnnotation(Excel.class).dateFormat();
-                            if (StringUtils.isNotEmpty(dateFormat)) {
-                                val = DateUtils.parseDateToStr(dateFormat, (Date) val);
+                            if (StringUtil.isNotEmpty(dateFormat)) {
+                                val = DateUtil.formatDate((Date) val, dateFormat);
                             } else {
                                 val = ConvertUtil.toStr(val);
                             }
@@ -190,20 +189,20 @@ public class ExcelUtil<T> {
                         val = ConvertUtil.toBigDecimal(val);
                     } else if (Date.class == fieldType) {
                         if (val instanceof String) {
-                            val = DateUtils.parseDate(val);
+                            val = DateUtil.parseDate(val);
                         } else if (val instanceof Double) {
                             val = org.apache.poi.ss.usermodel.DateUtil.getJavaDate((Double) val);
                         }
                     }
-                    if (StringUtils.isNotNull(fieldType)) {
+                    if (StringUtil.isNotNull(fieldType)) {
                         Excel attr = field.getAnnotation(Excel.class);
                         String propertyName = field.getName();
-                        if (StringUtils.isNotEmpty(attr.targetAttr())) {
+                        if (StringUtil.isNotEmpty(attr.targetAttr())) {
                             propertyName = field.getName() + "." + attr.targetAttr();
-                        } else if (StringUtils.isNotEmpty(attr.readConverterExp())) {
+                        } else if (StringUtil.isNotEmpty(attr.readConverterExp())) {
                             val = reverseByExp(String.valueOf(val), attr.readConverterExp());
                         }
-                        ReflectUtils.invokeSetter(entity, propertyName, val);
+                        ReflectUtil.invokeSetter(entity, propertyName, val);
                     }
                 }
                 list.add(entity);
@@ -244,7 +243,8 @@ public class ExcelUtil<T> {
         OutputStream out = null;
         try {
             // 取出一共有多少个sheet.
-            double sheetNo = Math.ceil(list.size() / sheetSize);
+            int n = list.size() / sheetSize;
+            double sheetNo = Math.ceil(n);
             for (int index = 0; index <= sheetNo; index++) {
                 createSheet(sheetNo, index);
 
@@ -375,7 +375,7 @@ public class ExcelUtil<T> {
     public void setCellVo(Object value, Excel attr, Cell cell) {
         if (ColumnType.STRING == attr.cellType()) {
             cell.setCellType(CellType.NUMERIC);
-            cell.setCellValue(StringUtils.isNull(value) ? attr.defaultValue() : value + attr.suffix());
+            cell.setCellValue(StringUtil.isNull(value) ? attr.defaultValue() : value + attr.suffix());
         } else if (ColumnType.NUMERIC == attr.cellType()) {
             cell.setCellType(CellType.NUMERIC);
             cell.setCellValue(Integer.parseInt(value + ""));
@@ -394,7 +394,7 @@ public class ExcelUtil<T> {
             row.setHeight((short) (attr.height() * 20));
         }
         // 如果设置了提示信息则鼠标放上去提示.
-        if (StringUtils.isNotEmpty(attr.prompt())) {
+        if (StringUtil.isNotEmpty(attr.prompt())) {
             // 这里默认设了2-101列提示.
             setXSSFPrompt(sheet, "", attr.prompt(), 1, 100, column, column);
         }
@@ -423,9 +423,9 @@ public class ExcelUtil<T> {
                 Object value = getTargetValue(vo, field, attr);
                 String dateFormat = attr.dateFormat();
                 String readConverterExp = attr.readConverterExp();
-                if (StringUtils.isNotEmpty(dateFormat) && StringUtils.isNotNull(value)) {
-                    cell.setCellValue(DateUtils.parseDateToStr(dateFormat, (Date) value));
-                } else if (StringUtils.isNotEmpty(readConverterExp) && StringUtils.isNotNull(value)) {
+                if (StringUtil.isNotEmpty(dateFormat) && StringUtil.isNotNull(value)) {
+                    cell.setCellValue(DateUtil.formatDate((Date) value, dateFormat));
+                } else if (StringUtil.isNotEmpty(readConverterExp) && StringUtil.isNotNull(value)) {
                     cell.setCellValue(convertByExp(String.valueOf(value), readConverterExp));
                 } else {
                     // 设置列类型
@@ -449,8 +449,7 @@ public class ExcelUtil<T> {
      * @param firstCol      开始列
      * @param endCol        结束列
      */
-    public void setXSSFPrompt(Sheet sheet, String promptTitle, String promptContent, int firstRow, int endRow,
-                              int firstCol, int endCol) {
+    public void setXSSFPrompt(Sheet sheet, String promptTitle, String promptContent, int firstRow, int endRow, int firstCol, int endCol) {
         DataValidationHelper helper = sheet.getDataValidationHelper();
         DataValidationConstraint constraint = helper.createCustomConstraint("DD1");
         CellRangeAddressList regions = new CellRangeAddressList(firstRow, endRow, firstCol, endCol);
@@ -569,7 +568,7 @@ public class ExcelUtil<T> {
      */
     private Object getTargetValue(T vo, Field field, Excel excel) throws Exception {
         Object o = field.get(vo);
-        if (StringUtils.isNotEmpty(excel.targetAttr())) {
+        if (StringUtil.isNotEmpty(excel.targetAttr())) {
             String target = excel.targetAttr();
             if (target.contains(".")) {
                 String[] targets = target.split("[.]");
@@ -592,7 +591,7 @@ public class ExcelUtil<T> {
      * @throws Exception
      */
     private Object getValue(Object o, String name) throws Exception {
-        if (StringUtils.isNotEmpty(name)) {
+        if (StringUtil.isNotEmpty(name)) {
             Class<?> clazz = o.getClass();
             String methodName = "get" + name.substring(0, 1).toUpperCase() + name.substring(1);
             Method method = clazz.getMethod(methodName);
@@ -673,11 +672,11 @@ public class ExcelUtil<T> {
         Object val = "";
         try {
             Cell cell = row.getCell(column);
-            if (StringUtils.isNotNull(cell)) {
+            if (StringUtil.isNotNull(cell)) {
                 if (cell.getCellTypeEnum() == CellType.NUMERIC || cell.getCellTypeEnum() == CellType.FORMULA) {
                     val = cell.getNumericCellValue();
                     if (HSSFDateUtil.isCellDateFormatted(cell)) {
-                        val = DateUtil.getJavaDate((Double) val); // POI Excel 日期格式转换
+                        val = org.apache.poi.ss.usermodel.DateUtil.getJavaDate((Double) val); // POI Excel 日期格式转换
                     } else {
                         if ((Double) val % 1 > 0) {
                             val = new DecimalFormat("0.00").format(val);

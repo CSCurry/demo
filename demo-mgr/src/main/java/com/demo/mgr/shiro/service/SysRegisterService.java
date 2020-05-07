@@ -6,7 +6,7 @@ import com.demo.mgr.shiro.web.manager.factory.AsyncFactory;
 import com.demo.business.service.mgr.ISysUserService;
 import com.demo.mgr.shiro.ShiroUtils;
 import com.demo.framework.constant.Constant;
-import com.demo.framework.util.ServletUtils;
+import com.demo.framework.util.ServletUtil;
 import com.demo.framework.constant.ShiroConstants;
 import com.demo.framework.constant.UserConstants;
 import com.demo.framework.util.MessageUtils;
@@ -36,7 +36,7 @@ public class SysRegisterService {
                 username = user.getLoginName(),
                 password = user.getPassword();
 
-        if (!StringUtils.isEmpty(ServletUtils.getRequest().getAttribute(ShiroConstants.CURRENT_CAPTCHA))) {
+        if (!StringUtils.isEmpty(ServletUtil.getRequest().getAttribute(ShiroConstants.CURRENT_CAPTCHA))) {
             msg = "验证码错误";
         } else if (StringUtils.isEmpty(username)) {
             msg = "用户名不能为空";

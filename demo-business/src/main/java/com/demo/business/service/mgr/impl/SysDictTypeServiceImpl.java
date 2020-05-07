@@ -6,11 +6,11 @@ import com.demo.business.domain.SysDictType;
 import com.demo.business.mapper.SysDictDataMapper;
 import com.demo.business.mapper.SysDictTypeMapper;
 import com.demo.business.service.mgr.ISysDictTypeService;
-import com.demo.framework.exception.BusinessException;
-import com.demo.framework.util.ConvertUtil;
-import com.demo.framework.util.StringUtils;
 import com.demo.framework.constant.UserConstants;
 import com.demo.framework.domain.Ztree;
+import com.demo.framework.exception.BusinessException;
+import com.demo.framework.util.ConvertUtil;
+import com.demo.framework.util.StringUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -72,11 +72,11 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
     @Override
     public List<SysDictData> selectDictDataByType(String dictType) {
         List<SysDictData> dictDatas = DictUtils.getDictCache(dictType);
-        if (StringUtils.isNotNull(dictDatas)) {
+        if (StringUtil.isNotNull(dictDatas)) {
             return dictDatas;
         }
         dictDatas = dictDataMapper.selectDictDataByType(dictType);
-        if (StringUtils.isNotNull(dictDatas)) {
+        if (StringUtil.isNotNull(dictDatas)) {
             DictUtils.setDictCache(dictType, dictDatas);
             return dictDatas;
         }
@@ -176,9 +176,9 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
      */
     @Override
     public String checkDictTypeUnique(SysDictType dict) {
-        Long dictId = StringUtils.isNull(dict.getDictId()) ? -1L : dict.getDictId();
+        Long dictId = StringUtil.isNull(dict.getDictId()) ? -1L : dict.getDictId();
         SysDictType dictType = dictTypeMapper.checkDictTypeUnique(dict.getDictType());
-        if (StringUtils.isNotNull(dictType) && dictType.getDictId().longValue() != dictId.longValue()) {
+        if (StringUtil.isNotNull(dictType) && dictType.getDictId().longValue() != dictId.longValue()) {
             return UserConstants.DICT_TYPE_NOT_UNIQUE;
         }
         return UserConstants.DICT_TYPE_UNIQUE;

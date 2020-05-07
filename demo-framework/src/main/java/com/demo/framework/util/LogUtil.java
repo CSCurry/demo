@@ -13,21 +13,22 @@ import java.util.Map;
 /**
  * 处理并记录日志文件
  *
- * @author ruoyi
+ * @author 30
  */
-public class LogUtils {
+public class LogUtil {
+
     public static final Logger ERROR_LOG = LoggerFactory.getLogger("sys-error");
     public static final Logger ACCESS_LOG = LoggerFactory.getLogger("sys-access");
 
     /**
      * 记录访问日志 [username][jsessionid][ip][accept][UserAgent][url][params][Referer]
      *
-     * @param request
-     * @throws Exception
+     * @param request HttpServletRequest
+     * @throws Exception Exception
      */
     public static void logAccess(HttpServletRequest request) throws Exception {
         String username = getUsername();
-        String jsessionId = request.getRequestedSessionId();
+        String jSessionId = request.getRequestedSessionId();
         String ip = IpUtil.getIpAddr(request);
         String accept = request.getHeader("accept");
         String userAgent = request.getHeader("User-Agent");
@@ -35,36 +36,36 @@ public class LogUtils {
         String params = getParams(request);
 
         StringBuilder s = new StringBuilder();
-        s.append(getBlock(username));
-        s.append(getBlock(jsessionId));
-        s.append(getBlock(ip));
-        s.append(getBlock(accept));
-        s.append(getBlock(userAgent));
-        s.append(getBlock(url));
-        s.append(getBlock(params));
-        s.append(getBlock(request.getHeader("Referer")));
+        s.append(StringUtil.getBlock(username));
+        s.append(StringUtil.getBlock(jSessionId));
+        s.append(StringUtil.getBlock(ip));
+        s.append(StringUtil.getBlock(accept));
+        s.append(StringUtil.getBlock(userAgent));
+        s.append(StringUtil.getBlock(url));
+        s.append(StringUtil.getBlock(params));
+        s.append(StringUtil.getBlock(request.getHeader("Referer")));
         getAccessLog().info(s.toString());
     }
 
     /**
      * 记录异常错误 格式 [exception]
      *
-     * @param message
-     * @param e
+     * @param message message
+     * @param e       Throwable
      */
     public static void logError(String message, Throwable e) {
         String username = getUsername();
         StringBuilder s = new StringBuilder();
-        s.append(getBlock("exception"));
-        s.append(getBlock(username));
-        s.append(getBlock(message));
+        s.append(StringUtil.getBlock("exception"));
+        s.append(StringUtil.getBlock(username));
+        s.append(StringUtil.getBlock(message));
         ERROR_LOG.error(s.toString(), e);
     }
 
     /**
      * 记录页面错误 错误日志记录 [page/eception][username][statusCode][errorMessage][servletName][uri][exceptionName][ip][exception]
      *
-     * @param request
+     * @param request HttpServletRequest
      */
     public static void logPageError(HttpServletRequest request) {
         String username = getUsername();
@@ -79,30 +80,23 @@ public class LogUtils {
         }
 
         StringBuilder s = new StringBuilder();
-        s.append(getBlock(t == null ? "page" : "exception"));
-        s.append(getBlock(username));
-        s.append(getBlock(statusCode));
-        s.append(getBlock(message));
-        s.append(getBlock(IpUtil.getIpAddr(request)));
+        s.append(StringUtil.getBlock(t == null ? "page" : "exception"));
+        s.append(StringUtil.getBlock(username));
+        s.append(StringUtil.getBlock(statusCode));
+        s.append(StringUtil.getBlock(message));
+        s.append(StringUtil.getBlock(IpUtil.getIpAddr(request)));
 
-        s.append(getBlock(uri));
-        s.append(getBlock(request.getHeader("Referer")));
+        s.append(StringUtil.getBlock(uri));
+        s.append(StringUtil.getBlock(request.getHeader("Referer")));
         StringWriter sw = new StringWriter();
 
         while (t != null) {
             t.printStackTrace(new PrintWriter(sw));
             t = t.getCause();
         }
-        s.append(getBlock(sw.toString()));
+        s.append(StringUtil.getBlock(sw.toString()));
         getErrorLog().error(s.toString());
 
-    }
-
-    public static String getBlock(Object msg) {
-        if (msg == null) {
-            msg = "";
-        }
-        return "[" + msg.toString() + "]";
     }
 
     protected static String getParams(HttpServletRequest request) throws Exception {

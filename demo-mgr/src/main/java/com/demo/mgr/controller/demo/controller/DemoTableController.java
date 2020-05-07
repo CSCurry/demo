@@ -1,11 +1,11 @@
 package com.demo.mgr.controller.demo.controller;
 
 import com.demo.framework.base.BaseController;
-import com.demo.framework.util.DateUtils;
-import com.demo.framework.util.StringUtils;
 import com.demo.framework.page.PageDomain;
 import com.demo.framework.page.TableDataInfo;
 import com.demo.framework.page.TableSupport;
+import com.demo.framework.util.DateUtil;
+import com.demo.framework.util.StringUtil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -220,7 +220,7 @@ public class DemoTableController extends BaseController {
         List<UserTableModel> userList = new ArrayList<UserTableModel>(Arrays.asList(new UserTableModel[users.size()]));
         Collections.copy(userList, users);
         // 查询条件过滤
-        if (StringUtils.isNotEmpty(userModel.getUserName())) {
+        if (StringUtil.isNotEmpty(userModel.getUserName())) {
             userList.clear();
             for (UserTableModel user : users) {
                 if (user.getUserName().equals(userModel.getUserName())) {
@@ -306,7 +306,7 @@ class UserTableModel {
         this.userEmail = userEmail;
         this.userBalance = userBalance;
         this.status = status;
-        this.createTime = DateUtils.getNowDate();
+        this.createTime = DateUtil.now();
     }
 
     public int getUserId() {

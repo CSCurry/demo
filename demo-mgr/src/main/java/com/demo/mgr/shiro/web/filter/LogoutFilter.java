@@ -1,13 +1,13 @@
 package com.demo.mgr.shiro.web.filter;
 
 import com.demo.business.domain.SysUser;
-import com.demo.mgr.shiro.web.manager.AsyncManager;
-import com.demo.mgr.shiro.web.manager.factory.AsyncFactory;
-import com.demo.mgr.shiro.ShiroUtils;
 import com.demo.framework.constant.Constant;
 import com.demo.framework.constant.ShiroConstants;
-import com.demo.framework.util.StringUtils;
 import com.demo.framework.util.MessageUtils;
+import com.demo.framework.util.StringUtil;
+import com.demo.mgr.shiro.ShiroUtils;
+import com.demo.mgr.shiro.web.manager.AsyncManager;
+import com.demo.mgr.shiro.web.manager.factory.AsyncFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
@@ -49,7 +49,7 @@ public class LogoutFilter extends org.apache.shiro.web.filter.authc.LogoutFilter
             String redirectUrl = getRedirectUrl(request, response, subject);
             try {
                 SysUser user = ShiroUtils.getSysUser();
-                if (StringUtils.isNotNull(user)) {
+                if (StringUtil.isNotNull(user)) {
                     String loginName = user.getLoginName();
                     // 记录用户退出日志
                     AsyncManager.me().execute(AsyncFactory.recordLogininfor(loginName, Constant.LOGOUT, MessageUtils.message("user.logout.success")));
@@ -74,7 +74,7 @@ public class LogoutFilter extends org.apache.shiro.web.filter.authc.LogoutFilter
     @Override
     protected String getRedirectUrl(ServletRequest request, ServletResponse response, Subject subject) {
         String url = getLoginUrl();
-        if (StringUtils.isNotEmpty(url)) {
+        if (StringUtil.isNotEmpty(url)) {
             return url;
         }
         return super.getRedirectUrl(request, response, subject);

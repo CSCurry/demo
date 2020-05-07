@@ -1,7 +1,7 @@
 package com.demo.mgr.shiro.web.manager;
 
-import com.demo.framework.util.SpringUtils;
-import com.demo.framework.util.Threads;
+import com.demo.framework.util.SpringUtil;
+import com.demo.framework.util.ThreadsUtil;
 
 import java.util.TimerTask;
 import java.util.concurrent.ScheduledExecutorService;
@@ -22,7 +22,7 @@ public class AsyncManager {
     /**
      * 异步操作任务调度线程池
      */
-    private ScheduledExecutorService executor = SpringUtils.getBean("scheduledExecutorService");
+    private ScheduledExecutorService executor = SpringUtil.getBean("scheduledExecutorService");
 
     /**
      * 单例模式
@@ -49,6 +49,6 @@ public class AsyncManager {
      * 停止任务线程池
      */
     public void shutdown() {
-        Threads.shutdownAndAwaitTermination(executor);
+        ThreadsUtil.shutdownAndAwaitTermination(executor);
     }
 }

@@ -1,7 +1,7 @@
 package com.demo.framework.domain.server;
 
+import com.demo.framework.util.DateUtil;
 import com.demo.framework.util.MathUtil;
-import com.demo.framework.util.DateUtils;
 
 import java.lang.management.ManagementFactory;
 
@@ -92,13 +92,13 @@ public class Jvm {
      * JDK启动时间
      */
     public String getStartTime() {
-        return DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, DateUtils.getServerStartDate());
+        return DateUtil.formatDate(DateUtil.getServerStartDate(), DateUtil.YYYY_MM_DD_HH_MM_SS);
     }
 
     /**
      * JDK运行时间
      */
     public String getRunTime() {
-        return DateUtils.getDatePoor(DateUtils.getNowDate(), DateUtils.getServerStartDate());
+        return DateUtil.diffTime(DateUtil.now(), DateUtil.getServerStartDate());
     }
 }

@@ -3,7 +3,7 @@ package com.demo.business.service.mgr.impl;
 import com.demo.business.domain.SysUserOnline;
 import com.demo.business.mapper.SysUserOnlineMapper;
 import com.demo.business.service.mgr.ISysUserOnlineService;
-import com.demo.framework.util.StringUtils;
+import com.demo.framework.util.StringUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -42,7 +42,7 @@ public class SysUserOnlineServiceImpl implements ISysUserOnlineService {
     @Override
     public void deleteOnlineById(String sessionId) {
         SysUserOnline userOnline = selectOnlineById(sessionId);
-        if (StringUtils.isNotNull(userOnline)) {
+        if (StringUtil.isNotNull(userOnline)) {
             userOnlineDao.deleteOnlineById(sessionId);
         }
     }
@@ -57,7 +57,7 @@ public class SysUserOnlineServiceImpl implements ISysUserOnlineService {
     public void batchDeleteOnline(List<String> sessions) {
         for (String sessionId : sessions) {
             SysUserOnline userOnline = selectOnlineById(sessionId);
-            if (StringUtils.isNotNull(userOnline)) {
+            if (StringUtil.isNotNull(userOnline)) {
                 userOnlineDao.deleteOnlineById(sessionId);
             }
         }

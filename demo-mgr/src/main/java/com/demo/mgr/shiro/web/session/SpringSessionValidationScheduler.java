@@ -1,6 +1,6 @@
 package com.demo.mgr.shiro.web.session;
 
-import com.demo.framework.util.Threads;
+import com.demo.framework.util.ThreadsUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.session.mgt.DefaultSessionManager;
 import org.apache.shiro.session.mgt.SessionValidationScheduler;
@@ -101,7 +101,7 @@ public class SpringSessionValidationScheduler implements SessionValidationSchedu
             log.debug("Stopping Spring Scheduler session validation job...");
         }
         if (this.enabled) {
-            Threads.shutdownAndAwaitTermination(scheduledExecutorService);
+            ThreadsUtil.shutdownAndAwaitTermination(scheduledExecutorService);
         }
         this.enabled = false;
     }

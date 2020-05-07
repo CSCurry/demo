@@ -38,11 +38,11 @@ public class SysDictTypeController extends BaseController {
     private ISysDictTypeService dictTypeService;
 
     /**
-     * 项目启动时，初始化参数到缓存
+     * 项目启动时，初始化字典到缓存
      */
     @PostConstruct
     public void init() {
-        log.info("init dict to the cache");
+        log.info("初始化字典到缓存");
         dictTypeService.init();
     }
 

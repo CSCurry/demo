@@ -9,7 +9,10 @@ import org.springframework.util.DigestUtils;
  */
 public class MD5Util {
 
-    public static String generateMD5(String originStr) {
-        return DigestUtils.md5DigestAsHex(originStr.getBytes());
+    /**
+     * 摘要
+     */
+    public static String md5(String str) {
+        return DigestUtils.md5DigestAsHex(str.getBytes());
     }
 }

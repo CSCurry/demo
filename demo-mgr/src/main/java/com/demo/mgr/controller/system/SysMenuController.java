@@ -3,33 +3,34 @@ package com.demo.mgr.controller.system;
 import com.demo.business.domain.SysMenu;
 import com.demo.business.domain.SysRole;
 import com.demo.business.service.mgr.ISysMenuService;
-import com.demo.mgr.shiro.ShiroUtils;
 import com.demo.framework.annotation.Log;
 import com.demo.framework.base.AjaxResult;
 import com.demo.framework.base.BaseController;
-import com.demo.framework.domain.Ztree;
 import com.demo.framework.constant.UserConstants;
+import com.demo.framework.domain.Ztree;
 import com.demo.framework.enums.BusinessType;
+import com.demo.mgr.shiro.ShiroUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
  * 菜单信息
  *
- * @author ruoyi
+ * @author 30
  */
 @Controller
 @RequestMapping("/system/menu")
 public class SysMenuController extends BaseController {
+
     private String prefix = "system/menu";
 
-    @Autowired
+    @Resource
     private ISysMenuService menuService;
 
     @RequiresPermissions("system:menu:view")
@@ -43,8 +44,7 @@ public class SysMenuController extends BaseController {
     @ResponseBody
     public List<SysMenu> list(SysMenu menu) {
         Long userId = ShiroUtils.getUserId();
-        List<SysMenu> menuList = menuService.selectMenuList(menu, userId);
-        return menuList;
+        return menuService.selectMenuList(menu, userId);
     }
 
     /**
@@ -147,8 +147,7 @@ public class SysMenuController extends BaseController {
     @ResponseBody
     public List<Ztree> roleMenuTreeData(SysRole role) {
         Long userId = ShiroUtils.getUserId();
-        List<Ztree> ztrees = menuService.roleMenuTreeData(role, userId);
-        return ztrees;
+        return menuService.roleMenuTreeData(role, userId);
     }
 
     /**
@@ -158,8 +157,7 @@ public class SysMenuController extends BaseController {
     @ResponseBody
     public List<Ztree> menuTreeData() {
         Long userId = ShiroUtils.getUserId();
-        List<Ztree> ztrees = menuService.menuTreeData(userId);
-        return ztrees;
+        return menuService.menuTreeData(userId);
     }
 
     /**

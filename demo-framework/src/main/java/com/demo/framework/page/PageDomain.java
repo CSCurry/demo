@@ -1,6 +1,6 @@
 package com.demo.framework.page;
 
-import com.demo.framework.util.StringUtils;
+import com.demo.framework.util.StringUtil;
 import lombok.Data;
 
 /**
@@ -32,6 +32,6 @@ public class PageDomain {
         if (orderByColumn == null || orderByColumn.length() == 0) {
             return "";
         }
-        return StringUtils.toUnderScoreCase(orderByColumn) + " " + isAsc;
+        return StringUtil.toUnderScoreCase(orderByColumn) + " " + isAsc;
     }
 }

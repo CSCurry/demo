@@ -2,14 +2,14 @@ package com.demo.mgr.controller.demo.controller;
 
 import com.demo.framework.base.AjaxResult;
 import com.demo.framework.base.BaseController;
-import com.demo.framework.exception.BusinessException;
 import com.demo.framework.domain.UserOperateModel;
-import com.demo.framework.util.ConvertUtil;
-import com.demo.framework.util.ExcelUtil;
-import com.demo.framework.util.StringUtils;
+import com.demo.framework.exception.BusinessException;
 import com.demo.framework.page.PageDomain;
 import com.demo.framework.page.TableDataInfo;
 import com.demo.framework.page.TableSupport;
+import com.demo.framework.util.ConvertUtil;
+import com.demo.framework.util.ExcelUtil;
+import com.demo.framework.util.StringUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -86,14 +86,14 @@ public class DemoOperateController extends BaseController {
         TableDataInfo rspData = new TableDataInfo();
         List<UserOperateModel> userList = new ArrayList<UserOperateModel>(users.values());
         // 查询条件过滤
-        if (StringUtils.isNotEmpty(userModel.getSearchValue())) {
+        if (StringUtil.isNotEmpty(userModel.getSearchValue())) {
             userList.clear();
             for (Map.Entry<Integer, UserOperateModel> entry : users.entrySet()) {
                 if (entry.getValue().getUserName().equals(userModel.getSearchValue())) {
                     userList.add(entry.getValue());
                 }
             }
-        } else if (StringUtils.isNotEmpty(userModel.getUserName())) {
+        } else if (StringUtil.isNotEmpty(userModel.getUserName())) {
             userList.clear();
             for (Map.Entry<Integer, UserOperateModel> entry : users.entrySet()) {
                 if (entry.getValue().getUserName().equals(userModel.getUserName())) {
@@ -224,7 +224,7 @@ public class DemoOperateController extends BaseController {
      * @return 结果
      */
     public String importUser(List<UserOperateModel> userList, Boolean isUpdateSupport) {
-        if (StringUtils.isNull(userList) || userList.size() == 0) {
+        if (StringUtil.isNull(userList) || userList.size() == 0) {
             throw new BusinessException("导入用户数据不能为空！");
         }
         int successNum = 0;

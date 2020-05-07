@@ -2,11 +2,11 @@ package com.demo.mgr.shiro.web.session;
 
 import com.demo.business.domain.SysUserOnline;
 import com.demo.business.service.mgr.ISysUserOnlineService;
-import com.demo.mgr.shiro.session.OnlineSession;
 import com.demo.framework.constant.ShiroConstants;
-import com.demo.framework.util.SpringUtils;
-import com.demo.framework.util.StringUtils;
-import com.demo.framework.util.BeanUtils;
+import com.demo.framework.util.BeanUtil;
+import com.demo.framework.util.SpringUtil;
+import com.demo.framework.util.StringUtil;
+import com.demo.mgr.shiro.session.OnlineSession;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.shiro.session.ExpiredSessionException;
@@ -70,9 +70,9 @@ public class OnlineWebSessionManager extends DefaultWebSessionManager {
     public OnlineSession getOnlineSession(SessionKey sessionKey) {
         OnlineSession session = null;
         Object obj = doGetSession(sessionKey);
-        if (StringUtils.isNotNull(obj)) {
+        if (StringUtil.isNotNull(obj)) {
             session = new OnlineSession();
-            BeanUtils.copyBeanProp(session, obj);
+            BeanUtil.copyBeanProp(session, obj);
         }
         return session;
     }
@@ -90,7 +90,7 @@ public class OnlineWebSessionManager extends DefaultWebSessionManager {
 
         int timeout = (int) this.getGlobalSessionTimeout();
         Date expiredDate = DateUtils.addMilliseconds(new Date(), -timeout);
-        ISysUserOnlineService userOnlineService = SpringUtils.getBean(ISysUserOnlineService.class);
+        ISysUserOnlineService userOnlineService = SpringUtil.getBean(ISysUserOnlineService.class);
         List<SysUserOnline> userOnlineList = userOnlineService.selectOnlineByExpired(expiredDate);
         // 批量过期删除
         List<String> needOfflineIdList = new ArrayList<>();

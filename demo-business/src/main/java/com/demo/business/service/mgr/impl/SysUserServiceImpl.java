@@ -5,13 +5,12 @@ import com.demo.business.mapper.*;
 import com.demo.business.service.mgr.ISysConfigService;
 import com.demo.business.service.mgr.ISysUserService;
 import com.demo.framework.annotation.DataScope;
+import com.demo.framework.auth.util.MD5Util;
+import com.demo.framework.constant.UserConstants;
 import com.demo.framework.exception.BusinessException;
 import com.demo.framework.util.ConvertUtil;
-import com.demo.framework.util.Md5Utils;
-import com.demo.framework.util.StringUtils;
-import com.demo.framework.constant.UserConstants;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.demo.framework.util.StringUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,26 +23,20 @@ import java.util.List;
  *
  * @author ruoyi
  */
+@Slf4j
 @Service
 public class SysUserServiceImpl implements ISysUserService {
 
-    private static final Logger log = LoggerFactory.getLogger(SysUserServiceImpl.class);
-
     @Resource
     private SysUserMapper userMapper;
-
     @Resource
     private SysRoleMapper roleMapper;
-
     @Resource
     private SysPostMapper postMapper;
-
     @Resource
     private SysUserPostMapper userPostMapper;
-
     @Resource
     private SysUserRoleMapper userRoleMapper;
-
     @Resource
     private ISysConfigService configService;
 
@@ -257,7 +250,7 @@ public class SysUserServiceImpl implements ISysUserService {
      * 新增用户角色信息
      */
     public void insertUserRole(Long userId, Long[] roleIds) {
-        if (StringUtils.isNotNull(roleIds)) {
+        if (StringUtil.isNotNull(roleIds)) {
             // 新增用户与角色管理
             List<SysUserRole> list = new ArrayList<SysUserRole>();
             for (Long roleId : roleIds) {
@@ -279,9 +272,9 @@ public class SysUserServiceImpl implements ISysUserService {
      */
     public void insertUserPost(SysUser user) {
         Long[] posts = user.getPostIds();
-        if (StringUtils.isNotNull(posts)) {
+        if (StringUtil.isNotNull(posts)) {
             // 新增用户与岗位管理
-            List<SysUserPost> list = new ArrayList<SysUserPost>();
+            List<SysUserPost> list = new ArrayList<>();
             for (Long postId : posts) {
                 SysUserPost up = new SysUserPost();
                 up.setUserId(user.getUserId());
@@ -317,9 +310,9 @@ public class SysUserServiceImpl implements ISysUserService {
      */
     @Override
     public String checkPhoneUnique(SysUser user) {
-        Long userId = StringUtils.isNull(user.getUserId()) ? -1L : user.getUserId();
+        Long userId = StringUtil.isNull(user.getUserId()) ? -1L : user.getUserId();
         SysUser info = userMapper.checkPhoneUnique(user.getPhonenumber());
-        if (StringUtils.isNotNull(info) && info.getUserId().longValue() != userId.longValue()) {
+        if (StringUtil.isNotNull(info) && info.getUserId().longValue() != userId.longValue()) {
             return UserConstants.USER_PHONE_NOT_UNIQUE;
         }
         return UserConstants.USER_PHONE_UNIQUE;
@@ -333,9 +326,9 @@ public class SysUserServiceImpl implements ISysUserService {
      */
     @Override
     public String checkEmailUnique(SysUser user) {
-        Long userId = StringUtils.isNull(user.getUserId()) ? -1L : user.getUserId();
+        Long userId = StringUtil.isNull(user.getUserId()) ? -1L : user.getUserId();
         SysUser info = userMapper.checkEmailUnique(user.getEmail());
-        if (StringUtils.isNotNull(info) && info.getUserId().longValue() != userId.longValue()) {
+        if (StringUtil.isNotNull(info) && info.getUserId().longValue() != userId.longValue()) {
             return UserConstants.USER_EMAIL_NOT_UNIQUE;
         }
         return UserConstants.USER_EMAIL_UNIQUE;
@@ -348,7 +341,7 @@ public class SysUserServiceImpl implements ISysUserService {
      */
     @Override
     public void checkUserAllowed(SysUser user) {
-        if (StringUtils.isNotNull(user.getUserId()) && user.isAdmin()) {
+        if (StringUtil.isNotNull(user.getUserId()) && user.isAdmin()) {
             throw new BusinessException("不允许操作超级管理员用户");
         }
     }
@@ -366,7 +359,7 @@ public class SysUserServiceImpl implements ISysUserService {
         for (SysRole role : list) {
             idsStr.append(role.getRoleName()).append(",");
         }
-        if (StringUtils.isNotEmpty(idsStr.toString())) {
+        if (StringUtil.isNotEmpty(idsStr.toString())) {
             return idsStr.substring(0, idsStr.length() - 1);
         }
         return idsStr.toString();
@@ -385,7 +378,7 @@ public class SysUserServiceImpl implements ISysUserService {
         for (SysPost post : list) {
             idsStr.append(post.getPostName()).append(",");
         }
-        if (StringUtils.isNotEmpty(idsStr.toString())) {
+        if (StringUtil.isNotEmpty(idsStr.toString())) {
             return idsStr.substring(0, idsStr.length() - 1);
         }
         return idsStr.toString();
@@ -401,7 +394,7 @@ public class SysUserServiceImpl implements ISysUserService {
      */
     @Override
     public String importUser(List<SysUser> userList, Boolean isUpdateSupport, String operName) {
-        if (StringUtils.isNull(userList) || userList.size() == 0) {
+        if (StringUtil.isNull(userList) || userList.size() == 0) {
             throw new BusinessException("导入用户数据不能为空！");
         }
         int successNum = 0;
@@ -413,8 +406,8 @@ public class SysUserServiceImpl implements ISysUserService {
             try {
                 // 验证是否存在这个用户
                 SysUser u = userMapper.selectUserByLoginName(user.getLoginName());
-                if (StringUtils.isNull(u)) {
-                    user.setPassword(Md5Utils.hash(user.getLoginName() + password));
+                if (StringUtil.isNull(u)) {
+                    user.setPassword(MD5Util.md5(user.getLoginName() + password));
                     user.setCreateBy(operName);
                     this.insertUser(user);
                     successNum++;

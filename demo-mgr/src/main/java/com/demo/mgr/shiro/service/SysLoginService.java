@@ -6,7 +6,7 @@ import com.demo.mgr.shiro.web.manager.factory.AsyncFactory;
 import com.demo.business.service.mgr.ISysUserService;
 import com.demo.mgr.shiro.ShiroUtils;
 import com.demo.framework.constant.Constant;
-import com.demo.framework.util.ServletUtils;
+import com.demo.framework.util.ServletUtil;
 import com.demo.framework.constant.ShiroConstants;
 import com.demo.framework.constant.UserConstants;
 import com.demo.framework.enums.UserStatus;
@@ -36,7 +36,7 @@ public class SysLoginService {
      */
     public SysUser login(String username, String password) {
         // 验证码校验
-        if (!StringUtils.isEmpty(ServletUtils.getRequest().getAttribute(ShiroConstants.CURRENT_CAPTCHA))) {
+        if (!StringUtils.isEmpty(ServletUtil.getRequest().getAttribute(ShiroConstants.CURRENT_CAPTCHA))) {
             AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constant.LOGIN_FAIL, MessageUtils.message("user.captcha.error")));
             throw new CaptchaException();
         }

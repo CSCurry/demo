@@ -1,13 +1,13 @@
 package com.demo.framework.util.file;
 
+import com.demo.framework.auth.util.MD5Util;
 import com.demo.framework.config.GlobalConfig;
 import com.demo.framework.constant.Constant;
-import com.demo.framework.util.DateUtils;
-import com.demo.framework.util.Md5Utils;
-import com.demo.framework.util.StringUtils;
 import com.demo.framework.exception.file.FileNameLengthLimitExceededException;
 import com.demo.framework.exception.file.FileSizeLimitExceededException;
 import com.demo.framework.exception.file.InvalidExtensionException;
+import com.demo.framework.util.DateUtil;
+import com.demo.framework.util.StringUtil;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -93,8 +93,8 @@ public class FileUploadUtils {
     public static final String upload(String baseDir, MultipartFile file, String[] allowedExtension)
             throws FileSizeLimitExceededException, IOException, FileNameLengthLimitExceededException,
             InvalidExtensionException {
-        int fileNamelength = Objects.requireNonNull(file.getOriginalFilename()).length();
-        if (fileNamelength > FileUploadUtils.DEFAULT_FILE_NAME_LENGTH) {
+        int fileNameLength = Objects.requireNonNull(file.getOriginalFilename()).length();
+        if (fileNameLength > FileUploadUtils.DEFAULT_FILE_NAME_LENGTH) {
             throw new FileNameLengthLimitExceededException(FileUploadUtils.DEFAULT_FILE_NAME_LENGTH);
         }
 
@@ -113,7 +113,7 @@ public class FileUploadUtils {
     public static final String extractFilename(MultipartFile file) {
         String fileName = file.getOriginalFilename();
         String extension = getExtension(file);
-        fileName = DateUtils.datePath() + "/" + encodingFilename(fileName) + "." + extension;
+        fileName = DateUtil.getDatePath() + "/" + encodingFilename(fileName) + "." + extension;
         return fileName;
     }
 
@@ -131,7 +131,7 @@ public class FileUploadUtils {
 
     private static final String getPathFileName(String uploadDir, String fileName) throws IOException {
         int dirLastIndex = GlobalConfig.getProfile().length() + 1;
-        String currentDir = StringUtils.substring(uploadDir, dirLastIndex);
+        String currentDir = StringUtil.substring(uploadDir, dirLastIndex);
         return Constant.RESOURCE_PREFIX + "/" + currentDir + "/" + fileName;
     }
 
@@ -140,7 +140,7 @@ public class FileUploadUtils {
      */
     private static final String encodingFilename(String fileName) {
         fileName = fileName.replace("_", " ");
-        fileName = Md5Utils.hash(fileName + System.nanoTime() + counter++);
+        fileName = MD5Util.md5(fileName + System.nanoTime() + counter++);
         return fileName;
     }
 
@@ -163,14 +163,11 @@ public class FileUploadUtils {
         String extension = getExtension(file);
         if (allowedExtension != null && !isAllowedExtension(extension, allowedExtension)) {
             if (allowedExtension == MimeTypeUtils.IMAGE_EXTENSION) {
-                throw new InvalidExtensionException.InvalidImageExtensionException(allowedExtension, extension,
-                        fileName);
+                throw new InvalidExtensionException.InvalidImageExtensionException(allowedExtension, extension, fileName);
             } else if (allowedExtension == MimeTypeUtils.FLASH_EXTENSION) {
-                throw new InvalidExtensionException.InvalidFlashExtensionException(allowedExtension, extension,
-                        fileName);
+                throw new InvalidExtensionException.InvalidFlashExtensionException(allowedExtension, extension, fileName);
             } else if (allowedExtension == MimeTypeUtils.MEDIA_EXTENSION) {
-                throw new InvalidExtensionException.InvalidMediaExtensionException(allowedExtension, extension,
-                        fileName);
+                throw new InvalidExtensionException.InvalidMediaExtensionException(allowedExtension, extension, fileName);
             } else {
                 throw new InvalidExtensionException(allowedExtension, extension, fileName);
             }
@@ -202,7 +199,7 @@ public class FileUploadUtils {
      */
     public static final String getExtension(MultipartFile file) {
         String extension = FilenameUtils.getExtension(file.getOriginalFilename());
-        if (StringUtils.isEmpty(extension)) {
+        if (StringUtil.isEmpty(extension)) {
             extension = MimeTypeUtils.getExtension(Objects.requireNonNull(file.getContentType()));
         }
         return extension;

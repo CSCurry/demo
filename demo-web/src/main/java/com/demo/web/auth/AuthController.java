@@ -73,7 +73,7 @@ public class AuthController extends BaseController {
         }
 
         //服务端签名
-        String sign = MD5Util.generateMD5(clientId + accessUser.getClientSecret() + vo.getTimestamp());
+        String sign = MD5Util.md5(clientId + accessUser.getClientSecret() + vo.getTimestamp());
         //验证签名
         if (!sign.equals(vo.getSign())) {
             throw new AuthException();

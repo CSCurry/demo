@@ -31,7 +31,7 @@ public class TaxNoServiceImpl implements TaxNoService {
     private String getToken() throws Exception {
         String url = baseUrl + "/base/oauth/token";
         long timestamp = System.currentTimeMillis();
-        String sign = MD5Util.generateMD5(clientId + clientSecret + timestamp);
+        String sign = MD5Util.md5(clientId + clientSecret + timestamp);
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("client_id", clientId);

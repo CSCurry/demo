@@ -7,11 +7,7 @@ import com.demo.business.service.mgr.ISysOperLogService;
 import com.demo.business.service.mgr.ISysUserOnlineService;
 import com.demo.business.service.mgr.impl.SysLogininforServiceImpl;
 import com.demo.framework.constant.Constant;
-import com.demo.framework.util.ServletUtils;
-import com.demo.framework.util.SpringUtils;
-import com.demo.framework.util.StringUtils;
-import com.demo.framework.util.IpUtil;
-import com.demo.framework.util.LogUtils;
+import com.demo.framework.util.*;
 import com.demo.mgr.shiro.ShiroUtils;
 import com.demo.mgr.shiro.session.OnlineSession;
 import eu.bitwalker.useragentutils.UserAgent;
@@ -49,7 +45,7 @@ public class AsyncFactory {
                 online.setBrowser(session.getBrowser());
                 online.setOs(session.getOs());
                 online.setStatus(session.getStatus());
-                SpringUtils.getBean(ISysUserOnlineService.class).saveOnline(online);
+                SpringUtil.getBean(ISysUserOnlineService.class).saveOnline(online);
             }
         };
     }
@@ -66,7 +62,7 @@ public class AsyncFactory {
             public void run() {
                 // 远程查询操作地点
                 operLog.setOperLocation(IpUtil.getRealAddressByIP(operLog.getOperIp()));
-                SpringUtils.getBean(ISysOperLogService.class).insertOperlog(operLog);
+                SpringUtil.getBean(ISysOperLogService.class).insertOperlog(operLog);
             }
         };
     }
@@ -81,18 +77,18 @@ public class AsyncFactory {
      * @return 任务task
      */
     public static TimerTask recordLogininfor(final String username, final String status, final String message, final Object... args) {
-        final UserAgent userAgent = UserAgent.parseUserAgentString(ServletUtils.getRequest().getHeader("User-Agent"));
+        final UserAgent userAgent = UserAgent.parseUserAgentString(ServletUtil.getRequest().getHeader("User-Agent"));
         final String ip = ShiroUtils.getIp();
         return new TimerTask() {
             @Override
             public void run() {
                 String address = IpUtil.getRealAddressByIP(ip);
                 StringBuilder s = new StringBuilder();
-                s.append(LogUtils.getBlock(ip));
+                s.append(StringUtil.getBlock(ip));
                 s.append(address);
-                s.append(LogUtils.getBlock(username));
-                s.append(LogUtils.getBlock(status));
-                s.append(LogUtils.getBlock(message));
+                s.append(StringUtil.getBlock(username));
+                s.append(StringUtil.getBlock(status));
+                s.append(StringUtil.getBlock(message));
                 // 打印信息到日志
                 log.info(s.toString(), args);
                 // 获取客户端操作系统
@@ -108,13 +104,13 @@ public class AsyncFactory {
                 loginInfo.setOs(os);
                 loginInfo.setMsg(message);
                 // 日志状态
-                if (StringUtils.equalsAny(status, Constant.LOGIN_SUCCESS, Constant.LOGOUT, Constant.REGISTER)) {
+                if (StringUtil.equalsAny(status, Constant.LOGIN_SUCCESS, Constant.LOGOUT, Constant.REGISTER)) {
                     loginInfo.setStatus("0");
                 } else if (Constant.LOGIN_FAIL.equals(status)) {
                     loginInfo.setStatus("1");
                 }
                 // 插入数据
-                SpringUtils.getBean(SysLogininforServiceImpl.class).insertLogininfor(loginInfo);
+                SpringUtil.getBean(SysLogininforServiceImpl.class).insertLogininfor(loginInfo);
             }
         };
     }

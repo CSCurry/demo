@@ -1,16 +1,16 @@
 package com.demo.mgr.shiro;
 
 import com.demo.business.domain.SysUser;
+import com.demo.framework.util.BeanUtil;
+import com.demo.framework.util.StringUtil;
 import com.demo.mgr.shiro.realm.UserRealm;
-import com.demo.framework.util.StringUtils;
-import com.demo.framework.util.BeanUtils;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.mgt.RealmSecurityManager;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
+import org.apache.shiro.subject.Subject;
 
 /**
  * shiro工具类
@@ -34,9 +34,9 @@ public class ShiroUtils {
     public static SysUser getSysUser() {
         SysUser user = null;
         Object obj = getSubject().getPrincipal();
-        if (StringUtils.isNotNull(obj)) {
+        if (StringUtil.isNotNull(obj)) {
             user = new SysUser();
-            BeanUtils.copyBeanProp(user, obj);
+            BeanUtil.copyBeanProp(user, obj);
         }
         return user;
     }

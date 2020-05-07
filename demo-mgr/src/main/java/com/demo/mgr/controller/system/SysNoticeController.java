@@ -2,18 +2,18 @@ package com.demo.mgr.controller.system;
 
 import com.demo.business.domain.SysNotice;
 import com.demo.business.service.mgr.ISysNoticeService;
-import com.demo.mgr.shiro.ShiroUtils;
 import com.demo.framework.annotation.Log;
 import com.demo.framework.base.AjaxResult;
 import com.demo.framework.base.BaseController;
 import com.demo.framework.enums.BusinessType;
 import com.demo.framework.page.TableDataInfo;
+import com.demo.mgr.shiro.ShiroUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -24,9 +24,10 @@ import java.util.List;
 @Controller
 @RequestMapping("/system/notice")
 public class SysNoticeController extends BaseController {
+
     private String prefix = "system/notice";
 
-    @Autowired
+    @Resource
     private ISysNoticeService noticeService;
 
     @RequiresPermissions("system:notice:view")

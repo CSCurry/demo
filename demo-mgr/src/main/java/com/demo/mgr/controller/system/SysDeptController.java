@@ -3,34 +3,35 @@ package com.demo.mgr.controller.system;
 import com.demo.business.domain.SysDept;
 import com.demo.business.domain.SysRole;
 import com.demo.business.service.mgr.ISysDeptService;
-import com.demo.mgr.shiro.ShiroUtils;
 import com.demo.framework.annotation.Log;
 import com.demo.framework.base.AjaxResult;
 import com.demo.framework.base.BaseController;
-import com.demo.framework.domain.Ztree;
-import com.demo.framework.util.StringUtils;
 import com.demo.framework.constant.UserConstants;
+import com.demo.framework.domain.Ztree;
 import com.demo.framework.enums.BusinessType;
+import com.demo.framework.util.StringUtil;
+import com.demo.mgr.shiro.ShiroUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
  * 部门信息
  *
- * @author ruoyi
+ * @author 30
  */
 @Controller
 @RequestMapping("/system/dept")
 public class SysDeptController extends BaseController {
+
     private String prefix = "system/dept";
 
-    @Autowired
+    @Resource
     private ISysDeptService deptService;
 
     @RequiresPermissions("system:dept:view")
@@ -43,8 +44,7 @@ public class SysDeptController extends BaseController {
     @PostMapping("/list")
     @ResponseBody
     public List<SysDept> list(SysDept dept) {
-        List<SysDept> deptList = deptService.selectDeptList(dept);
-        return deptList;
+        return deptService.selectDeptList(dept);
     }
 
     /**
@@ -77,7 +77,7 @@ public class SysDeptController extends BaseController {
     @GetMapping("/edit/{deptId}")
     public String edit(@PathVariable("deptId") Long deptId, ModelMap mmap) {
         SysDept dept = deptService.selectDeptById(deptId);
-        if (StringUtils.isNotNull(dept) && 100L == deptId) {
+        if (StringUtil.isNotNull(dept) && 100L == deptId) {
             dept.setParentName("无");
         }
         mmap.put("dept", dept);
@@ -142,8 +142,7 @@ public class SysDeptController extends BaseController {
     @GetMapping("/treeData")
     @ResponseBody
     public List<Ztree> treeData() {
-        List<Ztree> ztrees = deptService.selectDeptTree(new SysDept());
-        return ztrees;
+        return deptService.selectDeptTree(new SysDept());
     }
 
     /**
@@ -152,7 +151,6 @@ public class SysDeptController extends BaseController {
     @GetMapping("/roleDeptTreeData")
     @ResponseBody
     public List<Ztree> deptTreeData(SysRole role) {
-        List<Ztree> ztrees = deptService.roleDeptTreeData(role);
-        return ztrees;
+        return deptService.roleDeptTreeData(role);
     }
 }

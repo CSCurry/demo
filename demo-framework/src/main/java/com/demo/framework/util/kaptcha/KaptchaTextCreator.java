@@ -1,5 +1,6 @@
-package com.demo.framework.util;
+package com.demo.framework.util.kaptcha;
 
+import com.demo.framework.config.CaptchaConfig;
 import com.google.code.kaptcha.text.impl.DefaultTextCreator;
 
 import java.security.SecureRandom;
@@ -9,6 +10,7 @@ import java.util.Random;
  * 验证码文本生成器
  *
  * @author 30
+ * @see CaptchaConfig
  */
 public class KaptchaTextCreator extends DefaultTextCreator {
 

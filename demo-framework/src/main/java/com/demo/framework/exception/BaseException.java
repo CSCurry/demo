@@ -1,7 +1,7 @@
 package com.demo.framework.exception;
 
-import com.demo.framework.util.StringUtils;
 import com.demo.framework.util.MessageUtils;
+import com.demo.framework.util.StringUtil;
 
 /**
  * 基础异常
@@ -57,7 +57,7 @@ public class BaseException extends RuntimeException {
     @Override
     public String getMessage() {
         String message = null;
-        if (!StringUtils.isEmpty(code)) {
+        if (StringUtil.isNotEmpty(code)) {
             message = MessageUtils.message(code, args);
         }
         if (message == null) {

@@ -4,7 +4,7 @@ import com.demo.framework.base.AjaxResult;
 import com.demo.framework.config.GlobalConfig;
 import com.demo.framework.config.ServerConfig;
 import com.demo.framework.constant.Constant;
-import com.demo.framework.util.StringUtils;
+import com.demo.framework.util.StringUtil;
 import com.demo.framework.util.file.FileUploadUtils;
 import com.demo.framework.util.file.FileUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +40,7 @@ public class CommonController {
     public void fileDownload(String fileName, Boolean delete, HttpServletResponse response, HttpServletRequest request) {
         try {
             if (!FileUtils.isValidFilename(fileName)) {
-                throw new Exception(StringUtils.format("文件名称({})非法，不允许下载。 ", fileName));
+                throw new Exception(StringUtil.format("文件名称({})非法，不允许下载。 ", fileName));
             }
             String realFileName = System.currentTimeMillis() + fileName.substring(fileName.indexOf("_") + 1);
             String filePath = GlobalConfig.getDownloadPath() + fileName;
@@ -87,9 +87,9 @@ public class CommonController {
         // 本地资源路径
         String localPath = GlobalConfig.getProfile();
         // 数据库资源地址
-        String downloadPath = localPath + StringUtils.substringAfter(resource, Constant.RESOURCE_PREFIX);
+        String downloadPath = localPath + StringUtil.substringAfter(resource, Constant.RESOURCE_PREFIX);
         // 下载名称
-        String downloadName = StringUtils.substringAfterLast(downloadPath, "/");
+        String downloadName = StringUtil.substringAfterLast(downloadPath, "/");
         response.setCharacterEncoding(Constant.UTF8);
         response.setContentType("multipart/form-data");
         response.setHeader("Content-Disposition", "attachment;fileName=" + FileUtils.setFileDownloadHeader(request, downloadName));

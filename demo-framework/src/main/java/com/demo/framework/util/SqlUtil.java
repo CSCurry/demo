@@ -1,11 +1,12 @@
 package com.demo.framework.util;
 
 /**
- * sql操作工具类
+ * SQL工具类
  *
- * @author ruoyi
+ * @author 30
  */
 public class SqlUtil {
+
     /**
      * 仅支持字母、数字、下划线、空格、逗号（支持多个字段排序）
      */
@@ -15,8 +16,8 @@ public class SqlUtil {
      * 检查字符，防止注入绕过
      */
     public static String escapeOrderBySql(String value) {
-        if (StringUtils.isNotEmpty(value) && !isValidOrderBySql(value)) {
-            return StringUtils.EMPTY;
+        if (StringUtil.isNotEmpty(value) && !isValidOrderBySql(value)) {
+            return StringUtil.EMPTY;
         }
         return value;
     }

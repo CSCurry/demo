@@ -41,7 +41,7 @@ public class SysConfigController extends BaseController {
      */
     @PostConstruct
     public void init() {
-        log.info("init config to the cache");
+        log.info("初始化参数到缓存");
         configService.init();
     }
 

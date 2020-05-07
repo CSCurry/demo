@@ -5,45 +5,43 @@ import com.demo.business.domain.SysUserRole;
 import com.demo.business.service.mgr.ISysPostService;
 import com.demo.business.service.mgr.ISysRoleService;
 import com.demo.business.service.mgr.ISysUserService;
-import com.demo.mgr.shiro.ShiroUtils;
-import com.demo.mgr.shiro.service.SysPasswordService;
 import com.demo.framework.annotation.Log;
 import com.demo.framework.base.AjaxResult;
 import com.demo.framework.base.BaseController;
-import com.demo.framework.util.ExcelUtil;
 import com.demo.framework.constant.UserConstants;
 import com.demo.framework.enums.BusinessType;
 import com.demo.framework.page.TableDataInfo;
+import com.demo.framework.util.ExcelUtil;
+import com.demo.mgr.shiro.ShiroUtils;
+import com.demo.mgr.shiro.service.SysPasswordService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
  * 用户信息
  *
- * @author ruoyi
+ * @author 30
  */
 @Controller
 @RequestMapping("/system/user")
 public class SysUserController extends BaseController {
+
     private String prefix = "system/user";
 
-    @Autowired
+    @Resource
     private ISysUserService userService;
-
-    @Autowired
+    @Resource
     private ISysRoleService roleService;
-
-    @Autowired
+    @Resource
     private ISysPostService postService;
-
-    @Autowired
+    @Resource
     private SysPasswordService passwordService;
 
     @RequiresPermissions("system:user:view")
@@ -87,7 +85,7 @@ public class SysUserController extends BaseController {
     @GetMapping("/importTemplate")
     @ResponseBody
     public AjaxResult importTemplate() {
-        ExcelUtil<SysUser> util = new ExcelUtil<SysUser>(SysUser.class);
+        ExcelUtil<SysUser> util = new ExcelUtil<>(SysUser.class);
         return util.importTemplateExcel("用户数据");
     }
 

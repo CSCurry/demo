@@ -2,34 +2,35 @@ package com.demo.mgr.controller.system;
 
 import com.demo.business.domain.SysPost;
 import com.demo.business.service.mgr.ISysPostService;
-import com.demo.mgr.shiro.ShiroUtils;
 import com.demo.framework.annotation.Log;
 import com.demo.framework.base.AjaxResult;
 import com.demo.framework.base.BaseController;
-import com.demo.framework.util.ExcelUtil;
 import com.demo.framework.constant.UserConstants;
 import com.demo.framework.enums.BusinessType;
 import com.demo.framework.page.TableDataInfo;
+import com.demo.framework.util.ExcelUtil;
+import com.demo.mgr.shiro.ShiroUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
  * 岗位信息操作处理
  *
- * @author ruoyi
+ * @author 30
  */
 @Controller
 @RequestMapping("/system/post")
 public class SysPostController extends BaseController {
+
     private String prefix = "system/post";
 
-    @Autowired
+    @Resource
     private ISysPostService postService;
 
     @RequiresPermissions("system:post:view")

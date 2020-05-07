@@ -28,7 +28,6 @@ public class SysCaptchaController extends BaseController {
 
     @Resource(name = "captchaProducer")
     private Producer captchaProducer;
-
     @Resource(name = "captchaProducerMath")
     private Producer captchaProducerMath;
 

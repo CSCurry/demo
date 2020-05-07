@@ -10,12 +10,14 @@ import java.util.Random;
  * @author 30
  */
 @SuppressWarnings("unused")
-public class StringUtil {
+public class StringUtil extends org.apache.commons.lang3.StringUtils {
 
     //空字符串
     public static final String EMPTY = "";
+    //空JSON串
+    public static final String EMPTY_JSON = "{}";
     //下划线
-    private static final char SEPARATOR = '_';
+    public static final char SEPARATOR = '_';
 
     //↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 判断 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓//
 
@@ -70,7 +72,7 @@ public class StringUtil {
     }
 
     /**
-     * 判断一个Map是否为空
+     * 判断Map是否为空
      *
      * @param map 要判断的Map
      * @return true非空，false为空
@@ -127,6 +129,24 @@ public class StringUtil {
      */
     public static boolean isArray(Object object) {
         return isNotNull(object) && object.getClass().isArray();
+    }
+
+    /**
+     * 是否包含字符串
+     *
+     * @param str  验证字符串
+     * @param strs 字符串组
+     * @return 包含返回true
+     */
+    public static boolean inStringIgnoreCase(String str, String... strs) {
+        if (str != null && strs != null) {
+            for (String s : strs) {
+                if (str.equalsIgnoreCase(trim(s))) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     //↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 字符串处理 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓//
@@ -201,24 +221,6 @@ public class StringUtil {
     }
 
     /**
-     * 是否包含字符串
-     *
-     * @param str  验证字符串
-     * @param strs 字符串组
-     * @return 包含返回true
-     */
-    public static boolean inStringIgnoreCase(String str, String... strs) {
-        if (str != null && strs != null) {
-            for (String s : strs) {
-                if (str.equalsIgnoreCase(trim(s))) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
      * 将下划线大写方式命名的字符串转换为驼峰式。例如：HELLO_WORLD->HelloWorld
      *
      * @param name 转换前的下划线大写方式命名的字符串
@@ -245,6 +247,116 @@ public class StringUtil {
             result.append(camel.substring(1).toLowerCase());
         }
         return result.toString();
+    }
+
+    /**
+     * 驼峰式命名法 例如：user_name->userName
+     */
+    public static String toCamelCase(String s) {
+        if (s == null) {
+            return null;
+        }
+        s = s.toLowerCase();
+        StringBuilder sb = new StringBuilder(s.length());
+        boolean upperCase = false;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+
+            if (c == SEPARATOR) {
+                upperCase = true;
+            } else if (upperCase) {
+                sb.append(Character.toUpperCase(c));
+                upperCase = false;
+            } else {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 格式化文本, {} 表示占位符<br>
+     * 此方法只是简单将占位符 {} 按照顺序替换为参数<br>
+     * 如果想输出 {} 使用 \\转义 { 即可，如果想输出 {} 之前的 \ 使用双转义符 \\\\ 即可<br>
+     * 例：<br>
+     * 通常使用：format("this is {} for {}", "a", "b") -> this is a for b<br>
+     * 转义{}： format("this is \\{} for {}", "a", "b") -> this is \{} for a<br>
+     * 转义\： format("this is \\\\{} for {}", "a", "b") -> this is \a for b<br>
+     *
+     * @param template 文本模板，被替换的部分用 {} 表示
+     * @param params   参数值
+     * @return 格式化后的文本
+     */
+    public static String format(String template, Object... params) {
+        if (isEmpty(params) || isEmpty(template)) {
+            return template;
+        }
+        return formatPlaceholder(template, params);
+    }
+
+    /**
+     * 格式化字符串，处理占位符<br>
+     * 此方法只是简单将占位符 {} 按照顺序替换为参数<br>
+     * 如果想输出 {} 使用 \\转义 { 即可，如果想输出 {} 之前的 \ 使用双转义符 \\\\ 即可<br>
+     * 例：<br>
+     * 通常使用：format("this is {} for {}", "a", "b") -> this is a for b<br>
+     * 转义{}： format("this is \\{} for {}", "a", "b") -> this is \{} for a<br>
+     * 转义\： format("this is \\\\{} for {}", "a", "b") -> this is \a for b<br>
+     *
+     * @param strPattern 字符串模板
+     * @param argArray   参数列表
+     * @return 结果
+     */
+    public static String formatPlaceholder(final String strPattern, final Object... argArray) {
+        final char C_BACKSLASH = '\\';
+        final char C_DELIMITER_START = '{';
+        //final char C_DELIMITER_END = '}';
+
+        if (isEmpty(strPattern) || isEmpty(argArray)) {
+            return strPattern;
+        }
+        final int strPatternLength = strPattern.length();
+
+        // 初始化定义好的长度以获得更好的性能
+        StringBuilder sbuf = new StringBuilder(strPatternLength + 50);
+
+        int handledPosition = 0;
+        int delimIndex;// 占位符所在位置
+        for (int argIndex = 0; argIndex < argArray.length; argIndex++) {
+            delimIndex = strPattern.indexOf(EMPTY_JSON, handledPosition);
+            if (delimIndex == -1) {
+                if (handledPosition == 0) {
+                    return strPattern;
+                } else { // 字符串模板剩余部分不再包含占位符，加入剩余部分后返回结果
+                    sbuf.append(strPattern, handledPosition, strPatternLength);
+                    return sbuf.toString();
+                }
+            } else {
+                if (delimIndex > 0 && strPattern.charAt(delimIndex - 1) == C_BACKSLASH) {
+                    if (delimIndex > 1 && strPattern.charAt(delimIndex - 2) == C_BACKSLASH) {
+                        // 转义符之前还有一个转义符，占位符依旧有效
+                        sbuf.append(strPattern, handledPosition, delimIndex - 1);
+                        sbuf.append(ConvertUtil.utf8Str(argArray[argIndex]));
+                        handledPosition = delimIndex + 2;
+                    } else {
+                        // 占位符被转义
+                        argIndex--;
+                        sbuf.append(strPattern, handledPosition, delimIndex - 1);
+                        sbuf.append(C_DELIMITER_START);
+                        handledPosition = delimIndex + 1;
+                    }
+                } else {
+                    // 正常占位符
+                    sbuf.append(strPattern, handledPosition, delimIndex);
+                    sbuf.append(ConvertUtil.utf8Str(argArray[argIndex]));
+                    handledPosition = delimIndex + 2;
+                }
+            }
+        }
+        // 加入最后一个占位符后所有的字符
+        sbuf.append(strPattern, handledPosition, strPattern.length());
+
+        return sbuf.toString();
     }
 
     //↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 获取 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓//
@@ -284,10 +396,21 @@ public class StringUtil {
     /**
      * 获取参数不为空值
      *
-     * @param value defaultValue 要判断的value
+     * @param value        要判断的value
+     * @param defaultValue value为空时返回的默认值
      * @return value 返回值
      */
     public static <T> T nvl(T value, T defaultValue) {
         return value != null ? value : defaultValue;
+    }
+
+    /**
+     * 字符串用[]包起来
+     */
+    public static String getBlock(Object obj) {
+        if (isNull(obj)) {
+            obj = "";
+        }
+        return "[" + obj.toString() + "]";
     }
 }

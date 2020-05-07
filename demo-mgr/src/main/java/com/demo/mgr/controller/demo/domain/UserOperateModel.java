@@ -1,9 +1,9 @@
 package com.demo.mgr.controller.demo.domain;
 
-import com.demo.framework.base.BaseEntity;
 import com.demo.framework.annotation.Excel;
 import com.demo.framework.annotation.Excel.Type;
-import com.demo.framework.util.DateUtils;
+import com.demo.framework.base.BaseEntity;
+import com.demo.framework.util.DateUtil;
 
 import java.util.Date;
 
@@ -50,7 +50,7 @@ public class UserOperateModel extends BaseEntity {
         this.userEmail = userEmail;
         this.userBalance = userBalance;
         this.status = status;
-        this.createTime = DateUtils.getNowDate();
+        this.createTime = DateUtil.now();
     }
 
     public int getUserId() {

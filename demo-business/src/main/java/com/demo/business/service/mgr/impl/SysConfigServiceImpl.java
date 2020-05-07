@@ -3,11 +3,11 @@ package com.demo.business.service.mgr.impl;
 import com.demo.business.domain.SysConfig;
 import com.demo.business.mapper.SysConfigMapper;
 import com.demo.business.service.mgr.ISysConfigService;
-import com.demo.framework.constant.*;
+import com.demo.framework.constant.Constant;
+import com.demo.framework.constant.UserConstants;
 import com.demo.framework.util.CacheUtil;
 import com.demo.framework.util.ConvertUtil;
 import com.demo.framework.util.StringUtil;
-import com.demo.framework.util.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -59,7 +59,7 @@ public class SysConfigServiceImpl implements ISysConfigService {
         SysConfig config = new SysConfig();
         config.setConfigKey(configKey);
         SysConfig retConfig = configMapper.selectConfig(config);
-        if (StringUtils.isNotNull(retConfig)) {
+        if (StringUtil.isNotNull(retConfig)) {
             CacheUtil.put(getCacheName(), getCacheKey(configKey), retConfig.getConfigValue());
             return retConfig.getConfigValue();
         }
@@ -139,9 +139,9 @@ public class SysConfigServiceImpl implements ISysConfigService {
      */
     @Override
     public String checkConfigKeyUnique(SysConfig config) {
-        Long configId = StringUtils.isNull(config.getConfigId()) ? -1L : config.getConfigId();
+        Long configId = StringUtil.isNull(config.getConfigId()) ? -1L : config.getConfigId();
         SysConfig info = configMapper.checkConfigKeyUnique(config.getConfigKey());
-        if (StringUtils.isNotNull(info) && info.getConfigId().longValue() != configId.longValue()) {
+        if (StringUtil.isNotNull(info) && info.getConfigId().longValue() != configId.longValue()) {
             return UserConstants.CONFIG_KEY_NOT_UNIQUE;
         }
         return UserConstants.CONFIG_KEY_UNIQUE;
