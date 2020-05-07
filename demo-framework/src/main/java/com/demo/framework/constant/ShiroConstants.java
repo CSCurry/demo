@@ -3,9 +3,10 @@ package com.demo.framework.constant;
 /**
  * Shiro通用常量
  *
- * @author ruoyi
+ * @author 30
  */
 public interface ShiroConstants {
+
     /**
      * 当前登录的用户
      */

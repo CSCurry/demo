@@ -5,7 +5,7 @@ import com.demo.framework.exception.BaseException;
 /**
  * 用户信息异常类
  *
- * @author ruoyi
+ * @author 30
  */
 public class UserException extends BaseException {
 

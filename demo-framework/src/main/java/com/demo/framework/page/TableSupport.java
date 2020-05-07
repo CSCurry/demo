@@ -6,9 +6,10 @@ import com.demo.framework.util.ServletUtils;
 /**
  * 表格数据处理
  *
- * @author ruoyi
+ * @author 30
  */
 public class TableSupport {
+
     /**
      * 封装分页对象
      */

@@ -3,7 +3,7 @@ package com.demo.framework.enums;
 /**
  * 用户状态
  *
- * @author ruoyi
+ * @author 30
  */
 public enum UserStatus {
 
