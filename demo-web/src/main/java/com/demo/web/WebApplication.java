@@ -13,8 +13,6 @@ public class WebApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(WebApplication.class, args);
-        System.out.println(":::::::::::::::::::::::::");
-        System.out.println("::  Web START SUCCESS  ::");
-        System.out.println(":::::::::::::::::::::::::");
+        System.out.println("\uD83D\uDE80\uD83D\uDE80\uD83D\uDE80  Web START SUCCESS  \uD83D\uDE80\uD83D\uDE80\uD83D\uDE80");
     }
 }
