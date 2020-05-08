@@ -7,6 +7,15 @@ package com.demo.framework.constant;
  */
 public class GenConstants {
 
+    //作者
+    public static final String author = "30";
+    //生成包路径，需改成自己的模块名称 如 system monitor tool
+    public static final String packageName = "com.demo.code";
+    //是否自动去除表前缀，默认是false
+    public static final boolean autoRemovePre = false;
+    //表前缀（生成类名不会包含表前缀，多个用逗号分隔）
+    public static final String tablePrefix = "sys_";
+
     /**
      * 单表（增删改查）
      */

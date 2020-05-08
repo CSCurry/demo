@@ -3,9 +3,10 @@ package com.demo.business.domain;
 /**
  * 角色和部门关联 sys_role_dept
  *
- * @author ruoyi
+ * @author 30
  */
 public class SysRoleDept {
+
     /**
      * 角色ID
      */

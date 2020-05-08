@@ -14,13 +14,13 @@ import java.util.Map;
 /**
  * swagger 用户测试方法
  *
- * @author ruoyi
+ * @author 30
  */
 @Api("用户信息管理")
 @RestController
 @RequestMapping("/test/user")
 public class TestController extends BaseController {
-    private final static Map<Integer, UserEntity> users = new LinkedHashMap<Integer, UserEntity>();
+    private final static Map<Integer, UserEntity> users = new LinkedHashMap<>();
 
     {
         users.put(1, new UserEntity(1, "admin", "admin123", "15888888888"));
@@ -30,7 +30,7 @@ public class TestController extends BaseController {
     @ApiOperation("获取用户列表")
     @GetMapping("/list")
     public AjaxResult userList() {
-        List<UserEntity> userList = new ArrayList<UserEntity>(users.values());
+        List<UserEntity> userList = new ArrayList<>(users.values());
         return AjaxResult.success(userList);
     }
 

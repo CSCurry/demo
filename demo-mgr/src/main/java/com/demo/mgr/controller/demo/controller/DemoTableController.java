@@ -19,14 +19,15 @@ import java.util.*;
 /**
  * 表格相关
  *
- * @author ruoyi
+ * @author 30
  */
 @Controller
 @RequestMapping("/demo/table")
 public class DemoTableController extends BaseController {
+
     private String prefix = "demo/table";
 
-    private final static List<UserTableModel> users = new ArrayList<UserTableModel>();
+    private final static List<UserTableModel> users = new ArrayList<>();
 
     {
         users.add(new UserTableModel(1, "1000001", "测试1", "0", "15888888888", "ry@qq.com", 150.0, "0"));
@@ -217,7 +218,7 @@ public class DemoTableController extends BaseController {
     @ResponseBody
     public TableDataInfo list(UserTableModel userModel) {
         TableDataInfo rspData = new TableDataInfo();
-        List<UserTableModel> userList = new ArrayList<UserTableModel>(Arrays.asList(new UserTableModel[users.size()]));
+        List<UserTableModel> userList = new ArrayList<>(Arrays.asList(new UserTableModel[users.size()]));
         Collections.copy(userList, users);
         // 查询条件过滤
         if (StringUtil.isNotEmpty(userModel.getUserName())) {
@@ -234,8 +235,8 @@ public class DemoTableController extends BaseController {
             rspData.setTotal(userList.size());
             return rspData;
         }
-        Integer pageNum = (pageDomain.getPageNum() - 1) * 10;
-        Integer pageSize = pageDomain.getPageNum() * 10;
+        int pageNum = (pageDomain.getPageNum() - 1) * 10;
+        int pageSize = pageDomain.getPageNum() * 10;
         if (pageSize > userList.size()) {
             pageSize = userList.size();
         }

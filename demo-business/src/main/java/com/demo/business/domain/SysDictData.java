@@ -13,6 +13,7 @@ import javax.validation.constraints.Size;
  * @author 30
  */
 public class SysDictData extends BaseEntity {
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -132,7 +133,7 @@ public class SysDictData extends BaseEntity {
     }
 
     public boolean getDefault() {
-        return UserConstants.YES.equals(this.isDefault) ? true : false;
+        return UserConstants.YES.equals(this.isDefault);
     }
 
     public String getIsDefault() {

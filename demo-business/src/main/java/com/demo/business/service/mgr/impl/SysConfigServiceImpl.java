@@ -14,7 +14,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * 参数配置 服务层实现
+ * 参数配置 ServiceImpl
  *
  * @author 30
  */
@@ -139,9 +139,9 @@ public class SysConfigServiceImpl implements ISysConfigService {
      */
     @Override
     public String checkConfigKeyUnique(SysConfig config) {
-        Long configId = StringUtil.isNull(config.getConfigId()) ? -1L : config.getConfigId();
+        long configId = StringUtil.isNull(config.getConfigId()) ? -1L : config.getConfigId();
         SysConfig info = configMapper.checkConfigKeyUnique(config.getConfigKey());
-        if (StringUtil.isNotNull(info) && info.getConfigId().longValue() != configId.longValue()) {
+        if (StringUtil.isNotNull(info) && info.getConfigId() != configId) {
             return UserConstants.CONFIG_KEY_NOT_UNIQUE;
         }
         return UserConstants.CONFIG_KEY_UNIQUE;

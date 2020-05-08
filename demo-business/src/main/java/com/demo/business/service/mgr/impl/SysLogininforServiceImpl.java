@@ -10,9 +10,9 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * 系统访问日志情况信息 服务层处理
+ * 系统访问日志情况信息 ServiceImpl
  *
- * @author ruoyi
+ * @author 30
  */
 @Service
 public class SysLogininforServiceImpl implements ISysLogininforService {
@@ -45,7 +45,6 @@ public class SysLogininforServiceImpl implements ISysLogininforService {
      * 批量删除系统登录日志
      *
      * @param ids 需要删除的数据
-     * @return
      */
     @Override
     public int deleteLogininforByIds(String ids) {

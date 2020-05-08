@@ -12,6 +12,7 @@ import javax.validation.constraints.Size;
  * @author 30
  */
 public class SysDictType extends BaseEntity {
+
     private static final long serialVersionUID = 1L;
 
     /**

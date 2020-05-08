@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * 参数配置 信息操作处理
  *
- * @author ruoyi
+ * @author 30
  */
 @Slf4j
 @Controller
@@ -69,7 +69,7 @@ public class SysConfigController extends BaseController {
     @ResponseBody
     public AjaxResult export(SysConfig config) {
         List<SysConfig> list = configService.selectConfigList(config);
-        ExcelUtil<SysConfig> util = new ExcelUtil<SysConfig>(SysConfig.class);
+        ExcelUtil<SysConfig> util = new ExcelUtil<>(SysConfig.class);
         return util.exportExcel(list, "参数数据");
     }
 

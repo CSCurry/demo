@@ -1,7 +1,6 @@
 package com.demo.framework.util.gen;
 
 import com.alibaba.fastjson.JSONObject;
-import com.demo.framework.config.GenConfig;
 import com.demo.framework.constant.GenConstants;
 import com.demo.framework.domain.gen.GenTable;
 import com.demo.framework.domain.gen.GenTableColumn;
@@ -162,7 +161,7 @@ public class VelocityUtils {
      * @return 路径
      */
     public static String getProjectPath() {
-        String packageName = GenConfig.getPackageName();
+        String packageName = GenConstants.packageName;
         StringBuffer projectPath = new StringBuffer();
         projectPath.append("main/java/");
         projectPath.append(packageName.replace(".", "/"));

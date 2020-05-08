@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * 数据字典信息
  *
- * @author ruoyi
+ * @author 30
  */
 @Controller
 @RequestMapping("/system/dict/data")

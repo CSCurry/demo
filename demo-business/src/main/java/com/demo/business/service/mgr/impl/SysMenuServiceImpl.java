@@ -16,9 +16,9 @@ import java.text.MessageFormat;
 import java.util.*;
 
 /**
- * 菜单 业务层处理
+ * 菜单 ServiceImpl
  *
- * @author ruoyi
+ * @author 30
  */
 @Service
 public class SysMenuServiceImpl implements ISysMenuService {
@@ -27,7 +27,6 @@ public class SysMenuServiceImpl implements ISysMenuService {
 
     @Resource
     private SysMenuMapper menuMapper;
-
     @Resource
     private SysRoleMenuMapper roleMenuMapper;
 

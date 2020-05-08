@@ -14,16 +14,15 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * 岗位信息 服务层处理
+ * 岗位信息 ServiceImpl
  *
- * @author ruoyi
+ * @author 30
  */
 @Service
 public class SysPostServiceImpl implements ISysPostService {
 
     @Resource
     private SysPostMapper postMapper;
-
     @Resource
     private SysUserPostMapper userPostMapper;
 
@@ -84,7 +83,6 @@ public class SysPostServiceImpl implements ISysPostService {
      * 批量删除岗位信息
      *
      * @param ids 需要删除的数据ID
-     * @throws Exception
      */
     @Override
     public int deletePostByIds(String ids) throws BusinessException {
@@ -139,9 +137,9 @@ public class SysPostServiceImpl implements ISysPostService {
      */
     @Override
     public String checkPostNameUnique(SysPost post) {
-        Long postId = StringUtil.isNull(post.getPostId()) ? -1L : post.getPostId();
+        long postId = StringUtil.isNull(post.getPostId()) ? -1L : post.getPostId();
         SysPost info = postMapper.checkPostNameUnique(post.getPostName());
-        if (StringUtil.isNotNull(info) && info.getPostId().longValue() != postId.longValue()) {
+        if (StringUtil.isNotNull(info) && info.getPostId() != postId) {
             return UserConstants.POST_NAME_NOT_UNIQUE;
         }
         return UserConstants.POST_NAME_UNIQUE;
@@ -155,9 +153,9 @@ public class SysPostServiceImpl implements ISysPostService {
      */
     @Override
     public String checkPostCodeUnique(SysPost post) {
-        Long postId = StringUtil.isNull(post.getPostId()) ? -1L : post.getPostId();
+        long postId = StringUtil.isNull(post.getPostId()) ? -1L : post.getPostId();
         SysPost info = postMapper.checkPostCodeUnique(post.getPostCode());
-        if (StringUtil.isNotNull(info) && info.getPostId().longValue() != postId.longValue()) {
+        if (StringUtil.isNotNull(info) && info.getPostId() != postId) {
             return UserConstants.POST_CODE_NOT_UNIQUE;
         }
         return UserConstants.POST_CODE_UNIQUE;

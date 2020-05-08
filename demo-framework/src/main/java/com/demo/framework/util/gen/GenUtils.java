@@ -1,6 +1,5 @@
 package com.demo.framework.util.gen;
 
-import com.demo.framework.config.GenConfig;
 import com.demo.framework.constant.GenConstants;
 import com.demo.framework.domain.gen.GenTable;
 import com.demo.framework.domain.gen.GenTableColumn;
@@ -15,16 +14,17 @@ import java.util.Arrays;
  * @author 30
  */
 public class GenUtils {
+
     /**
      * 初始化表信息
      */
     public static void initTable(GenTable genTable, String operName) {
         genTable.setClassName(convertClassName(genTable.getTableName()));
-        genTable.setPackageName(GenConfig.getPackageName());
-        genTable.setModuleName(getModuleName(GenConfig.getPackageName()));
+        genTable.setPackageName(GenConstants.packageName);
+        genTable.setModuleName(getModuleName(GenConstants.packageName));
         genTable.setBusinessName(getBusinessName(genTable.getTableName()));
         genTable.setFunctionName(replaceText(genTable.getTableComment()));
-        genTable.setFunctionAuthor(GenConfig.getAuthor());
+        genTable.setFunctionAuthor(GenConstants.author);
         genTable.setCreateBy(operName);
     }
 
@@ -115,9 +115,10 @@ public class GenUtils {
      * @return 模块名
      */
     public static String getModuleName(String packageName) {
+        String moduleName;
         int lastIndex = packageName.lastIndexOf(".");
         int nameLength = packageName.length();
-        String moduleName = StringUtil.substring(packageName, lastIndex + 1, nameLength);
+        moduleName = StringUtil.substring(packageName, lastIndex + 1, nameLength);
         return moduleName;
     }
 
@@ -128,9 +129,10 @@ public class GenUtils {
      * @return 业务名
      */
     public static String getBusinessName(String tableName) {
+        String businessName;
         int lastIndex = tableName.lastIndexOf("_");
         int nameLength = tableName.length();
-        String businessName = StringUtil.substring(tableName, lastIndex + 1, nameLength);
+        businessName = StringUtil.substring(tableName, lastIndex + 1, nameLength);
         return businessName;
     }
 
@@ -141,8 +143,8 @@ public class GenUtils {
      * @return 类名
      */
     public static String convertClassName(String tableName) {
-        boolean autoRemovePre = GenConfig.getAutoRemovePre();
-        String tablePrefix = GenConfig.getTablePrefix();
+        boolean autoRemovePre = GenConstants.autoRemovePre;
+        String tablePrefix = GenConstants.tablePrefix;
         if (autoRemovePre && StringUtil.isNotEmpty(tablePrefix)) {
             String[] searchList = StringUtil.split(tablePrefix, ",");
             tableName = replaceFirst(tableName, searchList);
@@ -153,15 +155,14 @@ public class GenUtils {
     /**
      * 批量替换前缀
      *
-     * @param replacementm 替换值
-     * @param searchList   替换列表
-     * @return
+     * @param replaceVal 替换值
+     * @param searchList 替换列表
      */
-    public static String replaceFirst(String replacementm, String[] searchList) {
-        String text = replacementm;
+    public static String replaceFirst(String replaceVal, String[] searchList) {
+        String text = replaceVal;
         for (String searchString : searchList) {
-            if (replacementm.startsWith(searchString)) {
-                text = replacementm.replaceFirst(searchString, "");
+            if (replaceVal.startsWith(searchString)) {
+                text = replaceVal.replaceFirst(searchString, "");
                 break;
             }
         }

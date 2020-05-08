@@ -6,6 +6,7 @@ package com.demo.business.domain;
  * @author 30
  */
 public class SysUserRole {
+
     /**
      * 用户ID
      */

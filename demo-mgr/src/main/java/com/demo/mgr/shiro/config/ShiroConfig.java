@@ -33,7 +33,7 @@ import java.util.Map;
 /**
  * 权限配置加载
  *
- * @author ruoyi
+ * @author 30
  */
 @Configuration
 public class ShiroConfig {
@@ -87,38 +87,6 @@ public class ShiroConfig {
     // 权限认证失败地址
     @Value("${shiro.user.unauthorizedUrl}")
     private String unauthorizedUrl;
-
-    /**
-     * 缓存管理器 使用Ehcache实现
-     */
-//    @Bean
-//    public EhCacheManager getEhCacheManager() {
-//        net.sf.ehcache.CacheManager cacheManager = net.sf.ehcache.CacheManager.getCacheManager("demo");
-//        EhCacheManager em = new EhCacheManager();
-//        if (StringUtil.isNull(cacheManager)) {
-//            em.setCacheManager(new net.sf.ehcache.CacheManager(getCacheManagerConfigFileInputStream()));
-//        } else {
-//            em.setCacheManager(cacheManager);
-//        }
-//        return em;
-//    }
-
-    /**
-     * 返回配置文件流 避免ehcache配置文件一直被占用，无法完全销毁项目重新部署
-     */
-//    protected InputStream getCacheManagerConfigFileInputStream() {
-//        String configFile = "classpath:ehcache/ehcache-shiro.xml";
-//        InputStream inputStream = null;
-//        try {
-//            inputStream = ResourceUtils.getInputStreamForPath(configFile);
-//            byte[] b = IOUtils.toByteArray(inputStream);
-//            return new ByteArrayInputStream(b);
-//        } catch (IOException e) {
-//            throw new ConfigurationException("Unable to obtain input stream for cacheManagerConfigFile [" + configFile + "]", e);
-//        } finally {
-//            IOUtils.closeQuietly(inputStream);
-//        }
-//    }
 
     /**
      * 自定义Realm

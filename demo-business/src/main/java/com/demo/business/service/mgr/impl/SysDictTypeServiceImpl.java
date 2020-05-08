@@ -1,6 +1,6 @@
 package com.demo.business.service.mgr.impl;
 
-import com.demo.business.domain.DictUtils;
+import com.demo.business.domain.DictUtil;
 import com.demo.business.domain.SysDictData;
 import com.demo.business.domain.SysDictType;
 import com.demo.business.mapper.SysDictDataMapper;
@@ -19,9 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 字典 业务层处理
+ * 字典 ServiceImpl
  *
- * @author ruoyi
+ * @author 30
  */
 @Service
 public class SysDictTypeServiceImpl implements ISysDictTypeService {
@@ -38,7 +38,7 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
         List<SysDictType> dictTypeList = dictTypeMapper.selectDictTypeAll();
         for (SysDictType dictType : dictTypeList) {
             List<SysDictData> dictDataList = dictDataMapper.selectDictDataByType(dictType.getDictType());
-            DictUtils.setDictCache(dictType.getDictType(), dictDataList);
+            DictUtil.setDictCache(dictType.getDictType(), dictDataList);
         }
     }
 
@@ -71,13 +71,13 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
      */
     @Override
     public List<SysDictData> selectDictDataByType(String dictType) {
-        List<SysDictData> dictDatas = DictUtils.getDictCache(dictType);
+        List<SysDictData> dictDatas = DictUtil.getDictCache(dictType);
         if (StringUtil.isNotNull(dictDatas)) {
             return dictDatas;
         }
         dictDatas = dictDataMapper.selectDictDataByType(dictType);
         if (StringUtil.isNotNull(dictDatas)) {
-            DictUtils.setDictCache(dictType, dictDatas);
+            DictUtil.setDictCache(dictType, dictDatas);
             return dictDatas;
         }
         return null;
@@ -122,7 +122,7 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
         }
         int count = dictTypeMapper.deleteDictTypeByIds(dictIds);
         if (count > 0) {
-            DictUtils.clearDictCache();
+            DictUtil.clearDictCache();
         }
         return count;
     }
@@ -132,7 +132,7 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
      */
     @Override
     public void clearCache() {
-        DictUtils.clearDictCache();
+        DictUtil.clearDictCache();
     }
 
     /**
@@ -145,7 +145,7 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
     public int insertDictType(SysDictType dictType) {
         int row = dictTypeMapper.insertDictType(dictType);
         if (row > 0) {
-            DictUtils.clearDictCache();
+            DictUtil.clearDictCache();
         }
         return row;
     }
@@ -163,7 +163,7 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
         dictDataMapper.updateDictDataType(oldDict.getDictType(), dictType.getDictType());
         int row = dictTypeMapper.updateDictType(dictType);
         if (row > 0) {
-            DictUtils.clearDictCache();
+            DictUtil.clearDictCache();
         }
         return row;
     }
@@ -176,9 +176,9 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
      */
     @Override
     public String checkDictTypeUnique(SysDictType dict) {
-        Long dictId = StringUtil.isNull(dict.getDictId()) ? -1L : dict.getDictId();
+        long dictId = StringUtil.isNull(dict.getDictId()) ? -1L : dict.getDictId();
         SysDictType dictType = dictTypeMapper.checkDictTypeUnique(dict.getDictType());
-        if (StringUtil.isNotNull(dictType) && dictType.getDictId().longValue() != dictId.longValue()) {
+        if (StringUtil.isNotNull(dictType) && dictType.getDictId() != dictId) {
             return UserConstants.DICT_TYPE_NOT_UNIQUE;
         }
         return UserConstants.DICT_TYPE_UNIQUE;
@@ -192,7 +192,7 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
      */
     @Override
     public List<Ztree> selectDictTree(SysDictType dictType) {
-        List<Ztree> ztrees = new ArrayList<Ztree>();
+        List<Ztree> zTrees = new ArrayList<>();
         List<SysDictType> dictList = dictTypeMapper.selectDictTypeList(dictType);
         for (SysDictType dict : dictList) {
             if (UserConstants.DICT_NORMAL.equals(dict.getStatus())) {
@@ -200,16 +200,13 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
                 ztree.setId(dict.getDictId());
                 ztree.setName(transDictName(dict));
                 ztree.setTitle(dict.getDictType());
-                ztrees.add(ztree);
+                zTrees.add(ztree);
             }
         }
-        return ztrees;
+        return zTrees;
     }
 
     public String transDictName(SysDictType dictType) {
-        StringBuffer sb = new StringBuffer();
-        sb.append("(" + dictType.getDictName() + ")");
-        sb.append("&nbsp;&nbsp;&nbsp;" + dictType.getDictType());
-        return sb.toString();
+        return "(" + dictType.getDictName() + ")" + "&nbsp;&nbsp;&nbsp;" + dictType.getDictType();
     }
 }

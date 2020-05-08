@@ -7,6 +7,8 @@ import javax.annotation.Resource;
 
 /**
  * html调用 thymeleaf 实现参数管理
+ *
+ * @author 30
  */
 @Service("config")
 public class ConfigService {

@@ -45,7 +45,7 @@ public class SysIndexController extends BaseController {
 
     // 切换主题
     @GetMapping("/system/switchSkin")
-    public String switchSkin(ModelMap mmap) {
+    public String switchSkin() {
         return "skin";
     }
 

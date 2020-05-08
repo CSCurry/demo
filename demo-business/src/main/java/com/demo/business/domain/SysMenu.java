@@ -13,6 +13,7 @@ import java.util.List;
  * @author 30
  */
 public class SysMenu extends BaseEntity {
+
     private static final long serialVersionUID = 1L;
 
     /**

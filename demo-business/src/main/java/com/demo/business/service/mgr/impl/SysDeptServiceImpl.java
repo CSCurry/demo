@@ -17,9 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 部门管理 服务实现
+ * 部门管理 ServiceImpl
  *
- * @author ruoyi
+ * @author 30
  */
 @Service
 public class SysDeptServiceImpl implements ISysDeptService {

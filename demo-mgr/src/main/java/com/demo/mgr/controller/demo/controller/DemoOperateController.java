@@ -23,14 +23,15 @@ import java.util.Map;
 /**
  * 操作控制
  *
- * @author ruoyi
+ * @author 30
  */
 @Controller
 @RequestMapping("/demo/operate")
 public class DemoOperateController extends BaseController {
+
     private String prefix = "demo/operate";
 
-    private final static Map<Integer, UserOperateModel> users = new LinkedHashMap<Integer, UserOperateModel>();
+    private final static Map<Integer, UserOperateModel> users = new LinkedHashMap<>();
 
     {
         users.put(1, new UserOperateModel(1, "1000001", "测试1", "0", "15888888888", "ry@qq.com", 150.0, "0"));
@@ -84,7 +85,7 @@ public class DemoOperateController extends BaseController {
     @ResponseBody
     public TableDataInfo list(UserOperateModel userModel) {
         TableDataInfo rspData = new TableDataInfo();
-        List<UserOperateModel> userList = new ArrayList<UserOperateModel>(users.values());
+        List<UserOperateModel> userList = new ArrayList<>(users.values());
         // 查询条件过滤
         if (StringUtil.isNotEmpty(userModel.getSearchValue())) {
             userList.clear();
@@ -107,8 +108,8 @@ public class DemoOperateController extends BaseController {
             rspData.setTotal(userList.size());
             return rspData;
         }
-        Integer pageNum = (pageDomain.getPageNum() - 1) * 10;
-        Integer pageSize = pageDomain.getPageNum() * 10;
+        int pageNum = (pageDomain.getPageNum() - 1) * 10;
+        int pageSize = pageDomain.getPageNum() * 10;
         if (pageSize > userList.size()) {
             pageSize = userList.size();
         }
@@ -121,7 +122,7 @@ public class DemoOperateController extends BaseController {
      * 新增用户
      */
     @GetMapping("/add")
-    public String add(ModelMap mmap) {
+    public String add() {
         return prefix + "/add";
     }
 
@@ -131,7 +132,7 @@ public class DemoOperateController extends BaseController {
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(UserOperateModel user) {
-        Integer userId = users.size() + 1;
+        int userId = users.size() + 1;
         user.setUserId(userId);
         return AjaxResult.success(users.put(userId, user));
     }
@@ -159,9 +160,10 @@ public class DemoOperateController extends BaseController {
      */
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(UserOperateModel user) {
-        List<UserOperateModel> list = new ArrayList<UserOperateModel>(users.values());
-        ExcelUtil<UserOperateModel> util = new ExcelUtil<UserOperateModel>(UserOperateModel.class);
+    public AjaxResult export() {
+        List<UserOperateModel> list = new ArrayList<>(users.values());
+        ExcelUtil<UserOperateModel> util;
+        util = new ExcelUtil<>(UserOperateModel.class);
         return util.exportExcel(list, "用户数据");
     }
 
@@ -171,7 +173,7 @@ public class DemoOperateController extends BaseController {
     @GetMapping("/importTemplate")
     @ResponseBody
     public AjaxResult importTemplate() {
-        ExcelUtil<UserOperateModel> util = new ExcelUtil<UserOperateModel>(UserOperateModel.class);
+        ExcelUtil<UserOperateModel> util = new ExcelUtil<>(UserOperateModel.class);
         return util.importTemplateExcel("用户数据");
     }
 
@@ -181,7 +183,7 @@ public class DemoOperateController extends BaseController {
     @PostMapping("/importData")
     @ResponseBody
     public AjaxResult importData(MultipartFile file, boolean updateSupport) throws Exception {
-        ExcelUtil<UserOperateModel> util = new ExcelUtil<UserOperateModel>(UserOperateModel.class);
+        ExcelUtil<UserOperateModel> util = new ExcelUtil<>(UserOperateModel.class);
         List<UserOperateModel> userList = util.importExcel(file.getInputStream());
         String message = importUser(userList, updateSupport);
         return AjaxResult.success(message);
@@ -242,23 +244,23 @@ public class DemoOperateController extends BaseController {
                     }
                 }
                 if (!userFlag) {
-                    Integer userId = users.size() + 1;
+                    int userId = users.size() + 1;
                     user.setUserId(userId);
                     users.put(userId, user);
                     successNum++;
-                    successMsg.append("<br/>" + successNum + "、用户 " + user.getUserName() + " 导入成功");
+                    successMsg.append("<br/>").append(successNum).append("、用户 ").append(user.getUserName()).append(" 导入成功");
                 } else if (isUpdateSupport) {
                     users.put(user.getUserId(), user);
                     successNum++;
-                    successMsg.append("<br/>" + successNum + "、用户 " + user.getUserName() + " 更新成功");
+                    successMsg.append("<br/>").append(successNum).append("、用户 ").append(user.getUserName()).append(" 更新成功");
                 } else {
                     failureNum++;
-                    failureMsg.append("<br/>" + failureNum + "、用户 " + user.getUserName() + " 已存在");
+                    failureMsg.append("<br/>").append(failureNum).append("、用户 ").append(user.getUserName()).append(" 已存在");
                 }
             } catch (Exception e) {
                 failureNum++;
                 String msg = "<br/>" + failureNum + "、账号 " + user.getUserName() + " 导入失败：";
-                failureMsg.append(msg + e.getMessage());
+                failureMsg.append(msg).append(e.getMessage());
             }
         }
         if (failureNum > 0) {

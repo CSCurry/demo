@@ -10,10 +10,9 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * 公告 服务层实现
+ * 公告 ServiceImpl
  *
- * @author ruoyi
- * @date 2018-06-25
+ * @author 30
  */
 @Service
 public class SysNoticeServiceImpl implements ISysNoticeService {

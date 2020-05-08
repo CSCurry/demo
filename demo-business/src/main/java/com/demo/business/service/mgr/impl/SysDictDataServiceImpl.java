@@ -1,6 +1,6 @@
 package com.demo.business.service.mgr.impl;
 
-import com.demo.business.domain.DictUtils;
+import com.demo.business.domain.DictUtil;
 import com.demo.business.domain.SysDictData;
 import com.demo.business.mapper.SysDictDataMapper;
 import com.demo.business.service.mgr.ISysDictDataService;
@@ -11,9 +11,9 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * 字典 业务层处理
+ * 字典 ServiceImpl
  *
- * @author ruoyi
+ * @author 30
  */
 @Service
 public class SysDictDataServiceImpl implements ISysDictDataService {
@@ -65,7 +65,7 @@ public class SysDictDataServiceImpl implements ISysDictDataService {
     public int deleteDictDataByIds(String ids) {
         int row = dictDataMapper.deleteDictDataByIds(ConvertUtil.toStrArray(ids));
         if (row > 0) {
-            DictUtils.clearDictCache();
+            DictUtil.clearDictCache();
         }
         return row;
     }
@@ -80,7 +80,7 @@ public class SysDictDataServiceImpl implements ISysDictDataService {
     public int insertDictData(SysDictData dictData) {
         int row = dictDataMapper.insertDictData(dictData);
         if (row > 0) {
-            DictUtils.clearDictCache();
+            DictUtil.clearDictCache();
         }
         return row;
     }
@@ -95,7 +95,7 @@ public class SysDictDataServiceImpl implements ISysDictDataService {
     public int updateDictData(SysDictData dictData) {
         int row = dictDataMapper.updateDictData(dictData);
         if (row > 0) {
-            DictUtils.clearDictCache();
+            DictUtil.clearDictCache();
         }
         return row;
     }

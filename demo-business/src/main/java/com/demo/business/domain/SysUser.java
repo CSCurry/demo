@@ -15,9 +15,10 @@ import java.util.List;
 /**
  * 用户对象 sys_user
  *
- * @author ruoyi
+ * @author 30
  */
 public class SysUser extends BaseEntity {
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -104,15 +105,15 @@ public class SysUser extends BaseEntity {
     private String delFlag;
 
     /**
-     * 最后登陆IP
+     * 最后登录IP
      */
-    @Excel(name = "最后登陆IP", type = Excel.Type.EXPORT)
+    @Excel(name = "最后登录IP", type = Excel.Type.EXPORT)
     private String loginIp;
 
     /**
-     * 最后登陆时间
+     * 最后登录时间
      */
-    @Excel(name = "最后登陆时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss", type = Type.EXPORT)
+    @Excel(name = "最后登录时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss", type = Type.EXPORT)
     private Date loginDate;
 
     /**

@@ -13,6 +13,8 @@ public class MgrApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(MgrApplication.class, args);
-        System.out.println(" :: Mgr Start SUCCESS :: ");
+        System.out.println(":::::::::::::::::::::::::");
+        System.out.println("::  Mgr START SUCCESS  ::");
+        System.out.println(":::::::::::::::::::::::::");
     }
 }

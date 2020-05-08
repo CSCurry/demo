@@ -12,9 +12,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 在线用户 服务层处理
+ * 在线用户 ServiceImpl
  *
- * @author ruoyi
+ * @author 30
  */
 @Service
 public class SysUserOnlineServiceImpl implements ISysUserOnlineService {
@@ -37,7 +37,6 @@ public class SysUserOnlineServiceImpl implements ISysUserOnlineService {
      * 通过会话序号删除信息
      *
      * @param sessionId 会话ID
-     * @return 在线用户信息
      */
     @Override
     public void deleteOnlineById(String sessionId) {
@@ -51,7 +50,6 @@ public class SysUserOnlineServiceImpl implements ISysUserOnlineService {
      * 通过会话序号删除信息
      *
      * @param sessions 会话ID集合
-     * @return 在线用户信息
      */
     @Override
     public void batchDeleteOnline(List<String> sessions) {

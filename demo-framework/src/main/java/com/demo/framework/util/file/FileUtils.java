@@ -9,7 +9,7 @@ import java.net.URLEncoder;
 /**
  * 文件处理工具类
  *
- * @author ruoyi
+ * @author 30
  */
 public class FileUtils {
     public static String FILENAME_PATTERN = "[a-zA-Z0-9_\\-\\|\\.\\u4e00-\\u9fa5]+";
@@ -19,7 +19,6 @@ public class FileUtils {
      *
      * @param filePath 文件路径
      * @param os       输出流
-     * @return
      */
     public static void writeBytes(String filePath, OutputStream os) throws IOException {
         FileInputStream fis = null;
@@ -58,7 +57,6 @@ public class FileUtils {
      * 删除文件
      *
      * @param filePath 文件
-     * @return
      */
     public static boolean deleteFile(String filePath) {
         boolean flag = false;

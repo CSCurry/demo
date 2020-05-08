@@ -5,18 +5,19 @@ import com.demo.business.domain.SysUserOnline;
 import java.util.List;
 
 /**
- * 在线用户 数据层
+ * 在线用户 Mapper
  *
- * @author ruoyi
+ * @author 30
  */
 public interface SysUserOnlineMapper {
+
     /**
      * 通过会话序号查询信息
      *
      * @param sessionId 会话ID
      * @return 在线用户信息
      */
-    public SysUserOnline selectOnlineById(String sessionId);
+    SysUserOnline selectOnlineById(String sessionId);
 
     /**
      * 通过会话序号删除信息
@@ -24,7 +25,7 @@ public interface SysUserOnlineMapper {
      * @param sessionId 会话ID
      * @return 在线用户信息
      */
-    public int deleteOnlineById(String sessionId);
+    int deleteOnlineById(String sessionId);
 
     /**
      * 保存会话信息
@@ -32,7 +33,7 @@ public interface SysUserOnlineMapper {
      * @param online 会话信息
      * @return 结果
      */
-    public int saveOnline(SysUserOnline online);
+    int saveOnline(SysUserOnline online);
 
     /**
      * 查询会话集合
@@ -40,7 +41,7 @@ public interface SysUserOnlineMapper {
      * @param userOnline 会话参数
      * @return 会话集合
      */
-    public List<SysUserOnline> selectUserOnlineList(SysUserOnline userOnline);
+    List<SysUserOnline> selectUserOnlineList(SysUserOnline userOnline);
 
     /**
      * 查询过期会话集合
@@ -48,5 +49,5 @@ public interface SysUserOnlineMapper {
      * @param lastAccessTime 过期时间
      * @return 会话集合
      */
-    public List<SysUserOnline> selectOnlineByExpired(String lastAccessTime);
+    List<SysUserOnline> selectOnlineByExpired(String lastAccessTime);
 }

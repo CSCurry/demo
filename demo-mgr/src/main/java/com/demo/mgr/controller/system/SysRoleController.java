@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * 角色信息
  *
- * @author ruoyi
+ * @author 30
  */
 @Controller
 @RequestMapping("/system/role")
@@ -59,7 +59,7 @@ public class SysRoleController extends BaseController {
     @ResponseBody
     public AjaxResult export(SysRole role) {
         List<SysRole> list = roleService.selectRoleList(role);
-        ExcelUtil<SysRole> util = new ExcelUtil<SysRole>(SysRole.class);
+        ExcelUtil<SysRole> util = new ExcelUtil<>(SysRole.class);
         return util.exportExcel(list, "角色数据");
     }
 

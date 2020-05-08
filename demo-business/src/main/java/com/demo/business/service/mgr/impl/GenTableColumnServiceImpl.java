@@ -10,9 +10,9 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * 业务字段 服务层实现
+ * 业务字段 ServiceImpl
  *
- * @author ruoyi
+ * @author 30
  */
 @Service
 public class GenTableColumnServiceImpl implements IGenTableColumnService {

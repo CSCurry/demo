@@ -22,22 +22,19 @@ import javax.annotation.Resource;
 import java.util.*;
 
 /**
- * 角色 业务层处理
+ * 角色 ServiceImpl
  *
- * @author ruoyi
+ * @author 30
  */
 @Service
 public class SysRoleServiceImpl implements ISysRoleService {
 
     @Resource
     private SysRoleMapper roleMapper;
-
     @Resource
     private SysRoleMenuMapper roleMenuMapper;
-
     @Resource
     private SysUserRoleMapper userRoleMapper;
-
     @Resource
     private SysRoleDeptMapper roleDeptMapper;
 
@@ -121,14 +118,13 @@ public class SysRoleServiceImpl implements ISysRoleService {
      */
     @Override
     public boolean deleteRoleById(Long roleId) {
-        return roleMapper.deleteRoleById(roleId) > 0 ? true : false;
+        return roleMapper.deleteRoleById(roleId) > 0;
     }
 
     /**
      * 批量删除角色信息
      *
      * @param ids 需要删除的数据ID
-     * @throws Exception
      */
     @Override
     public int deleteRoleByIds(String ids) throws BusinessException {
@@ -198,7 +194,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
     public int insertRoleMenu(SysRole role) {
         int rows = 1;
         // 新增用户与角色管理
-        List<SysRoleMenu> list = new ArrayList<SysRoleMenu>();
+        List<SysRoleMenu> list = new ArrayList<>();
         for (Long menuId : role.getMenuIds()) {
             SysRoleMenu rm = new SysRoleMenu();
             rm.setRoleId(role.getRoleId());
@@ -219,7 +215,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
     public int insertRoleDept(SysRole role) {
         int rows = 1;
         // 新增角色与部门（数据权限）管理
-        List<SysRoleDept> list = new ArrayList<SysRoleDept>();
+        List<SysRoleDept> list = new ArrayList<>();
         for (Long deptId : role.getDeptIds()) {
             SysRoleDept rd = new SysRoleDept();
             rd.setRoleId(role.getRoleId());
@@ -240,9 +236,9 @@ public class SysRoleServiceImpl implements ISysRoleService {
      */
     @Override
     public String checkRoleNameUnique(SysRole role) {
-        Long roleId = StringUtil.isNull(role.getRoleId()) ? -1L : role.getRoleId();
+        long roleId = StringUtil.isNull(role.getRoleId()) ? -1L : role.getRoleId();
         SysRole info = roleMapper.checkRoleNameUnique(role.getRoleName());
-        if (StringUtil.isNotNull(info) && info.getRoleId().longValue() != roleId.longValue()) {
+        if (StringUtil.isNotNull(info) && info.getRoleId() != roleId) {
             return UserConstants.ROLE_NAME_NOT_UNIQUE;
         }
         return UserConstants.ROLE_NAME_UNIQUE;
@@ -256,9 +252,9 @@ public class SysRoleServiceImpl implements ISysRoleService {
      */
     @Override
     public String checkRoleKeyUnique(SysRole role) {
-        Long roleId = StringUtil.isNull(role.getRoleId()) ? -1L : role.getRoleId();
+        long roleId = StringUtil.isNull(role.getRoleId()) ? -1L : role.getRoleId();
         SysRole info = roleMapper.checkRoleKeyUnique(role.getRoleKey());
-        if (StringUtil.isNotNull(info) && info.getRoleId().longValue() != roleId.longValue()) {
+        if (StringUtil.isNotNull(info) && info.getRoleId() != roleId) {
             return UserConstants.ROLE_KEY_NOT_UNIQUE;
         }
         return UserConstants.ROLE_KEY_UNIQUE;
@@ -332,7 +328,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
     public int insertAuthUsers(Long roleId, String userIds) {
         Long[] users = ConvertUtil.toLongArray(userIds);
         // 新增用户与角色管理
-        List<SysUserRole> list = new ArrayList<SysUserRole>();
+        List<SysUserRole> list = new ArrayList<>();
         for (Long userId : users) {
             SysUserRole ur = new SysUserRole();
             ur.setUserId(userId);

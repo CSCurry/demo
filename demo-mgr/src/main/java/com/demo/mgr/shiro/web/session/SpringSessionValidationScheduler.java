@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 自定义任务调度器完成
  *
- * @author ruoyi
+ * @author 30
  */
 @Slf4j
 @Component

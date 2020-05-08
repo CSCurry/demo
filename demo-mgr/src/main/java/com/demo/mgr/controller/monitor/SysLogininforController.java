@@ -51,18 +51,18 @@ public class SysLogininforController extends BaseController {
         return getDataTable(list);
     }
 
-    @Log(title = "登陆日志", businessType = BusinessType.EXPORT)
+    @Log(title = "登录日志", businessType = BusinessType.EXPORT)
     @RequiresPermissions("monitor:logininfor:export")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(SysLogininfor logininfor) {
         List<SysLogininfor> list = logininforService.selectLogininforList(logininfor);
-        ExcelUtil<SysLogininfor> util = new ExcelUtil<SysLogininfor>(SysLogininfor.class);
-        return util.exportExcel(list, "登陆日志");
+        ExcelUtil<SysLogininfor> util = new ExcelUtil<>(SysLogininfor.class);
+        return util.exportExcel(list, "登录日志");
     }
 
     @RequiresPermissions("monitor:logininfor:remove")
-    @Log(title = "登陆日志", businessType = BusinessType.DELETE)
+    @Log(title = "登录日志", businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody
     public AjaxResult remove(String ids) {
@@ -70,7 +70,7 @@ public class SysLogininforController extends BaseController {
     }
 
     @RequiresPermissions("monitor:logininfor:remove")
-    @Log(title = "登陆日志", businessType = BusinessType.CLEAN)
+    @Log(title = "登录日志", businessType = BusinessType.CLEAN)
     @PostMapping("/clean")
     @ResponseBody
     public AjaxResult clean() {

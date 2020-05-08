@@ -8,6 +8,7 @@ import com.demo.framework.util.DateUtil;
 import java.util.Date;
 
 public class UserOperateModel extends BaseEntity {
+
     private static final long serialVersionUID = 1L;
 
     private int userId;

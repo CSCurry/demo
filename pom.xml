@@ -30,10 +30,15 @@
         <swagger.version>2.7.0</swagger.version>
         <pagehelper.version>1.2.5</pagehelper.version>
         <velocity.version>1.7</velocity.version>
+        <bitwalker.version>1.19</bitwalker.version>
+        <commons-io.version>2.5</commons-io.version>
+        <shiro.version>1.4.2</shiro.version>
+        <shiro.thymeleaf.version>2.0.0</shiro.thymeleaf.version>
+        <poi.version>4.0.0</poi.version>
+        <oshi.version>3.9.1</oshi.version>
+        <kaptcha.version>2.3.2</kaptcha.version>
     </properties>
 
-    <!-- 配置主 pom 打包方式为 pom -->
-    <packaging>pom</packaging>
 
     <!--声明依赖，并不实现引入，主要管理版本-->
     <dependencyManagement>
@@ -59,4 +64,6 @@
         </dependency>
     </dependencies>
 
+    <!-- 配置主 pom 打包方式为 pom -->
+    <packaging>pom</packaging>
 </project>

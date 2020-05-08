@@ -6,9 +6,10 @@ import com.demo.framework.util.StringUtil;
 /**
  * 基础异常
  *
- * @author ruoyi
+ * @author 30
  */
 public class BaseException extends RuntimeException {
+
     private static final long serialVersionUID = 1L;
 
     /**

@@ -3,9 +3,10 @@ package com.demo.business.domain;
 /**
  * 角色和菜单关联 sys_role_menu
  *
- * @author ruoyi
+ * @author 30
  */
 public class SysRoleMenu {
+
     /**
      * 角色ID
      */

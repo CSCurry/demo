@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * 数据字典信息
  *
- * @author ruoyi
+ * @author 30
  */
 @Slf4j
 @Controller
@@ -68,7 +68,7 @@ public class SysDictTypeController extends BaseController {
     public AjaxResult export(SysDictType dictType) {
 
         List<SysDictType> list = dictTypeService.selectDictTypeList(dictType);
-        ExcelUtil<SysDictType> util = new ExcelUtil<SysDictType>(SysDictType.class);
+        ExcelUtil<SysDictType> util = new ExcelUtil<>(SysDictType.class);
         return util.exportExcel(list, "字典类型");
     }
 
@@ -163,8 +163,7 @@ public class SysDictTypeController extends BaseController {
      * 选择字典树
      */
     @GetMapping("/selectDictTree/{columnId}/{dictType}")
-    public String selectDeptTree(@PathVariable("columnId") Long columnId, @PathVariable("dictType") String dictType,
-                                 ModelMap mmap) {
+    public String selectDeptTree(@PathVariable("columnId") Long columnId, @PathVariable("dictType") String dictType, ModelMap mmap) {
         mmap.put("columnId", columnId);
         mmap.put("dict", dictTypeService.selectDictTypeByType(dictType));
         return prefix + "/tree";
@@ -176,7 +175,6 @@ public class SysDictTypeController extends BaseController {
     @GetMapping("/treeData")
     @ResponseBody
     public List<Ztree> treeData() {
-        List<Ztree> ztrees = dictTypeService.selectDictTree(new SysDictType());
-        return ztrees;
+        return dictTypeService.selectDictTree(new SysDictType());
     }
 }

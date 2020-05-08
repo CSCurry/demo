@@ -34,9 +34,9 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 /**
- * 业务 服务层实现
+ * 业务 ServiceImpl
  *
- * @author ruoyi
+ * @author 30
  */
 @Slf4j
 @Service
@@ -97,7 +97,6 @@ public class GenTableServiceImpl implements IGenTableService {
      * 修改业务
      *
      * @param genTable 业务信息
-     * @return 结果
      */
     @Override
     @Transactional
@@ -116,7 +115,6 @@ public class GenTableServiceImpl implements IGenTableService {
      * 删除业务对象
      *
      * @param ids 需要删除的数据ID
-     * @return 结果
      */
     @Override
     @Transactional

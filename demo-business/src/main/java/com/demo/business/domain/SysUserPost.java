@@ -3,7 +3,7 @@ package com.demo.business.domain;
 /**
  * 用户和岗位关联 sys_user_post
  *
- * @author ruoyi
+ * @author 30
  */
 public class SysUserPost {
     /**

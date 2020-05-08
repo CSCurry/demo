@@ -12,14 +12,15 @@ import java.util.List;
 /**
  * 表单相关
  *
- * @author ruoyi
+ * @author 30
  */
 @Controller
 @RequestMapping("/demo/form")
 public class DemoFormController {
+
     private String prefix = "demo/form";
 
-    private final static List<UserFormModel> users = new ArrayList<UserFormModel>();
+    private final static List<UserFormModel> users = new ArrayList<>();
 
     {
         users.add(new UserFormModel(1, "1000001", "测试1", "15888888888"));
@@ -176,7 +177,7 @@ public class DemoFormController {
     @GetMapping("/collection")
     @ResponseBody
     public AjaxResult collection() {
-        String[] array = {"ruoyi 1", "ruoyi 2", "ruoyi 3", "ruoyi 4", "ruoyi 5"};
+        String[] array = {"demo1", "demo2", "demo3", "demo4", "demo5"};
         AjaxResult ajax = new AjaxResult();
         ajax.put("value", array);
         return ajax;

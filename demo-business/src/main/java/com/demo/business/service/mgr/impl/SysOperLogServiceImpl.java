@@ -10,9 +10,9 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * 操作日志 服务层处理
+ * 操作日志 ServiceImpl
  *
- * @author ruoyi
+ * @author 30
  */
 @Service
 public class SysOperLogServiceImpl implements ISysOperLogService {
@@ -45,7 +45,6 @@ public class SysOperLogServiceImpl implements ISysOperLogService {
      * 批量删除系统操作日志
      *
      * @param ids 需要删除的数据
-     * @return
      */
     @Override
     public int deleteOperLogByIds(String ids) {
