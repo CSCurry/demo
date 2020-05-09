@@ -61,6 +61,8 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <!-- 如果没有该配置，devtools不会生效 -->
+                    <fork>true</fork>
                     <!--指定main入口-->
                     <mainClass>com.demo.web.WebApplication</mainClass>
                 </configuration>

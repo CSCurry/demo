@@ -6,6 +6,7 @@ import com.demo.business.service.mgr.ISysConfigService;
 import com.demo.business.service.mgr.ISysUserService;
 import com.demo.framework.annotation.DataScope;
 import com.demo.framework.auth.util.MD5Util;
+import com.demo.framework.constant.Constant;
 import com.demo.framework.constant.UserConstants;
 import com.demo.framework.exception.BusinessException;
 import com.demo.framework.util.ConvertUtil;
@@ -398,7 +399,7 @@ public class SysUserServiceImpl implements ISysUserService {
         int failureNum = 0;
         StringBuilder successMsg = new StringBuilder();
         StringBuilder failureMsg = new StringBuilder();
-        String password = configService.selectConfigByKey("sys.user.initPassword");
+        String password = configService.selectConfigByKey(Constant.CONFIG_KEY_INIT_PASSWORD);
         for (SysUser user : userList) {
             try {
                 // 验证是否存在这个用户

@@ -36,7 +36,7 @@
         <shiro.thymeleaf.version>2.0.0</shiro.thymeleaf.version>
         <poi.version>4.0.0</poi.version>
         <oshi.version>3.9.1</oshi.version>
-        <kaptcha.version>2.3.2</kaptcha.version>
+        <captcha.version>1.6.2</captcha.version>
     </properties>
 
 

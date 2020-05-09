@@ -1,11 +1,13 @@
 package com.demo.mgr.shiro.web.filter.captcha;
 
-import com.demo.mgr.shiro.ShiroUtils;
+import com.demo.business.service.mgr.ISysConfigService;
+import com.demo.framework.constant.Constant;
 import com.demo.framework.constant.ShiroConstants;
 import com.demo.framework.util.StringUtil;
-import com.google.code.kaptcha.Constants;
+import com.demo.mgr.shiro.ShiroUtils;
 import org.apache.shiro.web.filter.AccessControlFilter;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
@@ -17,28 +19,14 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class CaptchaValidateFilter extends AccessControlFilter {
 
-    /**
-     * 是否开启验证码
-     */
-    private boolean captchaEnabled = true;
-
-    /**
-     * 验证码类型
-     */
-    private String captchaType = "math";
-
-    public void setCaptchaEnabled(boolean captchaEnabled) {
-        this.captchaEnabled = captchaEnabled;
-    }
-
-    public void setCaptchaType(String captchaType) {
-        this.captchaType = captchaType;
-    }
+    @Resource
+    private ISysConfigService configService;
 
     @Override
     public boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
+        boolean captchaEnabled = "true".equals(configService.selectConfigByKey(Constant.CONFIG_KEY_CAPTCHA_ENABLED));
         request.setAttribute(ShiroConstants.CURRENT_ENABLED, captchaEnabled);
-        request.setAttribute(ShiroConstants.CURRENT_TYPE, captchaType);
+        request.setAttribute(ShiroConstants.CURRENT_TYPE, configService.selectConfigByKey(Constant.CONFIG_KEY_CAPTCHA_TYPE));
         return super.onPreHandle(request, response, mappedValue);
     }
 
@@ -46,14 +34,14 @@ public class CaptchaValidateFilter extends AccessControlFilter {
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         // 验证码禁用 或不是表单提交 允许访问
-        if (!captchaEnabled || !"post".equals(httpServletRequest.getMethod().toLowerCase())) {
+        if (!"true".equals(configService.selectConfigByKey(Constant.CONFIG_KEY_CAPTCHA_ENABLED)) || !"post".equals(httpServletRequest.getMethod().toLowerCase())) {
             return true;
         }
         return validateResponse(httpServletRequest.getParameter(ShiroConstants.CURRENT_VALIDATECODE));
     }
 
     public boolean validateResponse(String validateCode) {
-        Object obj = ShiroUtils.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
+        Object obj = ShiroUtils.getSession().getAttribute(Constant.SESSION_KEY_CAPTCHA);
         String code = String.valueOf(obj != null ? obj : "");
         return StringUtil.isNotEmpty(validateCode) && validateCode.equalsIgnoreCase(code);
     }

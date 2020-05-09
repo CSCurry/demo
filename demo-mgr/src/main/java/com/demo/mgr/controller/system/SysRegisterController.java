@@ -2,6 +2,7 @@ package com.demo.mgr.controller.system;
 
 import com.demo.business.domain.SysUser;
 import com.demo.business.service.mgr.ISysConfigService;
+import com.demo.framework.constant.Constant;
 import com.demo.mgr.shiro.service.SysRegisterService;
 import com.demo.framework.base.AjaxResult;
 import com.demo.framework.base.BaseController;
@@ -34,7 +35,7 @@ public class SysRegisterController extends BaseController {
     @PostMapping("/register")
     @ResponseBody
     public AjaxResult ajaxRegister(SysUser user) {
-        if (!("true".equals(configService.selectConfigByKey("sys.account.registerUser")))) {
+        if (!("true".equals(configService.selectConfigByKey(Constant.CONFIG_KEY_REGISTER_USER)))) {
             return error("当前系统没有开启注册功能！");
         }
         String msg = registerService.register(user);

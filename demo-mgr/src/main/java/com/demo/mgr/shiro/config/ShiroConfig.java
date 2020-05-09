@@ -56,14 +56,6 @@ public class ShiroConfig {
     @Value("${shiro.session.kickoutAfter}")
     private boolean kickoutAfter;
 
-    // 验证码开关
-    @Value("${shiro.user.captchaEnabled}")
-    private boolean captchaEnabled;
-
-    // 验证码类型
-    @Value("${shiro.user.captchaType}")
-    private String captchaType;
-
     // 设置Cookie的域名
     @Value("${shiro.cookie.domain}")
     private String domain;
@@ -239,10 +231,7 @@ public class ShiroConfig {
      */
     @Bean
     public CaptchaValidateFilter captchaValidateFilter() {
-        CaptchaValidateFilter captchaValidateFilter = new CaptchaValidateFilter();
-        captchaValidateFilter.setCaptchaEnabled(captchaEnabled);
-        captchaValidateFilter.setCaptchaType(captchaType);
-        return captchaValidateFilter;
+        return new CaptchaValidateFilter();
     }
 
     /**

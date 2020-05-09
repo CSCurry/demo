@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <!-- 日志存放路径，只能是绝对路径 -->
-    <property name="log.path" value="/logs/demo"/>
+    <property name="log.path" value="/logs/demo/web"/>
     <!-- 日志输出格式 -->
-    <property name="log.console.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS}  %highlight(%-5level) [%thread] %cyan(%logger{36}) - [%method,%line] - %msg%n"/>
+    <property name="log.console.pattern" value="%cyan(%d{yyyy-MM-dd HH:mm:ss.SSS})  %highlight(%-5level) %cyan([%thread]) %green(%logger{20}) - [%method,%line] - %msg%n"/>
     <property name="log.file.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS}  %-5level [%thread] %logger{36} - [%method,%line] - %msg%n"/>
 
     <!-- 控制台输出 -->

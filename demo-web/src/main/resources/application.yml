@@ -1,4 +1,4 @@
-# 项目相关配置
+# 项目配置
 project:
   # 名称
   name: demo
@@ -7,10 +7,10 @@ project:
 
 # 开发环境配置
 server:
-  # 服务端口
+  # 服务器的HTTP端口，默认为80
   port: 8080
   servlet:
-    # 项目contextPath
+    # 应用的访问路径
     context-path: /
   tomcat:
     # tomcat的URI编码
@@ -24,6 +24,11 @@ server:
 spring:
   profiles:
     active: @environment@
+  # 热部署
+  devtools:
+    restart:
+      # 重启开关
+      enabled: true
   # 切面启用
   aop:
     proxy-target-class: true
@@ -31,13 +36,10 @@ spring:
   # 文件上传
   servlet:
     multipart:
-      max-file-size:  30MB
-      max-request-size:  30MB
-  # 热部署
-  devtools:
-    restart:
-      # 重启开关
-      enabled: false
+      # 单个文件大小
+      max-file-size:  10MB
+      # 设置总上传的文件大小
+      max-request-size:  20MB
   # 发送邮件
   mail:
     host: smtp.163.com #发送方邮件服务器
@@ -49,20 +51,23 @@ spring:
     properties.mail.smtp.ssl.enable: true
     default-encoding: utf-8
 
-# MyBatis
-mybatis:
-  # 搜索指定包别名
-  typeAliasesPackage: com.demo
-  # 配置mapper的扫描，找到所有的mapper.xml映射文件
-  mapperLocations: classpath*:mapper/**/*Mapper.xml
-  # 加载全局的配置文件
-  configLocation: classpath:mybatis/mybatis-config.xml
-
 # 日志配置
 logging:
   level:
     # 这里日志级别设为debug是为了打印SQL
     com.demo: debug
+    org.springframework: warn
+    # 避免找不到/templates而警告
+    org.springframework.boot.autoconfigure.thymeleaf: error
+
+# MyBatis
+mybatis:
+  # 搜索指定包别名
+  typeAliasesPackage: com.demo.business.domain
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapperLocations: classpath*:mapper/**/*Mapper.xml
+  # 加载全局的配置文件
+  configLocation: classpath:mybatis/mybatis-config.xml
 
 # PageHelper分页插件
 pagehelper:
@@ -77,5 +82,5 @@ xss:
   enabled: true
   # 排除链接（多个用逗号分隔）
   excludes: /shop/notice/*
-  # 匹配链接
-  urlPatterns: /shop/*,/monitor/*,/tool/*
+  # 匹配链接（多个用逗号分隔）
+  urlPatterns: /system/*,/monitor/*,/tool/*

@@ -17,6 +17,22 @@ public class Constant {
     //请求URL路径后面的token参数键
     public static final String REQUEST_URL_PARAMETER_TOKEN = "token";
 
+    //session key - 登录验证码
+    public static final String SESSION_KEY_CAPTCHA = "SESSION_KEY_CAPTCHA";
+
+    //config key - 默认皮肤样式名称
+    public static final String CONFIG_KEY_SKIN_NAME = "sys.index.skinName";
+    //config key - 账号初始密码
+    public static final String CONFIG_KEY_INIT_PASSWORD = "sys.user.initPassword";
+    //config key - 侧边栏主题
+    public static final String CONFIG_KEY_SIDE_THEME = "sys.index.sideTheme";
+    //config key - 是否开启用户注册功能
+    public static final String CONFIG_KEY_REGISTER_USER = "sys.account.registerUser";
+    //config key - 是否开启登录验证码
+    public static final String CONFIG_KEY_CAPTCHA_ENABLED = "sys.captcha.enabled";
+    //config key - 登录验证码类型
+    public static final String CONFIG_KEY_CAPTCHA_TYPE = "sys.captcha.type";
+
     /**
      * UTF-8 字符集
      */

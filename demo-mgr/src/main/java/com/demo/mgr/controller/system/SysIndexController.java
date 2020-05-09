@@ -6,6 +6,7 @@ import com.demo.business.service.mgr.ISysConfigService;
 import com.demo.business.service.mgr.ISysMenuService;
 import com.demo.framework.base.BaseController;
 import com.demo.framework.config.GlobalConfig;
+import com.demo.framework.constant.Constant;
 import com.demo.mgr.shiro.ShiroUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -36,8 +37,8 @@ public class SysIndexController extends BaseController {
         List<SysMenu> menus = menuService.selectMenusByUser(user);
         mmap.put("menus", menus);
         mmap.put("user", user);
-        mmap.put("sideTheme", configService.selectConfigByKey("sys.index.sideTheme"));
-        mmap.put("skinName", configService.selectConfigByKey("sys.index.skinName"));
+        mmap.put("sideTheme", configService.selectConfigByKey(Constant.CONFIG_KEY_SIDE_THEME));
+        mmap.put("skinName", configService.selectConfigByKey(Constant.CONFIG_KEY_SKIN_NAME));
         mmap.put("copyrightYear", GlobalConfig.getCopyrightYear());
         mmap.put("demoEnabled", GlobalConfig.isDemoEnabled());
         return "index";
