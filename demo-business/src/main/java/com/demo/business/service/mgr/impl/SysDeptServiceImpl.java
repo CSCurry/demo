@@ -90,7 +90,6 @@ public class SysDeptServiceImpl implements ISysDeptService {
      * @return 树结构列表
      */
     public List<Ztree> initZtree(List<SysDept> deptList, List<String> roleDeptList) {
-
         List<Ztree> zTrees = new ArrayList<>();
         boolean isCheck = StringUtil.isNotNull(roleDeptList);
         for (SysDept dept : deptList) {
