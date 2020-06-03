@@ -24,7 +24,7 @@ public class SysUser extends BaseEntity {
     /**
      * 用户ID
      */
-    @Excel(name = "用户序号", cellType = ColumnType.NUMERIC, prompt = "用户编号")
+    @Excel(name = "用户ID", cellType = ColumnType.NUMERIC, prompt = "用户编号")
     private Long userId;
 
     /**
@@ -44,9 +44,9 @@ public class SysUser extends BaseEntity {
     private Long roleId;
 
     /**
-     * 登录名称
+     * 登录账号
      */
-    @Excel(name = "登录名称")
+    @Excel(name = "登录账号")
     private String loginName;
 
     /**
@@ -94,9 +94,9 @@ public class SysUser extends BaseEntity {
     private String salt;
 
     /**
-     * 帐号状态（0正常 1停用）
+     * 状态（0正常 1停用）
      */
-    @Excel(name = "帐号状态", readConverterExp = "0=正常,1=停用")
+    @Excel(name = "状态", readConverterExp = "0=正常,1=停用")
     private String status;
 
     /**
@@ -329,5 +329,4 @@ public class SysUser extends BaseEntity {
     public void setPostIds(Long[] postIds) {
         this.postIds = postIds;
     }
-
 }
