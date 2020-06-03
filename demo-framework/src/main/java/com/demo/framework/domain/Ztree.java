@@ -1,5 +1,7 @@
 package com.demo.framework.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 
 /**
@@ -20,6 +22,10 @@ public class Ztree implements Serializable {
      * 节点父ID
      */
     private Long pId;
+    /**
+     * 节点父ID
+     */
+    private Long parentId;
 
     /**
      * 节点名称
@@ -54,12 +60,22 @@ public class Ztree implements Serializable {
         this.id = id;
     }
 
+    //解决Jackson序列化之后pId->pid的问题，尽量避免这种命名方式
+    @JsonProperty("pId")
     public Long getPId() {
         return pId;
     }
 
     public void setPId(Long pId) {
         this.pId = pId;
+    }
+
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
 
     public String getName() {
@@ -101,5 +117,4 @@ public class Ztree implements Serializable {
     public void setNocheck(boolean nocheck) {
         this.nocheck = nocheck;
     }
-
 }
