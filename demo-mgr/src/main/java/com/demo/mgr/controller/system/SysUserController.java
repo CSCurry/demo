@@ -25,12 +25,12 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * 用户信息
+ * 用户 Controller
  *
  * @author 30
  */
 @Controller
-@RequestMapping("/system/user")
+@RequestMapping("system/user")
 public class SysUserController extends BaseController {
 
     private String prefix = "system/user";
@@ -51,7 +51,7 @@ public class SysUserController extends BaseController {
     }
 
     @RequiresPermissions("system:user:list")
-    @PostMapping("/list")
+    @PostMapping("list")
     @ResponseBody
     public TableDataInfo list(SysUser user) {
         startPage();
@@ -61,7 +61,7 @@ public class SysUserController extends BaseController {
 
     @Log(title = "用户管理", businessType = BusinessType.EXPORT)
     @RequiresPermissions("system:user:export")
-    @PostMapping("/export")
+    @PostMapping("export")
     @ResponseBody
     public AjaxResult export(SysUser user) {
         List<SysUser> list = userService.selectUserList(user);
@@ -71,7 +71,7 @@ public class SysUserController extends BaseController {
 
     @Log(title = "用户管理", businessType = BusinessType.IMPORT)
     @RequiresPermissions("system:user:import")
-    @PostMapping("/importData")
+    @PostMapping("importData")
     @ResponseBody
     public AjaxResult importData(MultipartFile file, boolean updateSupport) throws Exception {
         ExcelUtil<SysUser> util = new ExcelUtil<>(SysUser.class);
@@ -82,7 +82,7 @@ public class SysUserController extends BaseController {
     }
 
     @RequiresPermissions("system:user:view")
-    @GetMapping("/importTemplate")
+    @GetMapping("importTemplate")
     @ResponseBody
     public AjaxResult importTemplate() {
         ExcelUtil<SysUser> util = new ExcelUtil<>(SysUser.class);
@@ -92,7 +92,7 @@ public class SysUserController extends BaseController {
     /**
      * 新增用户
      */
-    @GetMapping("/add")
+    @GetMapping("add")
     public String add(ModelMap mmap) {
         mmap.put("roles", roleService.selectRoleAll());
         mmap.put("posts", postService.selectPostAll());
@@ -104,7 +104,7 @@ public class SysUserController extends BaseController {
      */
     @RequiresPermissions("system:user:add")
     @Log(title = "用户管理", businessType = BusinessType.INSERT)
-    @PostMapping("/add")
+    @PostMapping("add")
     @ResponseBody
     public AjaxResult addSave(@Validated SysUser user) {
         if (UserConstants.USER_NAME_NOT_UNIQUE.equals(userService.checkLoginNameUnique(user.getLoginName()))) {
@@ -123,7 +123,7 @@ public class SysUserController extends BaseController {
     /**
      * 修改用户
      */
-    @GetMapping("/edit/{userId}")
+    @GetMapping("edit/{userId}")
     public String edit(@PathVariable("userId") Long userId, ModelMap mmap) {
         mmap.put("user", userService.selectUserById(userId));
         mmap.put("roles", roleService.selectRolesByUserId(userId));
@@ -136,7 +136,7 @@ public class SysUserController extends BaseController {
      */
     @RequiresPermissions("system:user:edit")
     @Log(title = "用户管理", businessType = BusinessType.UPDATE)
-    @PostMapping("/edit")
+    @PostMapping("edit")
     @ResponseBody
     public AjaxResult editSave(@Validated SysUser user) {
         userService.checkUserAllowed(user);
@@ -151,7 +151,7 @@ public class SysUserController extends BaseController {
 
     @RequiresPermissions("system:user:resetPwd")
     @Log(title = "重置密码", businessType = BusinessType.UPDATE)
-    @GetMapping("/resetPwd/{userId}")
+    @GetMapping("resetPwd/{userId}")
     public String resetPwd(@PathVariable("userId") Long userId, ModelMap mmap) {
         mmap.put("user", userService.selectUserById(userId));
         return prefix + "/resetPwd";
@@ -159,7 +159,7 @@ public class SysUserController extends BaseController {
 
     @RequiresPermissions("system:user:resetPwd")
     @Log(title = "重置密码", businessType = BusinessType.UPDATE)
-    @PostMapping("/resetPwd")
+    @PostMapping("resetPwd")
     @ResponseBody
     public AjaxResult resetPwdSave(SysUser user) {
         userService.checkUserAllowed(user);
@@ -177,7 +177,7 @@ public class SysUserController extends BaseController {
     /**
      * 进入授权角色页
      */
-    @GetMapping("/authRole/{userId}")
+    @GetMapping("authRole/{userId}")
     public String authRole(@PathVariable("userId") Long userId, ModelMap mmap) {
         SysUser user = userService.selectUserById(userId);
         // 获取用户所属的角色列表
@@ -192,7 +192,7 @@ public class SysUserController extends BaseController {
      */
     @RequiresPermissions("system:user:add")
     @Log(title = "用户管理", businessType = BusinessType.GRANT)
-    @PostMapping("/authRole/insertAuthRole")
+    @PostMapping("authRole/insertAuthRole")
     @ResponseBody
     public AjaxResult insertAuthRole(Long userId, Long[] roleIds) {
         userService.insertUserAuth(userId, roleIds);
@@ -201,7 +201,7 @@ public class SysUserController extends BaseController {
 
     @RequiresPermissions("system:user:remove")
     @Log(title = "用户管理", businessType = BusinessType.DELETE)
-    @PostMapping("/remove")
+    @PostMapping("remove")
     @ResponseBody
     public AjaxResult remove(String ids) {
         try {
@@ -214,7 +214,7 @@ public class SysUserController extends BaseController {
     /**
      * 校验用户名
      */
-    @PostMapping("/checkLoginNameUnique")
+    @PostMapping("checkLoginNameUnique")
     @ResponseBody
     public String checkLoginNameUnique(SysUser user) {
         return userService.checkLoginNameUnique(user.getLoginName());
@@ -223,7 +223,7 @@ public class SysUserController extends BaseController {
     /**
      * 校验手机号码
      */
-    @PostMapping("/checkPhoneUnique")
+    @PostMapping("checkPhoneUnique")
     @ResponseBody
     public String checkPhoneUnique(SysUser user) {
         return userService.checkPhoneUnique(user);
@@ -232,7 +232,7 @@ public class SysUserController extends BaseController {
     /**
      * 校验email邮箱
      */
-    @PostMapping("/checkEmailUnique")
+    @PostMapping("checkEmailUnique")
     @ResponseBody
     public String checkEmailUnique(SysUser user) {
         return userService.checkEmailUnique(user);
@@ -243,7 +243,7 @@ public class SysUserController extends BaseController {
      */
     @Log(title = "用户管理", businessType = BusinessType.UPDATE)
     @RequiresPermissions("system:user:edit")
-    @PostMapping("/changeStatus")
+    @PostMapping("changeStatus")
     @ResponseBody
     public AjaxResult changeStatus(SysUser user) {
         userService.checkUserAllowed(user);
