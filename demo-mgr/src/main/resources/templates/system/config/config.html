@@ -81,7 +81,8 @@
             },
                 {
                     field: 'configId',
-                    title: '参数主键'
+                    title: '参数主键',
+                    visible: false
                 },
                 {
                     field: 'configName',
@@ -94,7 +95,7 @@
                     field: 'configKey',
                     title: '参数键名',
                     formatter: function (value, row, index) {
-                        return $.table.tooltip(value, 30, "open");
+                        return $.table.tooltip(value, 40, "open");
                     }
                 },
                 {
