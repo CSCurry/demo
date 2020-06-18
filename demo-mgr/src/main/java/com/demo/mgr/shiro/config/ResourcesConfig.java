@@ -1,5 +1,6 @@
-package com.demo.framework.config;
+package com.demo.mgr.shiro.config;
 
+import com.demo.framework.config.GlobalConfig;
 import com.demo.framework.constant.Constant;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -38,5 +39,4 @@ public class ResourcesConfig implements WebMvcConfigurer {
         registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
-
 }
