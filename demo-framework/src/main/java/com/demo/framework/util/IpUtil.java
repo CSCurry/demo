@@ -1,8 +1,7 @@
 package com.demo.framework.util;
 
+import com.alibaba.fastjson.JSONObject;
 import com.demo.framework.config.GlobalConfig;
-import com.demo.framework.util.json.JSON;
-import com.demo.framework.util.json.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,35 +16,38 @@ import java.net.UnknownHostException;
 @Slf4j
 public class IpUtil {
 
-    public static final String IP_URL = "http://ip.taobao.com/service/getIpInfo.php";
+    //淘宝已挂
+    //public static final String IP_URL = "http://ip.taobao.com/service/getIpInfo.php";
 
-    //这个服务已挂
+    public static final String IP_URL = "http://whois.pconline.com.cn/ipJson.jsp";
+
+    //备选地址
     //http://gwgp-hye6ycojwut.n.bdcloudapi.com/getIpInfo?ip=123.116.182.163
 
-    public static String getRealAddressByIP(String ip) {
-        String address = "XX XX";
+    // 未知地址
+    public static final String UNKNOWN = "XX XX";
 
+    public static String getRealAddressByIP(String ip) {
         // 内网不查询
-        if (IpUtil.internalIp(ip)) {
+        if (internalIp(ip)) {
             return "内网IP";
         }
         if (GlobalConfig.isAddressEnabled()) {
-            String rspStr = HttpUtil.sendPost(IP_URL, "ip=" + ip);
-            if (StringUtil.isEmpty(rspStr)) {
-                log.error("获取地理位置异常 {}", ip);
-                return address;
-            }
             try {
-                JSONObject obj = JSON.unmarshal(rspStr, JSONObject.class);
-                JSONObject data = obj.getObj("data");
-                String region = data.getStr("region");
-                String city = data.getStr("city");
-                address = region + " " + city;
+                String rspStr = HttpUtil.doGet(IP_URL + "?ip=" + ip + "&json=true");
+                if (StringUtil.isEmpty(rspStr)) {
+                    log.error("获取地理位置异常 {}", ip);
+                    return UNKNOWN;
+                }
+                JSONObject obj = JSONObject.parseObject(rspStr);
+                String region = obj.getString("pro");
+                String city = obj.getString("city");
+                return String.format("%s %s", region, city);
             } catch (Exception e) {
                 log.error("获取地理位置异常 {}", ip);
             }
         }
-        return address;
+        return UNKNOWN;
     }
 
     public static String getIpAddr(HttpServletRequest request) {
