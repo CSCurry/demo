@@ -10,6 +10,12 @@
     <artifactId>demo-framework</artifactId>
 
     <dependencies>
+        <!--Hutool-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
+        </dependency>
         <!--devtools-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
