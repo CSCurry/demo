@@ -12,4 +12,13 @@ import java.lang.annotation.*;
 @Documented
 public @interface SystemLog {
 
+    /**
+     * 是否打印接口请求参数
+     */
+    boolean showParams() default true;
+
+    /**
+     * 是否打印接口返回数据
+     */
+    boolean showResult() default true;
 }

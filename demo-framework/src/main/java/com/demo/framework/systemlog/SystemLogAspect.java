@@ -14,12 +14,12 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Objects;
+import javax.servlet.http.HttpServletResponse;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
- * 系统日志切点
+ * 系统接口日志切点
  *
  * @author 30
  */
@@ -41,14 +41,14 @@ public class SystemLogAspect {
     /**
      * Controller层切点
      */
-    @Pointcut("@annotation(com.demo.framework.systemlog.SystemLog)")
-    public void controllerAspect() {
+    @Pointcut("@annotation(systemLog)")
+    public void pointCut(SystemLog systemLog) {
     }
 
     /**
      * 前置通知，方法调用前被调用
      */
-    @Before("controllerAspect()")
+    @Before("pointCut(SystemLog)")
     public void doBefore() {
         timeThreadLocal.set(System.currentTimeMillis());
     }
@@ -56,15 +56,34 @@ public class SystemLogAspect {
     /**
      * 后置返回通知
      */
-    @AfterReturning(pointcut = "controllerAspect()", returning = "result")
-    public void doAfterReturning(JoinPoint joinPoint, Object result) {
+    @AfterReturning(value = "pointCut(systemLog)", returning = "result", argNames = "joinPoint,result,systemLog")
+    public void doAfterReturning(JoinPoint joinPoint, Object result, SystemLog systemLog) {
         try {
             HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
+            String method = joinPoint.getTarget().getClass().getSimpleName() + "." + joinPoint.getSignature().getName();
+
+            //是否打印接口请求参数
+            boolean showParams = systemLog.showParams();
+            //请求参数
+            Object params = null;
+            Object[] args = joinPoint.getArgs();
+            if (showParams && args != null && args.length > 0) {
+                //joinPoint.getArgs()返回的数组中携带有Request或Response对象，导致JSON.toJSONString时序列化异常：
+                //java.lang.IllegalStateException: It is illegal to call this method if the current request is not in asynchronous mode (i.e. isAsyncStarted() returns false)
+                //过滤Request和Response后序列化无异常
+                List<Object> argList = Arrays.stream(args).filter(arg -> (!(arg instanceof HttpServletRequest) && !(arg instanceof HttpServletResponse))).collect(Collectors.toList());
+                params = argList.isEmpty() ? null : argList.get(0);
+            }
+
             HashMap<String, Object> map = new LinkedHashMap<>();
             map.put("time", (System.currentTimeMillis() - timeThreadLocal.get()) + "ms");
-            map.put("method", joinPoint.getTarget().getClass().getSimpleName() + "." + joinPoint.getSignature().getName());
-            map.put("params", joinPoint.getArgs() == null || joinPoint.getArgs().length == 0 ? null : joinPoint.getArgs()[0]);
-            map.put("result", result);
+            map.put("method", method);
+            if (showParams) {
+                map.put("params", params);
+            }
+            if (systemLog.showResult()) {
+                map.put("result", result);
+            }
             map.put("uri", request.getRequestURI());
             map.put("ip", IpUtil.getIpAddr(request));
             log.info(JSON.toJSONString(map, SerializerFeature.WriteMapNullValue));
